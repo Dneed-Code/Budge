@@ -1,0 +1,53 @@
+//MAIN LAYOUT CSS
+$navBackgroundColour: #121212;
+$bodyBackgroundColour: #212121;
+$topHeight: 6vh;
+$sidebarWidth: 15%;
+$mainWindowWidth: 100%-$sidebarWidth;
+$mainHeight: 100vh-$topHeight;
+
+.main-container {
+  height: 100vh;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sidebar {
+  background: $navBackgroundColour;
+  flex: 0 0 $sidebarWidth;
+  max-width: $sidebarWidth;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+}
+.topbar {
+  height: $topHeight;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: $navBackgroundColour;
+}
+.main-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: $bodyBackgroundColour;
+  height: $mainHeight;
+}
+.main-window {
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 $mainWindowWidth;
+  max-width: 88%;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+}
+.sidebar-image {
+  width: 80%;
+}
+.sidebar-image-row {
+  height: $topHeight;
+  padding-top: 17px;
+}
+.sidebar-navigation {
+  border-top: $bodyBackgroundColour 2px solid;
+}
