@@ -9,55 +9,149 @@
     <title>Collapsible sidebar using Bootstrap 4</title>
 
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 <!--MAIN CONTAINER-->
-<div class="row main-container">
-    <!--SIDEBAR-->
-    <div class="sidebar">
-        <div class="row">
-            <div class="col-12 text-center sidebar-image-row">
-                <img class="sidebar-image" src="/images/budge.png" alt="">
-            </div>
-        </div>
-        <div class="sidebar-navigation">
 
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <img src="./assets/logo.svg" class="sidebar-logo"/>
+            <img src="./assets/icon.svg" class="sidebar-icon"/>
         </div>
-    </div>
-    <!--MAIN WINDOW-->
-    <div class="main-window">
-        <!--TOP NAVIGATION-->
-        <div class="row topbar">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-1 pt-3 text-center">
-                        <i class="fas fa-bars" style="color: #DFDFDF"></i>
+
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Income</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Expenses</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Assets</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Liabilities</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Forecasting</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <!-- Top Nav -->
+        <div class="top-nav">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <h3 id="navbar-title">Dashboard</h3>
+
+                    <div id="rightElemenets">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Dom<span class="chevron"><i
+                                        class="fas fa-chevron-down"></i></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" style="padding-left: 0 !important;"><img
+                                        src="./assets/notification.png"/></a>
+                            </li>
+                            <li class="nav-item">
+                                <img src="https://cdn.trianglenetworks.co.uk/placeholder.png" class="profile-icon"
+                                     onclick="openProfilePopUp()"/>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-3 pt-2">
-                       <h2>Dashboard</h2>
+                </div>
+            </nav>
+        </div>
+
+        <section id="main-section">
+
+            <div class="row col-equal-height">
+                <div class="col-md-4">
+                    <div class="card tile" style="height: 200px;">
+                        <div class="card-body">
+                            Income
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card tile" style="height: 200px;">
+                        <div class="card-body">
+                            Expenses
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--MAIN CONTENT-->
-        <div class="row main-body">
-            <div class="col-12">
-                {{{body}}}
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card tile" style="height: 300px;">
+                        <div class="card-body">
+                            Net Worth
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </section>
+
     </div>
 </div>
-</body>
 
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 <!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
@@ -67,5 +161,13 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+</body>
 </html>
 
