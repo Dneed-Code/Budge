@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Budge Dashboard</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -15,12 +15,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-            crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/91e2863daf.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -31,50 +26,50 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <img src="./assets/logo.svg" class="sidebar-logo"/>
-            <img src="./assets/icon.svg" class="sidebar-icon"/>
+            <img src="/images/logo.svg" class="sidebar-logo"/>
+            <img src="/images/icon.svg" class="sidebar-icon"/>
         </div>
 
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fab fa-bimobject"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-hand-holding-usd"></i>
                     <span>Income</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-cash-register"></i>
                     <span>Expenses</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-chart-line"></i>
                     <span>Assets</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-landmark"></i>
                     <span>Liabilities</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-file-invoice-dollar"></i>
                     <span>Reports</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fas fa-chart-bar"></i>
                     <span>Forecasting</span>
                 </a>
             </li>
@@ -102,11 +97,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" style="padding-left: 0 !important;"><img
-                                        src="./assets/notification.png"/></a>
+                                        src="/images/notification.png"/></a>
                             </li>
                             <li class="nav-item">
-                                <img src="https://cdn.trianglenetworks.co.uk/placeholder.png" class="profile-icon"
-                                     onclick="openProfilePopUp()"/>
+                               <img src="/images/placeholder.jpg" class="profile-icon" onclick="openProfilePopUp()"/>
                             </li>
                         </ul>
                     </div>
@@ -116,32 +110,7 @@
 
         <section id="main-section">
 
-            <div class="row col-equal-height">
-                <div class="col-md-4">
-                    <div class="card tile" style="height: 200px;">
-                        <div class="card-body">
-                            Income
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="card tile" style="height: 200px;">
-                        <div class="card-body">
-                            Expenses
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-5">
-                <div class="col-md-12">
-                    <div class="card tile" style="height: 300px;">
-                        <div class="card-body">
-                            Net Worth
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{{body}}}
 
         </section>
 

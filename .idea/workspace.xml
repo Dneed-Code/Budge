@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/notification_dot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/icon.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +83,7 @@
       <workItem from="1605380047098" duration="522000" />
       <workItem from="1605380756081" duration="4654000" />
       <workItem from="1605538899048" duration="607000" />
-      <workItem from="1606731893923" duration="810000" />
+      <workItem from="1606731893923" duration="8996000" />
     </task>
     <task id="LOCAL-00001" summary="CSS from prototype input, ready for HTML layout">
       <created>1606732327246</created>
@@ -94,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606732327246</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Html layout input from mock">
+      <created>1606732806232</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606732806232</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,7 +118,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CSS from prototype input, ready for HTML layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="CSS from prototype input, ready for HTML layout" />
+    <MESSAGE value="Html layout input from mock" />
+    <option name="LAST_COMMIT_MESSAGE" value="Html layout input from mock" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -133,25 +139,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605380205858" />
-    <state width="949" height="271" key="GridCell.Tab.0.bottom" timestamp="1605507374145">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="949" height="271" key="GridCell.Tab.0.bottom" timestamp="1606752073796">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605228994230" />
+    <state width="949" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606752073796" />
     <state width="949" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.center" timestamp="1605507374145">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="949" height="271" key="GridCell.Tab.0.center" timestamp="1606752073796">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605228994229" />
+    <state width="949" height="271" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606752073796" />
     <state width="949" height="271" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.left" timestamp="1605507374145">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="949" height="271" key="GridCell.Tab.0.left" timestamp="1606752073796">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605228994229" />
+    <state width="949" height="271" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606752073796" />
     <state width="949" height="271" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.right" timestamp="1605507374145">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="949" height="271" key="GridCell.Tab.0.right" timestamp="1606752073796">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605228994230" />
+    <state width="949" height="271" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606752073796" />
     <state width="949" height="271" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1605203086142">
       <screen x="0" y="0" width="1920" height="1040" />
