@@ -6,18 +6,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/income');
+var indexRouter = require('./Services/routes/index');
+var usersRouter = require('./Services/routes/income');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'Presentation/views'));
 app.engine( 'hbs', hbs( {
   extname: 'hbs',
   defaultLayout: 'main',
-  layoutsDir: __dirname + '/views/layouts/',
-  partialsDir: __dirname + '/views/partials/'
+  layoutsDir: __dirname + '/Presentation/views/layouts/',
+  partialsDir: __dirname + '/Presentation/views/partials/'
 } ) );
 app.set('view engine', 'hbs');
 
@@ -26,12 +26,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'Presentation/public'),
+  dest: path.join(__dirname, 'Presentation/public'),
   debug: true,
   outputStyle: 'compressed'
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Presentation/public')));
 
 app.use('/', indexRouter);
 app.use('/income', usersRouter);
