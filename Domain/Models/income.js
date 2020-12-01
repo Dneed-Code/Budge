@@ -1,6 +1,6 @@
 class Income {
-    constructor(amount, name) {
+    constructor(amount, incomeName) {
         this.amount = amount;
-        this.name = name;
+        this.incomeName = incomeName;
     }
 }
