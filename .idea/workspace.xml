@@ -20,18 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/images/icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/images/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/notification.png" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/images/notification.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/notification_dot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/images/notification_dot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/public/stylesheets/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/error.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/views/error.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/income.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/views/income.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/Presentation/views/layouts/main.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/Models/income.js" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Models/income.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Sass File" />
-        <option value="JavaScript File" />
         <option value="SCSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -74,10 +63,11 @@
       <recent name="C:\Users\Dominic\WebstormProjects\Budge\views\partials" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\Services" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\Presentation" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\views" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\public\images" />
-      <recent name="C:\Users\Dominic\WebstormProjects\Budge\views\layouts" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,7 +86,7 @@
       <workItem from="1606731893923" duration="10910000" />
       <workItem from="1606811206898" duration="3924000" />
       <workItem from="1606816397223" duration="909000" />
-      <workItem from="1606817341071" duration="59000" />
+      <workItem from="1606817341071" duration="496000" />
     </task>
     <task id="LOCAL-00001" summary="CSS from prototype input, ready for HTML layout">
       <created>1606732327246</created>
@@ -140,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606816248803</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="File structure restructured, income class added">
+      <created>1606817649515</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606817649515</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +162,8 @@
     <MESSAGE value="Added income page (with no content) ready for implementation" />
     <MESSAGE value="Route for income page set up" />
     <MESSAGE value="Page titles now dynamic, Nodemon installed for development" />
-    <option name="LAST_COMMIT_MESSAGE" value="Page titles now dynamic, Nodemon installed for development" />
+    <MESSAGE value="File structure restructured, income class added" />
+    <option name="LAST_COMMIT_MESSAGE" value="File structure restructured, income class added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -185,28 +183,28 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605380205858" />
-    <state width="949" height="271" key="GridCell.Tab.0.bottom" timestamp="1606817311952">
+    <state width="949" height="271" key="GridCell.Tab.0.bottom" timestamp="1606817498257">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817311952" />
+    <state width="949" height="271" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817498257" />
     <state width="949" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606772623697" />
     <state width="949" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.center" timestamp="1606817311952">
+    <state width="949" height="271" key="GridCell.Tab.0.center" timestamp="1606817498256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817311952" />
+    <state width="949" height="271" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817498256" />
     <state width="949" height="271" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606772623697" />
     <state width="949" height="271" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.left" timestamp="1606817311952">
+    <state width="949" height="271" key="GridCell.Tab.0.left" timestamp="1606817498256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817311952" />
+    <state width="949" height="271" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817498256" />
     <state width="949" height="271" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606772623697" />
     <state width="949" height="271" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
-    <state width="949" height="271" key="GridCell.Tab.0.right" timestamp="1606817311952">
+    <state width="949" height="271" key="GridCell.Tab.0.right" timestamp="1606817498256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="271" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817311952" />
+    <state width="949" height="271" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817498256" />
     <state width="949" height="271" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606772623697" />
     <state width="949" height="271" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605507374145" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1605203086142">
@@ -214,10 +212,10 @@
     </state>
     <state x="461" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605203086142" />
     <state x="2381" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605034791532" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606816251802">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1606817651640">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606816251802" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606817651640" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1606772298745" />
     <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1605202560695">
       <screen x="0" y="0" width="1920" height="1040" />
