@@ -6,4 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('income', { title: 'Income' });
 });
 
+
 module.exports = router;
+

@@ -52,4 +52,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb+srv://Budge:WgELYn7HV6oO@cluster0.pykcg.mongodb.net/Budge?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 module.exports = app;
