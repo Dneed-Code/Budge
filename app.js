@@ -5,11 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+require('dotenv/config');
 
 var indexRouter = require('./Services/routes/index');
 var incomesRouter = require('./Services/routes/income');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'Presentation/views'));
@@ -54,8 +56,8 @@ app.use(function(err, req, res, next) {
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://Budge:WgELYn7HV6oO@cluster0.pykcg.mongodb.net/Budge?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
+var mongoDB = process.env.DB_CONNECTION;
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true},() => console.log('connected to db!'));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
