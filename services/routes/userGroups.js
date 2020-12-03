@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 const UserGroup = require('../../domain/models/UserGroup');
 
-/* GET user dashboard. */
+/* GET user group dashboard. */
 router.get('/', function (req, res, next) {
     res.render('userGroups', {title: 'User Groups'});
 });
 
-/* Post new user. */
+/* Post new user group. */
 router.post('/', function (req, res) {
     const userGroup = new UserGroup({
-        first_name: req.body.first_name,
+        name: req.body.name,
     });
 
     userGroup.save()

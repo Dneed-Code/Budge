@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res) {
     const income = new Incomes({
         user: req.body.user,
-        transaction_type: "Incomes",
+        transaction_type: "Income",
         source: req.body.source,
         interval: req.body.interval,
         start_date: req.body.start_date,

@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 /* Post new user. */
 router.post('/', function (req, res) {
     const user = new User({
-        user_group: req.body.user,
+        user_group: req.body.user_group,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         permission_level: req.body.permission_level,
