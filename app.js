@@ -11,7 +11,7 @@ require('dotenv/config');
 
 
 var indexRouter = require('./services/routes/index');
-var incomesRouter = require('./services/routes/income');
+var incomesRouter = require('./services/routes/incomes');
 
 var app = express();
 

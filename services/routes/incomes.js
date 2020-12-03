@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
-const Income = require('../../domain/models/Transaction');
+const Incomes = require('../../domain/models/Transaction');
 
 /* GET income dashboard. */
 router.get('/', function (req, res, next) {
-    res.render('income', {title: 'Income'});
+    res.render('income', {title: 'Incomes'});
 });
 
 /* Post new income. */
 router.post('/', function (req, res) {
-    const income = new Income({
+    const income = new Incomes({
         user: req.body.user,
-        transaction_type: req.body.transaction_type,
+        transaction_type: "Incomes",
         source: req.body.source,
         interval: req.body.interval,
         start_date: req.body.start_date,
@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
             res.status(200).json(data);
         })
         .catch(err => {
-            res.json({message: err});
+            res.status(404).json({message: err});
         })
 });
 
