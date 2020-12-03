@@ -20,13 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/services/routes/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/routes/userGroups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/income.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/income.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/routes/income.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/routes/incomes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +90,7 @@
       <workItem from="1606816397223" duration="909000" />
       <workItem from="1606817341071" duration="2325000" />
       <workItem from="1606851125976" duration="4940000" />
-      <workItem from="1606982759783" duration="6220000" />
+      <workItem from="1606982759783" duration="6426000" />
     </task>
     <task id="LOCAL-00001" summary="CSS from prototype input, ready for HTML layout">
       <created>1606732327246</created>
@@ -187,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607003132584</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="user route and basic first pass post route">
+      <created>1607003518354</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1607003518354</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +222,8 @@
     <MESSAGE value="transaction model schema added" />
     <MESSAGE value="updated config to use an env file for secret strings" />
     <MESSAGE value="user and usergroup models added, post route added for transactions (test)." />
-    <option name="LAST_COMMIT_MESSAGE" value="user and usergroup models added, post route added for transactions (test)." />
+    <MESSAGE value="user route and basic first pass post route" />
+    <option name="LAST_COMMIT_MESSAGE" value="user route and basic first pass post route" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -272,11 +276,11 @@
     </state>
     <state x="461" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605203086142" />
     <state x="2381" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605034791532" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607003139000">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1607003520325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1606846974363" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607003139000" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1607003520325" />
     <state x="247" y="140" width="1545" height="728" key="dock-window-1" timestamp="1607002854477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

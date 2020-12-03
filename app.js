@@ -12,6 +12,8 @@ require('dotenv/config');
 
 var indexRouter = require('./services/routes/index');
 var incomesRouter = require('./services/routes/incomes');
+var usersRouter = require('./services/routes/users');
+var userGroupsRouter = require('./services/routes/userGroups');
 
 var app = express();
 
@@ -40,6 +42,8 @@ app.use(express.static(path.join(__dirname, 'presentation/public')));
 
 app.use('/', indexRouter);
 app.use('/income', incomesRouter);
+app.use('/users', usersRouter);
+app.use('/userGroups', userGroupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
