@@ -5,21 +5,24 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+var bodyParser = require('body-parser');
 require('dotenv/config');
 
-var indexRouter = require('./Services/routes/index');
-var incomesRouter = require('./Services/routes/income');
+
+
+var indexRouter = require('./services/routes/index');
+var incomesRouter = require('./services/routes/income');
 
 var app = express();
 
-
+app.use(bodyParser.json());
 // view engine setup
-app.set('views', path.join(__dirname, 'Presentation/views'));
+app.set('views', path.join(__dirname, 'presentation/views'));
 app.engine( 'hbs', hbs( {
   extname: 'hbs',
   defaultLayout: 'main',
-  layoutsDir: __dirname + '/Presentation/views/layouts/',
-  partialsDir: __dirname + '/Presentation/views/partials/'
+  layoutsDir: __dirname + '/presentation/views/layouts/',
+  partialsDir: __dirname + '/presentation/views/partials/'
 } ) );
 app.set('view engine', 'hbs');
 
@@ -28,12 +31,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'Presentation/public'),
-  dest: path.join(__dirname, 'Presentation/public'),
+  src: path.join(__dirname, 'presentation/public'),
+  dest: path.join(__dirname, 'presentation/public'),
   debug: true,
   outputStyle: 'compressed'
 }));
-app.use(express.static(path.join(__dirname, 'Presentation/public')));
+app.use(express.static(path.join(__dirname, 'presentation/public')));
 
 app.use('/', indexRouter);
 app.use('/income', incomesRouter);
