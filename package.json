@@ -20,6 +20,7 @@
     "nodemon": "^2.0.6"
   },
   "devDependencies": {
-    "express-handlebars": "^5.2.0"
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6"
   }
 }

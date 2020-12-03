@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const Incomes = require('../../domain/models/Transaction');
+const Income = require('../../domain/models/Transaction');
 
 /* GET income dashboard. */
-router.get('/', function (req, res, next) {
-    res.render('income', {title: 'Incomes'});
+router.get('/', async function (req, res, next) {
+    const income = await Income.find();
+    res.render('income', {title: 'Incomes', income: income});
 });
 
 /* Post new income. */
 router.post('/', function (req, res) {
-    const income = new Incomes({
+    const income = new Income({
         user: req.body.user,
         transaction_type: "Income",
         source: req.body.source,

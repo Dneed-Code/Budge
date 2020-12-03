@@ -22,6 +22,10 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'presentation/views'));
 app.engine( 'hbs', hbs( {
   extname: 'hbs',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true
+  },
   defaultLayout: 'main',
   layoutsDir: __dirname + '/presentation/views/layouts/',
   partialsDir: __dirname + '/presentation/views/partials/'
