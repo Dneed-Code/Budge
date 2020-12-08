@@ -1,2 +1,2 @@
 # Budge
-![Budge Build Status](https://github.com/Dneed-Code/Budge/workflows/Node.js%20CI/badge.svg)
+![Budge Build](https://github.com/Dneed-Code/Budge/workflows/Budge%20Build/badge.svg)
