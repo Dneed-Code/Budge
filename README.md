@@ -1,2 +1,2 @@
 # Budge
-[![Build Status](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME}.png?branch=master)](https://travis-ci.org/{ORG-or-USERNAME}/{REPO-NAME})
+[![Build Status](https://github.com/Dneed-Code/Budge/actions?query=workflow%3A%22Node.js+CI%22)](https://github.com/Dneed-Code/Budge)
