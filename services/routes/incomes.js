@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const Income = require('../../domain/models/Transaction');
+const income_controller = require("../controllers/incomeController");
 
-/* GET income dashboard. */
+/*
+/!* GET income dashboard. *!/
 router.get('/', async function (req, res, next) {
     const income = await Income.find();
     res.render('income', {title: 'Incomes', income: income});
 });
 
-/* Post new income. */
+/!* Post new income. *!/
 router.post('/', function (req, res) {
     const income = new Income({
         user: req.body.user,
@@ -27,6 +29,39 @@ router.post('/', function (req, res) {
             res.status(404).json({message: err});
         })
 });
+*/
+
+
+/// INCOME ROUTES ///
+// GET request for list of all incomes.
+router.get('/list', income_controller.income_list);
+
+// GET request for creating income. NOTE This must come before route for id (i.e. display income).
+router.get('/create', income_controller.income_create_get);
+
+// POST request for creating income.
+router.post('/create', income_controller.income_create_post);
+
+// GET request to delete income.
+router.get('/:id/delete', income_controller.income_delete_get);
+
+// POST request to delete income.
+router.post('/:id/delete', income_controller.income_delete_post);
+
+// GET request to update income.
+router.get('/:id/update', income_controller.income_update_get);
+
+// POST request to update income.
+router.post('/:id/update', income_controller.income_update_post);
+
+// GET request for one income.
+router.get('/:id', income_controller.income_detail);
+
+// GET income page.
+router.get('/', income_controller.index);  //This actually maps to /catalog/ because we import the route with a /catalog prefix
+
+
+
 
 
 module.exports = router;

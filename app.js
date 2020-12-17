@@ -8,6 +8,12 @@ var sassMiddleware = require('node-sass-middleware');
 var bodyParser = require('body-parser');
 require('dotenv/config');
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = process.env.DB_CONNECTION;
+mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true},() => console.log('connected to Mongo database'));
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var indexRouter = require('./services/routes/index');
@@ -65,11 +71,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = process.env.DB_CONNECTION;
-mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true},() => console.log('connected to db!'));
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 module.exports = app;
