@@ -5,8 +5,14 @@
         <div class="card tile" style="height: 200px;">
             <div class="card-body">
                 Incomes
-                {{#each income}}
-                    <p>{{source}}</p>
+                {{#each data.income_count}}
+                    <p>{{data.income_count}}</p>
+                {{else}}
+                    <p>{{data.income_count}}</p>
+                    {{/each}}
+
+                {{#each data.income_list}}
+                    <p>{{user.first_name}} {{user.last_name}}</p>
                 {{/each}}
             </div>
         </div>
