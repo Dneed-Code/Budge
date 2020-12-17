@@ -52,39 +52,48 @@ exports.income_create_post =  [
 
         // Create a income object with escaped and trimmed data.
         var income = new Income(
-            { name: req.body.name }
+            {
+                transaction_type: "Income",
+                user: "5fc8ef42ba58094c449725c4",
+                source: req.body.source,
+                interval: req.body.interval,
+                amount: req.body.amount
+            }
         );
 
 
-        if (!errors.isEmpty()) {
-            // There are errors. Render the form again with sanitized values/error messages.
-            res.render('income_form', { title: 'Create Income', income: income, errors: errors.array()});
-            return;
-        }
-        else {
-            // Data from form is valid.
-            // Check if Income with same name already exists.
-            Income.findOne({ 'name': req.body.name })
-                .exec( function(err, found_income) {
-                    if (err) { return next(err); }
+        // if (!errors.isEmpty()) {
+        //     // There are errors. Render the form again with sanitized values/error messages.
+        //     res.render('income', { title: 'Income', income: income, errors: errors.array()});
+        //     return;
+        // }
+        // else {
+        // Data from form is valid.
+        // Check if Income with same name already exists.
+        Income.findOne({'name': req.body.name})
+            .exec(function (err, found_income) {
+                if (err) {
+                    return next(err);
+                }
 
-                    if (found_income) {
-                        // Income exists, redirect to its detail page.
-                        res.redirect(found_income.url);
-                    }
-                    else {
+                if (found_income) {
+                    // Income exists, redirect to its detail page.
+                    res.redirect(found_income.url);
+                } else {
 
-                        income.save(function (err) {
-                            if (err) { return next(err); }
-                            // Income saved. Redirect to income detail page.
-                            res.redirect(income.url);
-                        });
+                    income.save(function (err) {
+                        if (err) {
+                            return next(err);
+                        }
+                        // Income saved. Redirect to income detail page.
+                        res.redirect(income.url);
+                    });
 
-                    }
+                }
 
-                });
-        }
+            });
     }
+
 ];
 
 // Display income delete form on GET.

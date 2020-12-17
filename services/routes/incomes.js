@@ -54,7 +54,7 @@ router.get('/:id/update', income_controller.income_update_get);
 router.post('/:id/update', income_controller.income_update_post);
 
 // GET request for one income.
-router.get('/:id', income_controller.income_detail);
+router.get('/:id', income_controller.index);
 
 // GET income page.
 router.get('/', income_controller.index);
