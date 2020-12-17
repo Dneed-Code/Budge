@@ -18,6 +18,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var indexRouter = require('./services/routes/index');
 var incomesRouter = require('./services/routes/incomes');
+var expensesRouter = require('./services/routes/expenses');
 var usersRouter = require('./services/routes/users');
 var userGroupsRouter = require('./services/routes/userGroups');
 
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'presentation/public')));
 
 app.use('/', indexRouter);
 app.use('/income', incomesRouter);
+app.use('/expense', expensesRouter);
 app.use('/users', usersRouter);
 app.use('/userGroups', userGroupsRouter);
 

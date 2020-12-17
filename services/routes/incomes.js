@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const Income = require('../../domain/models/Transaction');
 const income_controller = require("../controllers/incomeController");
 
 /*
@@ -58,7 +57,7 @@ router.post('/:id/update', income_controller.income_update_post);
 router.get('/:id', income_controller.income_detail);
 
 // GET income page.
-router.get('/', income_controller.index);  //This actually maps to /catalog/ because we import the route with a /catalog prefix
+router.get('/', income_controller.index);
 
 
 

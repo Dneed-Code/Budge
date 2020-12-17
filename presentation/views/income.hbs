@@ -1,20 +1,35 @@
-
-
-<div class="row col-equal-height">
-    <div class="col-md-4">
-        <div class="card tile" style="height: 200px;">
+<style>
+    label {
+        color: white;
+    }
+</style>
+<div class="row col-equal-height mb-3">
+    <div class="col-md-12">
+        <div class="card tile" style="">
             <div class="card-body">
-                Incomes
-                {{#each data.income_count}}
-                    <p>{{data.income_count}}</p>
-                {{else}}
-                    <p>{{data.income_count}}</p>
+                <table id="table_id" class="display">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Source</th>
+                        <th>Amount</th>
+                        <th>Interval</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each data.income_list}}
+                        <tr>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{source}}</td>
+                            <td>£{{amount}}</td>
+                            <td>{{interval}} Days</td>
+                        </tr>
                     {{/each}}
-
-                {{#each data.income_list}}
-                    <p>{{user.first_name}} {{user.last_name}}</p>
-                {{/each}}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
+{{> addIncome}}

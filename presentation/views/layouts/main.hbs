@@ -11,6 +11,8 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!--Datatable css-->
+    <link rel="stylesheet" href="/stylesheets/datatable.css">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/style.css">
 
@@ -44,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/expense">
                     <i class="fas fa-cash-register"></i>
                     <span>Expenses</span>
                 </a>
@@ -129,6 +131,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+<!--Datatables JS-->
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -136,6 +140,9 @@
             $('#sidebar').toggleClass('active');
         });
     });
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
 </script>
 </body>
 </html>
