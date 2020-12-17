@@ -33,6 +33,8 @@ router.post('/', function (req, res) {
 
 
 /// INCOME ROUTES ///
+// GET request for list of all incomes.
+router.get('/list', income_controller.income_list);
 
 // GET request for creating income. NOTE This must come before route for id (i.e. display income).
 router.get('/create', income_controller.income_create_get);
@@ -55,8 +57,10 @@ router.post('/:id/update', income_controller.income_update_post);
 // GET request for one income.
 router.get('/:id', income_controller.income_detail);
 
-// GET request for list of all incomes.
-router.get('/', income_controller.income_list);
+// GET income page.
+router.get('/', income_controller.index);  //This actually maps to /catalog/ because we import the route with a /catalog prefix
+
+
 
 
 

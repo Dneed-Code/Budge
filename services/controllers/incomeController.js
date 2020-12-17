@@ -1,9 +1,32 @@
-var IncomeInstance = require('../../domain/models/Transaction');
+var User = require('../../domain/models/User');
+var Income = require('../../domain/models/Transaction');
 
-// Display list of all Incomes.
-exports.income_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Income list');
+var async = require('async');
+
+// Gets Income page
+exports.index = function(req, res, next) {
+    async.parallel({
+        income_count: function(callback) {
+            Income.countDocuments({transaction_type:'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
+        },
+        income_list: function(callback) {
+            Income.find({}, 'user source amount', callback).populate('user');
+        },
+    }, function(err, results) {
+        res.render('income', { title: 'Income', error: err, data: results });
+    });
 };
+// Display list of all Incomes.
+exports.income_list = function(req, res, next) {
+    Income.find({}, 'user source amount')
+        .populate('user')
+        .exec(function (err, list_incomes) {
+            if (err) { return next(err); }
+            //Successful, so render
+            res.send({income_list: list_incomes });
+        });
+};
+
 // Display detail page for a specific Income.
 exports.income_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: income detail: ' + req.params.id);
