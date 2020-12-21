@@ -97,21 +97,45 @@ exports.income_create_post =  [
 ];
 
 // Display income delete form on GET.
-exports.income_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: income delete GET');
+exports.income_delete_get = function(req, res, next) {
+    async.parallel({
+        income: function(callback) {
+            Income.findById(req.params.id).exec(callback)
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.income==null) { // No results.
+            res.redirect('/incomes');
+        }
+        // Successful, so render.
+        res.render('income_delete', { title: 'Delete Income', income: results.income } );
+    });
 };
 
 // Handle income delete on POST.
 exports.income_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: income delete POST');
+    async.parallel({
+        income: function(callback) {
+            Income.findById(req.body.incomeid).exec(callback)
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        // Success
+            // Income has no dependants. Delete object and redirect to the list of incomes.
+            Income.findByIdAndRemove(req.body.incomeid, function deleteIncome(err) {
+                if (err) { return next(err); }
+                // Success - go to income list
+                res.redirect('/incomes')
+            })
+    });
 };
 
-// Display Author update form on GET.
+// Display income update form on GET.
 exports.income_update_get = function(req, res) {
     res.send('NOT IMPLEMENTED: income update GET');
 };
 
-// Handle Author update on POST.
+// Handle income update on POST.
 exports.income_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: income update POST');
 };
