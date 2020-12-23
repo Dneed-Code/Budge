@@ -29,7 +29,7 @@
     <div class="col-md-12">
         <div class="card tile" style="">
             <div class="card-body">
-                <table id="table_id" class="display">
+                <table id="table_id" class="display table">
                     <thead>
                     <tr>
                         <th>User Name</th>
@@ -53,7 +53,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -92,5 +91,6 @@
             cutoutPercentage: 35
         }
     });
+
 </script>
 {{> addIncome}}
