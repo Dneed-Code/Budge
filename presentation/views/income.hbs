@@ -3,24 +3,30 @@
         color: white;
     }
 </style>
-<div class="row col-equal-height mb-3">
+<div class="row col-equal-height mb-4">
     <div class="col-md-4">
-        <div class="card tile" style="">
-            <div class="card-body">
-                <canvas id="myChart"></canvas>
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Total Income Over Time</h4>
+                <canvas id="incomeLineChart" style="height: 250px"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card tile" style="">
-            <div class="card-body">
-                <canvas id="myChart2"></canvas>
+            <div class="card-body text-center">
+                <h4>Income Contribution (Total)</h4>
+                <canvas id="incomeDonutChart"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card tile" style="">
-            <div class="card-body">
+            <div class="card-body text-center">
+                <h4>Total Monthly Income</h4>
+                <p>Intervals, If less than 30 days will only be counted once for the sake of budgetting</p>
+<h1 id="incomeTotal" class="pt-2"></h1>
+                <p class="pt-3">This is an increase of £600, a 40% increase in income from last month.</p>
             </div>
         </div>
     </div>
@@ -54,39 +60,63 @@
     </div>
 </div>
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var incomeAmounts = []
+        {{#each data.income_list}}
+        incomeAmounts.push({{amount}});
+        {{/each}}
+    function sum(incomeAmounts) {
+        var sum = 0;
+        for (var index = 0; index < incomeAmounts.length; index++) {
+            sum += incomeAmounts[index];
+        }
+        return sum;
+    }
+    $(document).ready(
+            function() {
+                $('#incomeTotal').text('£' + sum(incomeAmounts));
+            }
+    );
+    var ctx = document.getElementById('incomeLineChart').getContext('2d');
+    var donutLabels = [];
+    var donutAmounts = [];
+        {{#each data.income_list}}
+        donutLabels.push('{{source}}');
+        donutAmounts.push('{{amount}}');
+        {{/each}}
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
         // The data for our dataset
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-                label: 'My First dataset',
-                backgroundColor: '#288db9',
+                label: 'Income Over Time',
+                backgroundColor: '#0e1726',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
+                data: [0, 10, 5, 2, 20, 30, 45, 40, 10, 5, 9, 50]
             }]
         },
 
         // Configuration options go here
-        options: {}
+        options: {
+            responsive: true
+        }
     });
-    var dough = document.getElementById('myChart2').getContext('2d');
+    var dough = document.getElementById('incomeDonutChart').getContext('2d');
     var myDoughnutChart = new Chart(dough, {
         type: 'doughnut',
-                // The data for our dataset
-                data: {
-                    labels: ['January', 'February', 'March', 'April'],
-                    datasets: [{
-                        label: 'My First dataset',
-                        backgroundColor: ['#288db9','#ffffff','#FF0000','#FFFF00'],
-                        borderColor: '#343434',
-                        weight: 2,
-                        data: [0, 10, 5, 2]
-                    }]
-                },
+        // The data for our dataset
+        data: {
+            labels: donutLabels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['#5c1ac3', '#e7515a', '#e2a03f', '#60e23f'],
+                borderColor: '#0e1726',
+                weight: 2,
+                data: donutAmounts
+            }]
+        },
         options: {
             cutoutPercentage: 35
         }
