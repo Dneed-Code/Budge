@@ -11,15 +11,21 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Datatable css -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/datatable.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/datatabledt.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/datatablemt.css">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/style.css">
-
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/91e2863daf.js" crossorigin="anonymous"></script>
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 
 <body>
+
 <!--MAIN CONTAINER-->
 
 <div class="wrapper">
@@ -30,7 +36,7 @@
             <img src="/images/icon.svg" class="sidebar-icon"/>
         </div>
 
-        <ul class="list-unstyled components">
+        <ul class="list-unstyled components sidebar-links">
             <li class="active">
                 <a href="#">
                     <i class="fab fa-bimobject"></i>
@@ -44,7 +50,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/expense">
                     <i class="fas fa-cash-register"></i>
                     <span>Expenses</span>
                 </a>
@@ -78,13 +84,12 @@
 
     <!-- Page Content  -->
     <div id="content">
-
         <!-- Top Nav -->
         <div class="top-nav">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-justify"></i>
+                    <button type="button" id="sidebarCollapse" class="btn btn-top">
+                        <i class="topicon fas fa-align-justify"></i>
                     </button>
 
                     <h3 id="navbar-title">{{{title}}}</h3>
@@ -129,6 +134,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+<!--Datatables JS-->
+<script src="javascripts/datatables.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -136,6 +144,23 @@
             $('#sidebar').toggleClass('active');
         });
     });
+
+    $(document).ready(function() {
+        $('#table_id').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+            },
+             "lengthChange": false,
+             "pageLength": 7,
+            drawCallback: function () {
+                $('.t-dot').tooltip({ template: '<div class="tooltip status" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' })
+                $('.dataTables_wrapper table').removeClass('table-striped');
+            }
+        });
+    } );
 </script>
 </body>
 </html>

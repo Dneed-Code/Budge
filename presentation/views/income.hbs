@@ -1,20 +1,96 @@
-
-
-<div class="row col-equal-height">
+<style>
+    label {
+        color: white;
+    }
+</style>
+<div class="row col-equal-height mb-3">
     <div class="col-md-4">
-        <div class="card tile" style="height: 200px;">
+        <div class="card tile" style="">
             <div class="card-body">
-                Incomes
-                {{#each data.income_count}}
-                    <p>{{data.income_count}}</p>
-                {{else}}
-                    <p>{{data.income_count}}</p>
-                    {{/each}}
-
-                {{#each data.income_list}}
-                    <p>{{user.first_name}} {{user.last_name}}</p>
-                {{/each}}
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card tile" style="">
+            <div class="card-body">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card tile" style="">
+            <div class="card-body">
             </div>
         </div>
     </div>
 </div>
+<div class="row col-equal-height mb-3">
+    <div class="col-md-12">
+        <div class="card tile" style="">
+            <div class="card-body">
+                <table id="table_id" class="display table">
+                    <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Source</th>
+                        <th>Amount</th>
+                        <th>Interval</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each data.income_list}}
+                        <tr>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{source}}</td>
+                            <td>£{{amount}}</td>
+                            <td>{{interval}} Days</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: '#288db9',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+    var dough = document.getElementById('myChart2').getContext('2d');
+    var myDoughnutChart = new Chart(dough, {
+        type: 'doughnut',
+                // The data for our dataset
+                data: {
+                    labels: ['January', 'February', 'March', 'April'],
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: ['#288db9','#ffffff','#FF0000','#FFFF00'],
+                        borderColor: '#343434',
+                        weight: 2,
+                        data: [0, 10, 5, 2]
+                    }]
+                },
+        options: {
+            cutoutPercentage: 35
+        }
+    });
+
+</script>
+{{> addIncome}}
