@@ -13,10 +13,42 @@ exports.index = function (req, res, next) {
         income_list: function (callback) {
             Income.find({}, 'user source amount interval', callback).populate('user');
         },
+        income_per_month: function (callback) {
+            getIncomePerMonth().then(function(incomePerMonth) {
+                callback("",incomePerMonth);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
     }, function (err, results) {
         res.render('income', {title: 'Income', error: err, data: results});
     });
 };
+
+function getIncomePerMonth() {
+    return new Promise(function(resolve, reject) {
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
+        let monthlyIncomeData = new Array(12).fill(0);
+
+        incomes.then(function(doc) {
+
+            for (var i = 0; i < doc.length; i++){
+                var startMonth = doc[i].start_date.getMonth();
+                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
+                for (var j = startMonth; j < numberOfMonths+startMonth; j++){
+                    monthlyIncomeData[j] += doc[i].amount;
+                }
+                console.log(numberOfMonths);
+            }
+
+            resolve(monthlyIncomeData);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+}
 // Display list of all Incomes.
 exports.income_list = function (req, res, next) {
     Income.find({}, 'user source amount interval')

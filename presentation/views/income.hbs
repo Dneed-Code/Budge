@@ -25,8 +25,9 @@
             <div class="card-body text-center">
                 <h4>Total Monthly Income</h4>
                 <p>Intervals, If less than 30 days will only be counted once for the sake of budgetting</p>
-<h1 id="incomeTotal" class="pt-2"></h1>
-                <p class="pt-3">This is an increase of £600, a 40% increase in income from last month.</p>
+                <h1 id="incomeTotal" class="pt-2"></h1>
+                <p class="pt-3">This is an increase of {{incomeChangeAmount}}, a {{incomeChangePercentage}} increase in
+                    income from last month. From a total of {{data.income_count}} different Incomes</p>
             </div>
         </div>
     </div>
@@ -71,8 +72,9 @@
         }
         return sum;
     }
+
     $(document).ready(
-            function() {
+            function () {
                 $('#incomeTotal').text('£' + sum(incomeAmounts));
             }
     );
@@ -92,9 +94,9 @@
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Income Over Time',
-                backgroundColor: '#0e1726',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45, 40, 10, 5, 9, 50]
+                backgroundColor: '#0e172685',
+                borderColor: '#e2a03f',
+                data: [{{data.income_per_month}}]
             }]
         },
 
@@ -118,7 +120,11 @@
             }]
         },
         options: {
-            cutoutPercentage: 35
+            cutoutPercentage: 35,
+            scaleLabel:
+                    function (label) {
+                        return '$' + label.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
         }
     });
 
