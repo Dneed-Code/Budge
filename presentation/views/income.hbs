@@ -25,9 +25,8 @@
             <div class="card-body text-center">
                 <h4>Total Monthly Income</h4>
                 <p>Intervals, If less than 30 days will only be counted once for the sake of budgetting</p>
-                <h1 id="incomeTotal" class="pt-2"></h1>
-                <p class="pt-3">This is an increase of {{incomeChangeAmount}}, a {{incomeChangePercentage}} increase in
-                    income from last month. From a total of {{data.income_count}} different Incomes</p>
+                <h1 class="pt-2">£{{data.income_current_month}}</h1>
+                <p class="pt-3">This is {{data.change}}</p>
             </div>
         </div>
     </div>
@@ -43,6 +42,8 @@
                         <th>Source</th>
                         <th>Amount</th>
                         <th>Interval</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,8 @@
                             <td>{{source}}</td>
                             <td>£{{amount}}</td>
                             <td>{{interval}} Days</td>
+                            <td>{{formatDate start_date "short"}}</td>
+                            <td>{{formatDate end_date "short"}}</td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -60,7 +63,27 @@
         </div>
     </div>
 </div>
+{{> addIncome}}
 <script>
+    $( "#saveIncome" ).click(function() {
+        $.ajax
+        ({
+            url: '/income/create',
+            data: "book_id="+book_id,
+            type: 'post',
+            success: function()
+            {
+                $('.modal-box').text(result).fadeIn(700, function()
+                {
+                    setTimeout(function()
+                    {
+                        $('.modal-box').fadeOut();
+                    }, 2000);
+                });
+            }
+        });
+    });
+
     var incomeAmounts = []
         {{#each data.income_list}}
         incomeAmounts.push({{amount}});
@@ -93,7 +116,7 @@
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-                label: 'Income Over Time',
+                label: 'Income Over Time (£)',
                 backgroundColor: '#0e172685',
                 borderColor: '#e2a03f',
                 data: [{{data.income_per_month}}]
@@ -120,13 +143,8 @@
             }]
         },
         options: {
-            cutoutPercentage: 35,
-            scaleLabel:
-                    function (label) {
-                        return '$' + label.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    }
+            cutoutPercentage: 35
         }
     });
 
 </script>
-{{> addIncome}}

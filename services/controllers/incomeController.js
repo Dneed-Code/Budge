@@ -11,11 +11,27 @@ exports.index = function (req, res, next) {
             Income.countDocuments({transaction_type: 'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
         },
         income_list: function (callback) {
-            Income.find({}, 'user source amount interval', callback).populate('user');
+            Income.find({}, 'user source amount interval start_date end_date', callback).populate('user');
         },
         income_per_month: function (callback) {
-            getIncomePerMonth().then(function(incomePerMonth) {
-                callback("",incomePerMonth);
+            getIncomePerMonth().then(function (incomePerMonth) {
+                callback("", incomePerMonth);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        income_current_month: function (callback) {
+            getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
+                callback("", incomeCurrentMonth);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        change: function (callback) {
+            getChange().then(function (change) {
+                callback("", change);
             })
                 .catch((err) => {
                     console.log(err);
@@ -27,28 +43,79 @@ exports.index = function (req, res, next) {
 };
 
 function getIncomePerMonth() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
         let monthlyIncomeData = new Array(12).fill(0);
-
-        incomes.then(function(doc) {
-
-            for (var i = 0; i < doc.length; i++){
+        incomes.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
                 var startMonth = doc[i].start_date.getMonth();
                 var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
-                for (var j = startMonth; j < numberOfMonths+startMonth; j++){
+                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
                     monthlyIncomeData[j] += doc[i].amount;
                 }
                 console.log(numberOfMonths);
             }
-
             resolve(monthlyIncomeData);
-
         }).catch((err) => {
             console.log(err);
         });
     });
 }
+function getIncomeCurrentMonth() {
+    return new Promise(function (resolve, reject) {
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
+        let monthlyIncomeData = new Array(12).fill(0);
+        incomes.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
+                var startMonth = doc[i].start_date.getMonth();
+                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
+                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
+                    monthlyIncomeData[j] += doc[i].amount;
+                }
+                console.log(numberOfMonths);
+            }
+            var dateNow = new Date();
+            var currentMonth = dateNow.getMonth();
+            resolve(monthlyIncomeData[currentMonth]);
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+}
+
+function getChange() {
+    return new Promise(function (resolve, reject) {
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
+        let monthlyIncomeData = new Array(12).fill(0);
+        incomes.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
+                var startMonth = doc[i].start_date.getMonth();
+                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
+                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
+                    monthlyIncomeData[j] += doc[i].amount;
+                }
+                console.log(numberOfMonths);
+                var dateNow = new Date();
+                var currentMonth = dateNow.getMonth();
+                var lastMonth = currentMonth - 1;
+                var change = "";
+                var changeAmount = monthlyIncomeData[currentMonth] - monthlyIncomeData[lastMonth];
+                var changePercentage = ((changeAmount / monthlyIncomeData[lastMonth]) * 100).toFixed(2) + '%';
+                if (monthlyIncomeData[currentMonth] < monthlyIncomeData[lastMonth]) {
+                    change = "a decrease of " +" " +"£"+ Math.abs(changeAmount) + " "+ " a " +" "+ changePercentage + " " + "change in income from last month.";
+                } else if (monthlyIncomeData[currentMonth] > monthlyIncomeData[lastMonth]) {
+                    change = "an increase of"
+                } else {
+                    change = "the same"
+                }
+            }
+            resolve(change);
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+}
+
 // Display list of all Incomes.
 exports.income_list = function (req, res, next) {
     Income.find({}, 'user source amount interval')
