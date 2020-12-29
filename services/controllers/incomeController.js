@@ -11,7 +11,7 @@ exports.index = function (req, res, next) {
             Income.countDocuments({transaction_type: 'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
         },
         income_list: function (callback) {
-            Income.find({}, 'user source amount interval start_date end_date', callback).populate('user');
+            Income.find({}, 'user source amount date_paid start_date end_date', callback).populate('user');
         },
         income_per_month: function (callback) {
             getIncomePerMonth().then(function (incomePerMonth) {
@@ -38,14 +38,14 @@ exports.index = function (req, res, next) {
                 })
         },
     }, function (err, results) {
-        res.render('income', {title: 'Income', error: err, data: results});
+        res.render('income', {title: 'Income', error: err, data: results, income: true});
     });
 };
 
 
 // Display list of all Incomes.
 exports.income_list = function (req, res, next) {
-    Income.find({}, 'user source amount interval')
+    Income.find({}, 'user source amount date_paid')
         .populate('user')
         .exec(function (err, list_incomes) {
             if (err) {
@@ -84,7 +84,7 @@ exports.income_create_post = [
                 transaction_type: "Income",
                 user: "5fc8ef42ba58094c449725c4",
                 source: req.body.source,
-                interval: req.body.interval,
+                date_paid: req.body.date_paid,
                 amount: req.body.amount
             }
         );
@@ -195,7 +195,7 @@ exports.income_update_post = [
 
     // Validate and sanitise fields.
     body('source', 'Source must not be empty.').trim().isLength({min: 1}).escape(),
-    body('interval', 'Interval must not be empty.').trim().isLength({min: 1}).escape(),
+    body('date_paid', 'Date Paid must not be empty.').trim().isLength({min: 1}).escape(),
     body('amount', 'Amount must not be empty.').trim().isLength({min: 1}).escape(),
 
 
@@ -210,7 +210,7 @@ exports.income_update_post = [
             {
                 transaction_type: "Income",
                 source: req.body.source,
-                interval: req.body.interval,
+                date_paid: req.body.date_paid,
                 amount: req.body.amount,
                 _id: req.params.id
             });
@@ -252,14 +252,15 @@ exports.income_update_post = [
 
 function getIncomePerMonth() {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
-        let monthlyIncomeData = new Array(12).fill(0);
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
+        let monthlyIncomeData = new Array(100).fill(0);
         incomes.then(function (doc) {
             for (var i = 0; i < doc.length; i++) {
-                var startMonth = doc[i].start_date.getMonth();
-                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
-                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
-                    monthlyIncomeData[j] += doc[i].amount;
+                var startDate = doc[i].start_date;
+                var endDate = doc[i].end_date;
+                var numberOfMonths = monthDiff(startDate, endDate);
+                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
+                        monthlyIncomeData[j] += doc[i].amount;
                 }
                 console.log(numberOfMonths);
             }
@@ -271,19 +272,21 @@ function getIncomePerMonth() {
 }
 function getIncomeCurrentMonth() {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
-        let monthlyIncomeData = new Array(12).fill(0);
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
+        let monthlyIncomeData = new Array(100).fill(0);
         incomes.then(function (doc) {
             for (var i = 0; i < doc.length; i++) {
-                var startMonth = doc[i].start_date.getMonth();
-                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
-                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
-                    monthlyIncomeData[j] += doc[i].amount;
+                var startDate = doc[i].start_date;
+                var endDate = doc[i].end_date;
+                var numberOfMonths = monthDiff(startDate, endDate);
+                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
+                        monthlyIncomeData[j] += doc[i].amount;
                 }
                 console.log(numberOfMonths);
             }
             var dateNow = new Date();
             var currentMonth = dateNow.getMonth();
+            console.log('This month is ' + currentMonth)
             resolve(monthlyIncomeData[currentMonth]);
         }).catch((err) => {
             console.log(err);
@@ -291,15 +294,25 @@ function getIncomeCurrentMonth() {
     });
 }
 
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    console.log('Difference in months is ' + months)
+    return months <= 0 ? 1 : months;
+}
+
 function getChange() {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount interval start_date end_date');
+        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
         let monthlyIncomeData = new Array(12).fill(0);
         incomes.then(function (doc) {
             for (var i = 0; i < doc.length; i++) {
-                var startMonth = doc[i].start_date.getMonth();
-                var numberOfMonths = doc[i].end_date.getMonth() - startMonth;
-                for (var j = startMonth; j < numberOfMonths + startMonth; j++) {
+                var startDate = doc[i].start_date;
+                var endDate = doc[i].end_date;
+                var numberOfMonths = monthDiff(startDate, endDate);
+                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
                     monthlyIncomeData[j] += doc[i].amount;
                 }
                 console.log(numberOfMonths);

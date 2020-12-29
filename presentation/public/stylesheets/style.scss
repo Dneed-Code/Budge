@@ -10,7 +10,7 @@ body {
   overflow-x: hidden;
 
 }
-h1,h4 {
+h1,h4,.modal-title {
   color: $base-color-text;
 }
 p {
@@ -365,4 +365,64 @@ section#main-section {
   border-radius: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.modal-content {
+ background-color: $base-color-elements;
+}
+.form-control {
+  height: auto;
+  border: 1px solid #1b2e4b;
+  color: #009688;
+  font-size: 15px;
+  padding: 8px 10px;
+  letter-spacing: 1px;
+  height: calc(1.4em + 1.4rem + 2px);
+  padding: .75rem 1.25rem;
+  border-radius: 6px;
+  background: #1b2e4b;
+}
+.form-group label, label {
+  font-size: 15px;
+  color: #acb0c3;
+  letter-spacing: 1px;
+}
+.form-group {
+  margin-bottom: 0;
+}
 
+.btn-primary {
+  color: #fff !important;
+  background-color: #1b55e2 !important;
+  border-color: #1b55e2;
+}
+.custom-control-label {
+  //position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1rem;
+  height: 1.25rem;
+  opacity: 0;
+}
+.custom-control {
+  //position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.modal-header {
+  border-bottom: 1px solid $base-color-sidenav-text;
+}
+.modal-footer {
+  border-top: 1px solid $base-color-sidenav-text;
+}

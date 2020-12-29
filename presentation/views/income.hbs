@@ -24,7 +24,7 @@
         <div class="card tile" style="">
             <div class="card-body text-center">
                 <h4>Total Monthly Income</h4>
-                <p>Intervals, If less than 30 days will only be counted once for the sake of budgetting</p>
+                <p>This is the summation of all incomes from your group, that are active this month.</p>
                 <h1 class="pt-2">£{{data.income_current_month}}</h1>
                 <p class="pt-3">This is {{data.change}}</p>
             </div>
@@ -41,7 +41,7 @@
                         <th>User Name</th>
                         <th>Source</th>
                         <th>Amount</th>
-                        <th>Interval</th>
+                        <th>Date Received</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                     </tr>
@@ -52,7 +52,7 @@
                             <td>{{user.first_name}} {{user.last_name}}</td>
                             <td>{{source}}</td>
                             <td>£{{amount}}</td>
-                            <td>{{interval}} Days</td>
+                            <td>{{formatDatePaid date_paid}}</td>
                             <td>{{formatDate start_date "short"}}</td>
                             <td>{{formatDate end_date "short"}}</td>
                         </tr>

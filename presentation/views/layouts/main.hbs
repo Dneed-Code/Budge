@@ -41,13 +41,13 @@
         </div>
 
         <ul class="list-unstyled components sidebar-links">
-            <li class="active">
-                <a href="#">
+            <li class="{{#if dashboard}}active{{/if}}">
+                <a href="/">
                     <i class="fab fa-bimobject"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li class="{{#if income}}active{{/if}}">
                 <a href='/income'>
                     <i class="fas fa-hand-holding-usd"></i>
                     <span>Incomes</span>
