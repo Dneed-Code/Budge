@@ -52,9 +52,9 @@
                             <td>{{user.first_name}} {{user.last_name}}</td>
                             <td>{{source}}</td>
                             <td>£{{amount}}</td>
-                            <td>{{formatDatePaid date_paid}}</td>
-                            <td>{{formatDate start_date "short"}}</td>
-                            <td>{{formatEndDate end_date "short"}}</td>
+                            <td data-sort="{{date_paid}}">{{formatDatePaid date_paid}}</td>
+                            <td data-sort="{{formatDate start_date "year"}}">{{formatDate start_date "short"}}</td>
+                            <td data-sort="{{formatDate end_date "year"}}">{{formatEndDate end_date "short"}}</td>
                         </tr>
                     {{/each}}
                     </tbody>

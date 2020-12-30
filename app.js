@@ -46,6 +46,7 @@ app.set('view engine', 'hbs');
 
 var exphbs = hbs.create({});
 var DateFormats = {
+  year: "YYYYMMDD",
   short: "DD MMMM - YYYY",
   long: "dddd DD.MM.YYYY HH:mm"
 };

@@ -284,13 +284,13 @@ a.article:hover {
 
 #content {
   width: 100%;
-  min-height: 100vh;
+  min-height: 95vh;
   transition: all 0.3s;
 }
 
 section#main-section {
-  padding: 69px !important;
-  padding-bottom: 0 !important;
+  padding: 30px !important;
+  //padding-bottom: 10px !important;
 }
 
 .tile {

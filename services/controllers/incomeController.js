@@ -83,10 +83,7 @@ exports.income_create_post = [
 
         // Get Start dates day of the Month as this will be date paid
         var startDate = new Date(req.body.start_date);
-        datePaid = startDate.getDate();
-        console.log(datePaid + "THIS IS THE DATEPAID");
-
-
+        var datePaid = startDate.getDate();
 
         // Get status (If its an income still being received)
         var status;
