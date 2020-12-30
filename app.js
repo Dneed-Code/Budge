@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var bodyParser = require('body-parser');
+require('toastr');
 require('dotenv/config');
 var moment = require('moment'); // require
 moment().format();
@@ -48,7 +49,7 @@ var DateFormats = {
   short: "DD MMMM - YYYY",
   long: "dddd DD.MM.YYYY HH:mm"
 };
-// register new function
+// register new function for formatting dates in view
 exphbs.handlebars.registerHelper('formatDate', function(datetime, format) {
   if (moment) {
     // can use other formats like 'lll' too
@@ -59,7 +60,7 @@ exphbs.handlebars.registerHelper('formatDate', function(datetime, format) {
     return datetime;
   }
 });
-// register new function
+// register new function for formatting dates paid in view
 exphbs.handlebars.registerHelper('formatDatePaid', function(number) {
   var j = number % 10,
       k = number % 100;
@@ -75,6 +76,21 @@ exphbs.handlebars.registerHelper('formatDatePaid', function(number) {
   return number + "th";
 }
 );
+// register new function for formatting dates in view
+exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format) {
+  var endDateNoEnd = new Date(2030, 12, 12);
+  if (datetime > endDateNoEnd){
+    return 'Enduring Income'
+  }
+  if (moment) {
+    // can use other formats like 'lll' too
+    format = DateFormats[format] || format;
+    return moment(datetime).format(format);
+  }
+  else {
+    return datetime;
+  }
+});
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <div class="statbox">
                     <div class="">
-                        <form>
+                        <form id="addIncomeForm" onsubmit="postIncome()" >
                             <div class="form-row mb-2">
                                 <div class="form-group col-md-6">
                                     <label for="inputSource">Source</label>
@@ -51,7 +51,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveIncome">Add Income</button>
+                <button type="button" class="btn btn-primary" id="saveIncome" onclick="postIncome()">Add Income</button>
             </div>
         </div>
     </div>

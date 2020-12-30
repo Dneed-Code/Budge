@@ -54,7 +54,7 @@
                             <td>£{{amount}}</td>
                             <td>{{formatDatePaid date_paid}}</td>
                             <td>{{formatDate start_date "short"}}</td>
-                            <td>{{formatDate end_date "short"}}</td>
+                            <td>{{formatEndDate end_date "short"}}</td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -65,24 +65,7 @@
 </div>
 {{> addIncome}}
 <script>
-    $( "#saveIncome" ).click(function() {
-        $.ajax
-        ({
-            url: '/income/create',
-            data: "book_id="+book_id,
-            type: 'post',
-            success: function()
-            {
-                $('.modal-box').text(result).fadeIn(700, function()
-                {
-                    setTimeout(function()
-                    {
-                        $('.modal-box').fadeOut();
-                    }, 2000);
-                });
-            }
-        });
-    });
+
 
     var incomeAmounts = []
         {{#each data.income_list}}
@@ -146,5 +129,58 @@
             cutoutPercentage: 35
         }
     });
+    toastr.options = {
+        "preventDuplicates": true,
+        "preventOpenDuplicates": true
+    };
+    function postIncome() {
+        var endDate;
+        var isErrors = false;
+        if ($('#inputSource').val() == "" || $('#inputSource').val().length < 2){
+            toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
+            isErrors = true;
+        }
+        if($('#inputAmount').val() == "" || $('#inputAmount').val().length < 2){
+            toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
+            isErrors = true;
+        }
+        if($('#inputStartDate').val() == ""){
+            toastr.info('You must enter a valid start date of the income, it must be a complete date!', 'Start Date Input Error');
+            isErrors = true;
+        }
+        if ($('#gridCheck').is(':checked')){
+endDate = new Date(2040, 12, 12);
+        }else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
+                toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
+                isErrors = true;
+            }else {
+            endDate = $('#inputEndDate').val();
+        }
+
+console.log(endDate);
+        if (!isErrors){
+        $.ajax({
+            url: '/income/create',
+            type: 'POST',
+            cache: false,
+            data: {
+                source: $('#inputSource').val(),
+                amount: $('#inputAmount').val(),
+                start_date: $('#inputStartDate').val(),
+                end_date: endDate
+            },
+            success: function (data) {
+                window.location.assign('/income')
+            }
+            , error: function (jqXHR, textStatus, err) {
+                //alert('text status ' + textStatus + ', err ' + err)
+            }
+        });
+    }
+}
+
+    function isAfterStartDate(){
+        return new $('#inputStartDate').val() < $('#inputEndDate').val();
+    }
 
 </script>

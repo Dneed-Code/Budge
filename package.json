@@ -21,7 +21,9 @@
     "mongoose": "^5.11.1",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "socket.io": "^3.0.4",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "express-handlebars": "^5.2.0",

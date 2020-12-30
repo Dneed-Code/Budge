@@ -70,7 +70,10 @@ exports.income_create_get = function (req, res, next) {
 exports.income_create_post = [
 
     // Validate and santise the name field.
-    body('name', 'Income name required').trim().isLength({min: 1}).escape(),
+    body('source', 'Income source required').trim().isLength({min: 2}).escape(),
+    body('amount', 'Income source required').trim().isLength({min: 1}).escape(),
+    body('start_date', 'Income start date required').trim().isLength({min: 2}).escape(),
+    body('end_date', 'Income end date required').trim().isLength({min: 2}).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -78,49 +81,70 @@ exports.income_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
+        // Get Start dates day of the Month as this will be date paid
+        var startDate = new Date(req.body.start_date);
+        datePaid = startDate.getDate();
+        console.log(datePaid + "THIS IS THE DATEPAID");
+
+
+
+        // Get status (If its an income still being received)
+        var status;
+        var currentDate = new Date();
+        var endDate = new Date(req.body.end_date);
+        if (endDate > currentDate && startDate < currentDate){
+            status = 'active';
+        }else {
+            status = 'inactive';
+        }
+
         // Create a income object with escaped and trimmed data.
         var income = new Income(
             {
                 transaction_type: "Income",
                 user: "5fc8ef42ba58094c449725c4",
                 source: req.body.source,
-                date_paid: req.body.date_paid,
-                amount: req.body.amount
+                date_paid: datePaid,
+                amount: req.body.amount,
+                start_date: req.body.start_date,
+                end_date: req.body.end_date,
+                status: status
             }
         );
 
 
-        // if (!errors.isEmpty()) {
-        //     // There are errors. Render the form again with sanitized values/error messages.
-        //     res.render('income', { title: 'Income', income: income, errors: errors.array()});
-        //     return;
-        // }
-        // else {
-        // Data from form is valid.
-        // Check if Income with same name already exists.
-        Income.findOne({'name': req.body.name})
-            .exec(function (err, found_income) {
-                if (err) {
-                    return next(err);
-                }
-
-                if (found_income) {
-                    // Income exists, redirect to its detail page.
-                    res.redirect(found_income.url);
-                } else {
+        //  if (!errors.isEmpty()) {
+        //      // There are errors. Render the form again with sanitized values/error messages.
+        //     res.render('income', { title: 'Income', income: income, errors: errors.array(), income: true});
+        //      return;
+        //  }
+        //  else {
+        // // Data from form is valid.
+        // // Check if Income with same name already exists.
+        // Income.findOne({'name': req.body.name})
+        //     .exec(function (err, found_income) {
+        //         if (err) {
+        //             return next(err);
+        //         }
+        //
+        //         if (found_income) {
+        //             // Income exists, redirect to its detail page.
+        //             res.redirect(found_income.url);
+        //         } else {
 
                     income.save(function (err) {
                         if (err) {
                             return next(err);
                         }
-                        // Income saved. Redirect to income detail page.
-                        res.redirect(income.url);
+                        // Income saved. Redirect to income page.
+                        res.redirect('/income');
+
                     });
 
-                }
+                // }
 
-            });
-    }
+            // });
+     }
 
 ];
 
@@ -262,7 +286,6 @@ function getIncomePerMonth() {
                 for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
                         monthlyIncomeData[j] += doc[i].amount;
                 }
-                console.log(numberOfMonths);
             }
             resolve(monthlyIncomeData);
         }).catch((err) => {
@@ -282,27 +305,22 @@ function getIncomeCurrentMonth() {
                 for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
                         monthlyIncomeData[j] += doc[i].amount;
                 }
-                console.log(numberOfMonths);
             }
             var dateNow = new Date();
             var currentMonth = dateNow.getMonth();
-            console.log('This month is ' + currentMonth)
             resolve(monthlyIncomeData[currentMonth]);
         }).catch((err) => {
             console.log(err);
         });
     });
 }
-
 function monthDiff(d1, d2) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth();
     months += d2.getMonth();
-    console.log('Difference in months is ' + months)
     return months <= 0 ? 1 : months;
 }
-
 function getChange() {
     return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
@@ -315,7 +333,6 @@ function getChange() {
                 for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
                     monthlyIncomeData[j] += doc[i].amount;
                 }
-                console.log(numberOfMonths);
                 var dateNow = new Date();
                 var currentMonth = dateNow.getMonth();
                 var lastMonth = currentMonth - 1;
@@ -325,9 +342,9 @@ function getChange() {
                 if (monthlyIncomeData[currentMonth] < monthlyIncomeData[lastMonth]) {
                     change = "a decrease of " +" " +"£"+ Math.abs(changeAmount) + " "+ " a " +" "+ changePercentage + " " + "change in income from last month.";
                 } else if (monthlyIncomeData[currentMonth] > monthlyIncomeData[lastMonth]) {
-                    change = "an increase of"
+                    change = "a increase of " +" " +"£"+ Math.abs(changeAmount) + " "+ " a " +" "+ changePercentage + " " + "change in income from last month.";
                 } else {
-                    change = "the same"
+                    change = "the same income as last month, great work your income is stable!";
                 }
             }
             resolve(change);
