@@ -81,7 +81,7 @@ exphbs.handlebars.registerHelper('formatDatePaid', function(number) {
 exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format) {
   var endDateNoEnd = new Date(2030, 12, 12);
   if (datetime > endDateNoEnd){
-    return 'Enduring Income'
+    return 'Ongoing Income'
   }
   if (moment) {
     // can use other formats like 'lll' too
