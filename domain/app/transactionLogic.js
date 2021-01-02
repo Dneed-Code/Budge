@@ -10,7 +10,7 @@ exports.countIncomes = function (callback) {
 // List the all the incomes
 // TODO: Make this only list the incomes from the current users group
 exports.listIncomes = function (callback) {
-    Income.find({'transaction_type': 'Income'}, 'user source amount date_paid start_date end_date status', callback).populate('user');
+    Income.find({'transaction_type': 'Income'}, callback).populate('user');
 }
 // List the all the active incomes
 // TODO: Make this only list the incomes from the current users group

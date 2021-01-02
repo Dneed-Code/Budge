@@ -1,5 +1,3 @@
-
-
 var createError = require('http-errors');
 var express = require('express');
 var hbs = require('express-handlebars')
@@ -79,7 +77,7 @@ exphbs.handlebars.registerHelper('formatDatePaid', function(number) {
 );
 // register new function for formatting dates in view
 exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format) {
-  var endDateNoEnd = new Date(2030, 12, 12);
+  var endDateNoEnd = new Date(2024, 11, 12);
   if (datetime > endDateNoEnd){
     return 'Ongoing Income'
   }

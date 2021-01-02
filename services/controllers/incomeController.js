@@ -3,6 +3,8 @@ const Income = require('../../domain/models/Transaction');
 const transaction_logic = require('../../domain/app/transactionLogic');
 const {body, validationResult} = require('express-validator');
 const async = require('async');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // Gets Income page
 exports.index = function (req, res, next) {
@@ -170,23 +172,21 @@ exports.income_update_get = function (req, res, next) {
 
     // Get income and user for form.
     async.parallel({
-        income: function (callback) {
-            Income.findById(req.params.id).populate('user').exec(callback);
-        },
-        users: function (callback) {
-            User.find(callback);
+        income_found: function (callback) {
+            console.log(req.params.id);
+            Income.find({_id: req.params.id}, callback).populate('user');
         },
     }, function (err, results) {
         if (err) {
             return next(err);
         }
-        if (results.income == null) { // No results.
-            var err = new Error('Income not found');
+        if (results.income_found == null) { // No results.
+            var err = new Error('Income not found', err);
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('income_modal', {title: 'Update Income', authors: results.users, income: results.income});
+        res.send({data: results});
     });
 
 };

@@ -429,7 +429,9 @@ input[type=checkbox], input[type=radio] {
 .toast {
   opacity: 1 !important;
 }
-canvas {
-  margin: 0 auto;
-  height: 100%;
+.dataHover:hover{
+  cursor: pointer;
+}
+.dataHover:hover{
+  background-color: rgba(77, 87, 96, 0.52) !important;
 }

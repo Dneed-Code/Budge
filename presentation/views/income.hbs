@@ -35,7 +35,7 @@
     <div class="col-md-12">
         <div class="card tile" style="">
             <div class="card-body">
-                <table id="table_id" class="display table">
+                <table id="table_id" class="display table table-hover">
                     <thead>
                     <tr>
                         <th>User Name</th>
@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                     {{#each data.income_list}}
-                        <tr>
+                        <tr class="dataHover hover" onclick="editModal('{{id}}')">
                             <td>{{user.first_name}} {{user.last_name}}</td>
                             <td>{{source}}</td>
                             <td>£{{amount}}</td>
@@ -64,8 +64,8 @@
     </div>
 </div>
 {{> addIncome}}
+{{> editIncome}}
 <script>
-
 
     var incomeAmounts = []
         {{#each data.income_list}}
@@ -168,7 +168,6 @@ endDate = new Date(2025, 12, 12);
             endDate = $('#inputEndDate').val();
         }
 
-console.log(endDate);
         if (!isErrors){
         $.ajax({
             url: '/income/create',
@@ -194,4 +193,81 @@ console.log(endDate);
         return new $('#inputStartDate').val() < $('#inputEndDate').val();
     }
 
+    function editModal(id) {
+        var thisId = id;
+        $.ajax({
+            url: '/income/' + thisId + '/update',
+            type: 'GET',
+            dataType: 'json',
+            id: thisId,
+            success: function (data) {
+                $('#inputEditSource').val(data.data.income_found[0].source);
+                $('#inputEditAmount').val(data.data.income_found[0].amount);
+                $('#inputEditStartDate').val(formatDate(data.data.income_found[0].start_date));
+                $('#inputEditEndDate').val(formatDate(data.data.income_found[0].end_date));
+            }
+            , error: function (jqXHR, textStatus, err) {
+                alert('text status ' + textStatus + ', err ' + err)
+            }
+        });
+        $('#editIncomeModal').modal('show');
+    }
+function editIncome(id){
+        var endDate;
+        var isErrors = false;
+        if ($('#inputEditSource').val() == "" || $('#inputEditSource').val().length < 2){
+            toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
+            isErrors = true;
+        }
+        if($('#inputEditAmount').val() == "" || $('#inputEditAmount').val().length < 2){
+            toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
+            isErrors = true;
+        }
+        if($('#inputEditStartDate').val() == ""){
+            toastr.info('You must enter a valid start date of the income, it must be a complete date!', 'Start Date Input Error');
+            isErrors = true;
+        }
+        if ($('#gridEditCheck').is(':checked')){
+            endDate = new Date(2025, 12, 12);
+        }else if ($('#inputEditEndDate').val() == "" || !isAfterStartDate($('#inputEditEndDate').val())) {
+            toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
+            isErrors = true;
+        }else {
+            endDate = $('#inputEditEndDate').val();
+        }
+
+        if (!isErrors){
+            $.ajax({
+                url: '/income/'+thisId+'/update',
+                type: 'POST',
+                cache: false,
+                data: {
+                    source: $('#inputEditSource').val(),
+                    amount: $('#inputEditAmount').val(),
+                    start_date: $('#inputEditStartDate').val(),
+                    end_date: endDate
+                },
+                success: function (data) {
+                    window.location.assign('/income')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    //alert('text status ' + textStatus + ', err ' + err)
+                }
+            });
+        }
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
 </script>
