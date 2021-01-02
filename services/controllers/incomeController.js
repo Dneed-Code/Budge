@@ -1,20 +1,20 @@
-var User = require('../../domain/models/User');
-var Income = require('../../domain/models/Transaction');
-
+const User = require('../../domain/models/User');
+const Income = require('../../domain/models/Transaction');
+const transaction_logic = require('../../domain/app/transactionLogic');
 const {body, validationResult} = require('express-validator');
-var async = require('async');
+const async = require('async');
 
 // Gets Income page
 exports.index = function (req, res, next) {
     async.parallel({
         income_count: function (callback) {
-            Income.countDocuments({transaction_type: 'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
+            transaction_logic.countIncomes(callback);
         },
         income_list: function (callback) {
-            Income.find({}, 'user source amount date_paid start_date end_date', callback).populate('user');
+            transaction_logic.listIncomes(callback);
         },
         income_per_month: function (callback) {
-            getIncomePerMonth().then(function (incomePerMonth) {
+            transaction_logic.getIncomePerMonth().then(function (incomePerMonth) {
                 callback("", incomePerMonth);
             })
                 .catch((err) => {
@@ -22,7 +22,7 @@ exports.index = function (req, res, next) {
                 })
         },
         income_current_month: function (callback) {
-            getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
+            transaction_logic.getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
                 callback("", incomeCurrentMonth);
             })
                 .catch((err) => {
@@ -30,7 +30,7 @@ exports.index = function (req, res, next) {
                 })
         },
         change: function (callback) {
-            getChange().then(function (change) {
+            transaction_logic.getChange().then(function (change) {
                 callback("", change);
             })
                 .catch((err) => {
@@ -41,7 +41,6 @@ exports.index = function (req, res, next) {
         res.render('income', {title: 'Income', error: err, data: results, income: true});
     });
 };
-
 
 // Display list of all Incomes.
 exports.income_list = function (req, res, next) {
@@ -80,20 +79,8 @@ exports.income_create_post = [
 
         // Extract the validation errors from a request.
         const errors = validationResult(req);
-
-        // Get Start dates day of the Month as this will be date paid
-        var startDate = new Date(req.body.start_date);
-        var datePaid = startDate.getDate();
-
-        // Get status (If its an income still being received)
-        var status;
-        var currentDate = new Date();
-        var endDate = new Date(req.body.end_date);
-        if (endDate > currentDate && startDate < currentDate){
-            status = 'active';
-        }else {
-            status = 'inactive';
-        }
+        var datePaid = transaction_logic.getDatePaid(req.body.start_date);
+        var status = transaction_logic.getStatus(req.body.start_date,req.body.end_date);
 
         // Create a income object with escaped and trimmed data.
         var income = new Income(
@@ -108,42 +95,32 @@ exports.income_create_post = [
                 status: status
             }
         );
-
-
-        //  if (!errors.isEmpty()) {
-        //      // There are errors. Render the form again with sanitized values/error messages.
-        //     res.render('income', { title: 'Income', income: income, errors: errors.array(), income: true});
-        //      return;
-        //  }
-        //  else {
-        // // Data from form is valid.
-        // // Check if Income with same name already exists.
-        // Income.findOne({'name': req.body.name})
-        //     .exec(function (err, found_income) {
-        //         if (err) {
-        //             return next(err);
-        //         }
-        //
-        //         if (found_income) {
-        //             // Income exists, redirect to its detail page.
-        //             res.redirect(found_income.url);
-        //         } else {
-
-                    income.save(function (err) {
-                        if (err) {
-                            return next(err);
-                        }
-                        // Income saved. Redirect to income page.
-                        res.redirect('/income');
-
-                    });
-
-                // }
-
-            // });
-     }
-
-];
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values/error messages.
+            res.render('income', {title: 'Income', income: income, errors: errors.array(), income: true});
+        } else {
+            // Data from form is valid.
+            // Check if Income with same name already exists.
+            Income.findOne({'source': req.body.source, 'date_paid': datePaid, 'amount': req.body.amount})
+                .exec(function (err, found_income) {
+                    if (err) {
+                        return next(err);
+                    }
+                    if (found_income) {
+                        // Income exists, redirect to its detail page.
+                        res.redirect(found_income.url);
+                    } else {
+                        income.save(function (err) {
+                            if (err) {
+                                return next(err);
+                            }
+                            // Income saved. Redirect to income page.
+                            res.redirect('/income');
+                        });
+                    }
+                });
+        }
+    }];
 
 // Display income delete form on GET.
 exports.income_delete_get = function (req, res, next) {
@@ -271,82 +248,5 @@ exports.income_update_post = [
     }
 ];
 
-function getIncomePerMonth() {
-    return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(100).fill(0);
-        incomes.then(function (doc) {
-            for (var i = 0; i < doc.length; i++) {
-                var startDate = doc[i].start_date;
-                var endDate = doc[i].end_date;
-                var numberOfMonths = monthDiff(startDate, endDate);
-                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-                        monthlyIncomeData[j] += doc[i].amount;
-                }
-            }
-            resolve(monthlyIncomeData);
-        }).catch((err) => {
-            console.log(err);
-        });
-    });
-}
-function getIncomeCurrentMonth() {
-    return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(100).fill(0);
-        incomes.then(function (doc) {
-            for (var i = 0; i < doc.length; i++) {
-                var startDate = doc[i].start_date;
-                var endDate = doc[i].end_date;
-                var numberOfMonths = monthDiff(startDate, endDate);
-                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-                        monthlyIncomeData[j] += doc[i].amount;
-                }
-            }
-            var dateNow = new Date();
-            var currentMonth = dateNow.getMonth();
-            resolve(monthlyIncomeData[currentMonth]);
-        }).catch((err) => {
-            console.log(err);
-        });
-    });
-}
-function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    return months <= 0 ? 1 : months;
-}
-function getChange() {
-    return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(12).fill(0);
-        incomes.then(function (doc) {
-            for (var i = 0; i < doc.length; i++) {
-                var startDate = doc[i].start_date;
-                var endDate = doc[i].end_date;
-                var numberOfMonths = monthDiff(startDate, endDate);
-                for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-                    monthlyIncomeData[j] += doc[i].amount;
-                }
-                var dateNow = new Date();
-                var currentMonth = dateNow.getMonth();
-                var lastMonth = currentMonth - 1;
-                var change = "";
-                var changeAmount = monthlyIncomeData[currentMonth] - monthlyIncomeData[lastMonth];
-                var changePercentage = ((changeAmount / monthlyIncomeData[lastMonth]) * 100).toFixed(2) + '%';
-                if (monthlyIncomeData[currentMonth] < monthlyIncomeData[lastMonth]) {
-                    change = "a decrease of " +" " +"£"+ Math.abs(changeAmount) + " "+ " a " +" "+ changePercentage + " " + "change in income from last month.";
-                } else if (monthlyIncomeData[currentMonth] > monthlyIncomeData[lastMonth]) {
-                    change = "a increase of " +" " +"£"+ Math.abs(changeAmount) + " "+ " a " +" "+ changePercentage + " " + "change in income from last month.";
-                } else {
-                    change = "the same income as last month, great work your income is stable!";
-                }
-            }
-            resolve(change);
-        }).catch((err) => {
-            console.log(err);
-        });
-    });
-}
+
+
