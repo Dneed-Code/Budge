@@ -37,6 +37,9 @@ exports.index = function (req, res, next) {
                     console.log(err);
                 })
         },
+        active_incomes: function (callback) {
+            transaction_logic.listActiveIncomes(callback);
+        },
     }, function (err, results) {
         res.render('income', {title: 'Income', error: err, data: results, income: true});
     });
@@ -80,7 +83,7 @@ exports.income_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
         var datePaid = transaction_logic.getDatePaid(req.body.start_date);
-        var status = transaction_logic.getStatus(req.body.start_date,req.body.end_date);
+        var status = transaction_logic.getStatus(req.body.start_date, req.body.end_date);
 
         // Create a income object with escaped and trimmed data.
         var income = new Income(

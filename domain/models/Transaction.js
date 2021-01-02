@@ -16,7 +16,7 @@ var TransactionSchema = new Schema(
         start_date: {type: Date},
         end_date: {type: Date},
         amount: {type: Number, maxlength: 15},
-        status: {type: String, required: true, maxlength: 15},
+        status: {type: Boolean, required: true, maxlength: 15},
     }
 );
 

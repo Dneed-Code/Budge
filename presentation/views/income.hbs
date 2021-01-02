@@ -7,23 +7,23 @@
     <div class="col-md-4">
         <div class="card tile">
             <div class="card-body text-center">
-                <h4>Total Income Over Time</h4>
-                <canvas id="incomeLineChart" style="height: 250px"></canvas>
+                <h4>Income Over Time (Year) </h4>
+                <canvas id="incomeLineChart"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card tile" style="">
             <div class="card-body text-center">
-                <h4>Income Contribution (Total)</h4>
-                <canvas id="incomeDonutChart"></canvas>
+                <h4 id="donutHead">Active Income Contribution (Total)</h4>
+                <canvas style="margin-top: 10px" id="incomeDonutChart"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card tile" style="">
             <div class="card-body text-center">
-                <h4>Total Monthly Income {{data.income_count}}</h4>
+                <h4>Total Current Monthly Income</h4>
                 <p>This is the summation of all incomes from your group, that are active this month.</p>
                 <h1 class="pt-2">£{{data.income_current_month}}</h1>
                 <p class="pt-3">This is {{data.change}}</p>
@@ -87,10 +87,14 @@
     var ctx = document.getElementById('incomeLineChart').getContext('2d');
     var donutLabels = [];
     var donutAmounts = [];
-        {{#each data.income_list}}
+        {{#each data.active_incomes}}
         donutLabels.push('{{source}}');
         donutAmounts.push('{{amount}}');
+        {{else}}
+        $( "#donutHead" ).after( "<p>You have no active incomes currently, Try adding one!</p>" );
         {{/each}}
+
+
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
@@ -100,8 +104,8 @@
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Income Over Time (£)',
-                backgroundColor: '#0e172685',
-                borderColor: '#e2a03f',
+                backgroundColor: 'rgba(20, 255, 40, 0.05)',
+                borderColor: 'rgba(0, 199, 17, 0.75)',
                 data: [{{data.income_per_month}}]
             }]
         },

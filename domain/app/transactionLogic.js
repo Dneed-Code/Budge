@@ -9,7 +9,12 @@ exports.countIncomes = function (callback) {
 // List the all the incomes
 // TODO: Make this only list the incomes from the current users group
 exports.listIncomes = function (callback) {
-    Income.find({}, 'user source amount date_paid start_date end_date', callback).populate('user');
+    Income.find({'transaction_type': 'Income'}, 'user source amount date_paid start_date end_date status', callback).populate('user');
+}
+// List the all the active incomes
+// TODO: Make this only list the incomes from the current users group
+exports.listActiveIncomes = function (callback) {
+    Income.find({'transaction_type': 'Income', status: true}, 'user source amount date_paid start_date end_date status', callback).populate('user');
 }
 
 // Calculate the Income per month of all the cumulative incomes in the list
@@ -17,9 +22,10 @@ exports.listIncomes = function (callback) {
 exports.getIncomePerMonth = function () {
     return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(100).fill(0);
+        let monthlyIncomeData = new Array(52).fill(0);
         incomes.then(function (doc) {
             monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
+
             resolve(monthlyIncomeData);
         }).catch((err) => {
             console.log(err);
@@ -69,13 +75,13 @@ exports.getDatePaid = function getDatePaid(startDate) {
 
 // Get status (If its an income still being received or not)
 exports.getStatus = function getStatus(startDate, endDate) {
-    var status;
+    var status = new Boolean(false);
     var currentDate = new Date();
     var tempEndDate = new Date(endDate);
     if (tempEndDate > currentDate && startDate < currentDate) {
-        status = 'active';
+        status = true;
     } else {
-        status = 'inactive';
+        status = false;
     }
     return status;
 }
