@@ -1,4 +1,5 @@
 const Income = require('../../domain/models/Transaction');
+var moment = require('moment');
 
 // Count the number of incomes
 // TODO: Make this only count the current users group
@@ -14,7 +15,10 @@ exports.listIncomes = function (callback) {
 // List the all the active incomes
 // TODO: Make this only list the incomes from the current users group
 exports.listActiveIncomes = function (callback) {
-    Income.find({'transaction_type': 'Income', status: true}, 'user source amount date_paid start_date end_date status', callback).populate('user');
+    Income.find({
+        'transaction_type': 'Income',
+        status: true
+    }, 'user source amount date_paid start_date end_date status', callback).populate('user');
 }
 
 // Calculate the Income per month of all the cumulative incomes in the list
@@ -22,11 +26,27 @@ exports.listActiveIncomes = function (callback) {
 exports.getIncomePerMonth = function () {
     return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(52).fill(0);
+        let monthlyIncomeData = [];
         incomes.then(function (doc) {
             monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
+            var thisYearIncome = [];
+            var dateNow = new Date();
+            var startDate = new Date(dateNow.getFullYear(), 0);
+            var startDateMo = moment(startDate);
+            for (var j = 0; j < 12; j++) {
 
-            resolve(monthlyIncomeData);
+                if (isNaN(monthlyIncomeData[getDictKey(startDate)])) {
+                    thisYearIncome[j] = 0;
+                } else {
+                    thisYearIncome[j] = monthlyIncomeData[getDictKey(startDate)];
+                }
+
+                startDateMo.add(1, 'months');
+                startDate = new Date(startDateMo);
+            }
+
+
+            resolve(thisYearIncome);
         }).catch((err) => {
             console.log(err);
         });
@@ -38,12 +58,12 @@ exports.getIncomePerMonth = function () {
 exports.getIncomeCurrentMonth = function getIncomeCurrentMonth() {
     return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(100).fill(0);
+        let monthlyIncomeData = [];
         incomes.then(function (doc) {
             monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
             var dateNow = new Date();
-            var currentMonth = dateNow.getMonth();
-            resolve(monthlyIncomeData[currentMonth]);
+            var currentMonth = dateNow;
+            resolve(monthlyIncomeData[getDictKey(currentMonth)]);
         }).catch((err) => {
             console.log(err);
         });
@@ -55,7 +75,7 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth() {
 exports.getChange = function getChange() {
     return new Promise(function (resolve, reject) {
         const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = new Array(12).fill(0);
+        let monthlyIncomeData = [];
         incomes.then(function (doc) {
             monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
             var change = constructChangeMessage(monthlyIncomeData);
@@ -75,7 +95,7 @@ exports.getDatePaid = function getDatePaid(startDate) {
 
 // Get status (If its an income still being received or not)
 exports.getStatus = function getStatus(startDate, endDate) {
-    var status = new Boolean(false);
+    var status = Boolean(false);
     var currentDate = new Date();
     var tempEndDate = new Date(endDate);
     if (tempEndDate > currentDate && startDate < currentDate) {
@@ -89,14 +109,16 @@ exports.getStatus = function getStatus(startDate, endDate) {
 // Create a string message that conveys the change in income from last month to the current month
 function constructChangeMessage(monthlyIncomeData) {
     var dateNow = new Date();
-    var currentMonth = dateNow.getMonth();
-    var lastMonth = currentMonth - 1;
+    var lastMonthMo = moment(dateNow);
+    lastMonthMo.subtract(1, 'months');
+    var lastMonth = new Date(lastMonthMo);
     var change;
-    var changeAmount = monthlyIncomeData[currentMonth] - monthlyIncomeData[lastMonth];
-    var changePercentage = ((changeAmount / monthlyIncomeData[lastMonth]) * 100).toFixed(2) + '%';
-    if (monthlyIncomeData[currentMonth] < monthlyIncomeData[lastMonth]) {
+    console.log(lastMonth);
+    var changeAmount = monthlyIncomeData[getDictKey(dateNow)] - monthlyIncomeData[getDictKey(lastMonth)];
+    var changePercentage = ((changeAmount / monthlyIncomeData[getDictKey(lastMonth)]) * 100).toFixed(2) + '%';
+    if (monthlyIncomeData[getDictKey(dateNow)] < monthlyIncomeData[getDictKey(lastMonth)]) {
         change = "a decrease of " + " " + "£" + Math.abs(changeAmount) + " " + " a " + " " + changePercentage + " " + "change in income from last month.";
-    } else if (monthlyIncomeData[currentMonth] > monthlyIncomeData[lastMonth]) {
+    } else if (monthlyIncomeData[getDictKey(dateNow)] > monthlyIncomeData[getDictKey(lastMonth)]) {
         change = "a increase of " + " " + "£" + Math.abs(changeAmount) + " " + " a " + " " + changePercentage + " " + "change in income from last month.";
     } else {
         change = "the same income as last month, great work your income is stable!";
@@ -106,14 +128,41 @@ function constructChangeMessage(monthlyIncomeData) {
 
 // Calculate the Monthly Income Data
 function getMonthlyIncomeData(incomeData, doc) {
+
+    // For each Income
     for (var i = 0; i < doc.length; i++) {
         var startDate = doc[i].start_date;
         var endDate = doc[i].end_date;
         var numberOfMonths = monthDiff(startDate, endDate);
-        for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-            incomeData[j] += doc[i].amount;
+        var startDateMo = moment(startDate);
+
+        for (var j = 0; j < numberOfMonths; j++) {
+
+            if (isNaN(incomeData[getDictKey(startDate)])) {
+                console.log("this is err");
+                incomeData[getDictKey(startDate)] = doc[i].amount;
+            } else {
+                var newAmount = incomeData[getDictKey(startDate)] + doc[i].amount;
+                console.log(incomeData[getDictKey(startDate)]);
+                console.log(doc[i].amount);
+                console.log('pls sir');
+                incomeData[getDictKey(startDate)] = newAmount;
+            }
+
+            startDateMo.add(1, 'months');
+            startDate = new Date(startDateMo);
         }
     }
+    console.log(incomeData);
+    //
+    //
+    //
+    // for (var i = 0; i < doc.length; i++) {
+
+    //     for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
+    //         incomeData[j] += doc[i].amount;
+    //     }
+    // }
     return incomeData;
 }
 
@@ -124,4 +173,10 @@ function monthDiff(d1, d2) {
     months -= d1.getMonth();
     months += d2.getMonth();
     return months <= 0 ? 1 : months;
+}
+
+// Get date key for dictionary
+function getDictKey(date) {
+    var key = date.toLocaleString('default', {month: 'short'}) + " " + date.getFullYear();
+    return key;
 }

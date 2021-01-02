@@ -112,7 +112,14 @@
 
         // Configuration options go here
         options: {
-            responsive: true
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
     });
     var dough = document.getElementById('incomeDonutChart').getContext('2d');
@@ -153,7 +160,7 @@
             isErrors = true;
         }
         if ($('#gridCheck').is(':checked')){
-endDate = new Date(2040, 12, 12);
+endDate = new Date(2025, 12, 12);
         }else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
                 toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
                 isErrors = true;
