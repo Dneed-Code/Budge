@@ -194,14 +194,18 @@ exports.income_update_get = function (req, res, next) {
 // Handle income update on POST.
 exports.income_update_post = [
 
-    // Validate and sanitise fields.
-    body('source', 'Source must not be empty.').trim().isLength({min: 1}).escape(),
-    body('date_paid', 'Date Paid must not be empty.').trim().isLength({min: 1}).escape(),
-    body('amount', 'Amount must not be empty.').trim().isLength({min: 1}).escape(),
 
+    // Validate and santise the name field.
+    body('source', 'Income source required').trim().isLength({min: 2}).escape(),
+    body('amount', 'Income source required').trim().isLength({min: 1}).escape(),
+    body('start_date', 'Income start date required').trim().isLength({min: 2}).escape(),
+    body('end_date', 'Income end date required').trim().isLength({min: 2}).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
+
+        var datePaid = transaction_logic.getDatePaid(req.body.start_date);
+        var status = transaction_logic.getStatus(req.body.start_date, req.body.end_date);
 
         // Extract the validation errors from a request.
         const errors = validationResult(req);
@@ -213,7 +217,10 @@ exports.income_update_post = [
                 source: req.body.source,
                 date_paid: req.body.date_paid,
                 amount: req.body.amount,
-                _id: req.params.id
+                _id: req.params.id,
+                start_date: req.body.start_date,
+                end_date: req.body.end_date,
+                status: status
             });
 
         income.user = Income.findById(req.params.id).populate('user');

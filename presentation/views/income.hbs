@@ -91,7 +91,7 @@
         donutLabels.push('{{source}}');
         donutAmounts.push('{{amount}}');
         {{else}}
-        $( "#donutHead" ).after( "<p>You have no active incomes currently, Try adding one!</p>" );
+        $("#donutHead").after("<p>You have no active incomes currently, Try adding one!</p>");
         {{/each}}
 
 
@@ -144,53 +144,58 @@
         "preventDuplicates": true,
         "preventOpenDuplicates": true
     };
+
     function postIncome() {
         var endDate;
         var isErrors = false;
-        if ($('#inputSource').val() == "" || $('#inputSource').val().length < 2){
+        if ($('#inputSource').val() == "" || $('#inputSource').val().length < 2) {
             toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
             isErrors = true;
         }
-        if($('#inputAmount').val() == "" || $('#inputAmount').val().length < 2){
+        if ($('#inputAmount').val() == "" || $('#inputAmount').val().length < 2) {
             toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
             isErrors = true;
         }
-        if($('#inputStartDate').val() == ""){
+        if ($('#inputStartDate').val() == "") {
             toastr.info('You must enter a valid start date of the income, it must be a complete date!', 'Start Date Input Error');
             isErrors = true;
         }
-        if ($('#gridCheck').is(':checked')){
-endDate = new Date(2025, 12, 12);
-        }else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
-                toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
-                isErrors = true;
-            }else {
+        if ($('#gridCheck').is(':checked')) {
+            endDate = new Date(2025, 12, 12);
+        } else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
+            toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
+            isErrors = true;
+        } else {
             endDate = $('#inputEndDate').val();
         }
 
-        if (!isErrors){
-        $.ajax({
-            url: '/income/create',
-            type: 'POST',
-            cache: false,
-            data: {
-                source: $('#inputSource').val(),
-                amount: $('#inputAmount').val(),
-                start_date: $('#inputStartDate').val(),
-                end_date: endDate
-            },
-            success: function (data) {
-                window.location.assign('/income')
-            }
-            , error: function (jqXHR, textStatus, err) {
-                //alert('text status ' + textStatus + ', err ' + err)
-            }
-        });
+        if (!isErrors) {
+            $.ajax({
+                url: '/income/create',
+                type: 'POST',
+                cache: false,
+                data: {
+                    source: $('#inputSource').val(),
+                    amount: $('#inputAmount').val(),
+                    start_date: $('#inputStartDate').val(),
+                    end_date: endDate
+                },
+                success: function (data) {
+                    window.location.assign('/income')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    //alert('text status ' + textStatus + ', err ' + err)
+                }
+            });
+        }
     }
-}
 
-    function isAfterStartDate(){
+    function isAfterStartDate() {
         return new $('#inputStartDate').val() < $('#inputEndDate').val();
+    }
+
+    function isAfterEditStartDate() {
+        return new $('#inputEditStartDate').val() < $('#inputEditEndDate').val();
     }
 
     function editModal(id) {
@@ -205,6 +210,7 @@ endDate = new Date(2025, 12, 12);
                 $('#inputEditAmount').val(data.data.income_found[0].amount);
                 $('#inputEditStartDate').val(formatDate(data.data.income_found[0].start_date));
                 $('#inputEditEndDate').val(formatDate(data.data.income_found[0].end_date));
+                $('#inputEditId').text(thisId);
             }
             , error: function (jqXHR, textStatus, err) {
                 alert('text status ' + textStatus + ', err ' + err)
@@ -212,33 +218,34 @@ endDate = new Date(2025, 12, 12);
         });
         $('#editIncomeModal').modal('show');
     }
-function editIncome(id){
+
+    function editIncome() {
         var endDate;
         var isErrors = false;
-        if ($('#inputEditSource').val() == "" || $('#inputEditSource').val().length < 2){
+        if ($('#inputEditSource').val() == "" || $('#inputEditSource').val().length < 2) {
             toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
             isErrors = true;
         }
-        if($('#inputEditAmount').val() == "" || $('#inputEditAmount').val().length < 2){
-            toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
+        if ($('#inputEditAmount').val() == "" || $('#inputEditAmount').val().length < 2) {
+            toastr.error('You must enter a value for the amount of the income, it must be a number and larger than 10!', 'Amount Input Error');
             isErrors = true;
         }
-        if($('#inputEditStartDate').val() == ""){
+        if ($('#inputEditStartDate').val() == "") {
             toastr.info('You must enter a valid start date of the income, it must be a complete date!', 'Start Date Input Error');
             isErrors = true;
         }
-        if ($('#gridEditCheck').is(':checked')){
+        if ($('#gridEditCheck').is(':checked')) {
             endDate = new Date(2025, 12, 12);
-        }else if ($('#inputEditEndDate').val() == "" || !isAfterStartDate($('#inputEditEndDate').val())) {
+        } else if ($('#inputEditEndDate').val() == "" || !isAfterEditStartDate($('#inputEditEndDate').val())) {
             toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
             isErrors = true;
-        }else {
+        } else {
             endDate = $('#inputEditEndDate').val();
         }
-
-        if (!isErrors){
+        var id = $('#inputEditId').text();
+        if (!isErrors) {
             $.ajax({
-                url: '/income/'+thisId+'/update',
+                url: '/income/' + id + '/update',
                 type: 'POST',
                 cache: false,
                 data: {

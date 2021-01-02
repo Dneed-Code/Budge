@@ -10,7 +10,7 @@ exports.countIncomes = function (callback) {
 // List the all the incomes
 // TODO: Make this only list the incomes from the current users group
 exports.listIncomes = function (callback) {
-    Income.find({'transaction_type': 'Income'}, callback).populate('user');
+    Income.find({'transaction_type': 'Income'}, '_id user source amount date_paid start_date end_date status', callback).populate('user');
 }
 // List the all the active incomes
 // TODO: Make this only list the incomes from the current users group
@@ -94,12 +94,18 @@ exports.getDatePaid = function getDatePaid(startDate) {
 }
 
 // Get status (If its an income still being received or not)
-exports.getStatus = function getStatus(startDate, endDate) {
-    var status = Boolean(false);
+exports.getStatus = function getStatus(startDateInput, endDateInput) {
+    var status;
     var currentDate = new Date();
-    var tempEndDate = new Date(endDate);
-    if (tempEndDate > currentDate && startDate < currentDate) {
-        status = true;
+    var startDate = new Date(startDateInput);
+    var endDate = new Date(endDateInput);
+
+    if (endDate > currentDate) {
+        if (startDate < currentDate) {
+            status = true;
+        } else {
+            status = false;
+        }
     } else {
         status = false;
     }
@@ -113,7 +119,6 @@ function constructChangeMessage(monthlyIncomeData) {
     lastMonthMo.subtract(1, 'months');
     var lastMonth = new Date(lastMonthMo);
     var change;
-    console.log(lastMonth);
     var changeAmount = monthlyIncomeData[getDictKey(dateNow)] - monthlyIncomeData[getDictKey(lastMonth)];
     var changePercentage = ((changeAmount / monthlyIncomeData[getDictKey(lastMonth)]) * 100).toFixed(2) + '%';
     if (monthlyIncomeData[getDictKey(dateNow)] < monthlyIncomeData[getDictKey(lastMonth)]) {
@@ -139,13 +144,9 @@ function getMonthlyIncomeData(incomeData, doc) {
         for (var j = 0; j < numberOfMonths; j++) {
 
             if (isNaN(incomeData[getDictKey(startDate)])) {
-                console.log("this is err");
                 incomeData[getDictKey(startDate)] = doc[i].amount;
             } else {
                 var newAmount = incomeData[getDictKey(startDate)] + doc[i].amount;
-                console.log(incomeData[getDictKey(startDate)]);
-                console.log(doc[i].amount);
-                console.log('pls sir');
                 incomeData[getDictKey(startDate)] = newAmount;
             }
 
@@ -153,7 +154,7 @@ function getMonthlyIncomeData(incomeData, doc) {
             startDate = new Date(startDateMo);
         }
     }
-    console.log(incomeData);
+
     //
     //
     //
