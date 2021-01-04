@@ -1,20 +1,24 @@
-/*
-    DEMO STYLE
-*/
+$base-color-body: #060818;
+$base-color-elements: #0e1726;
+$base-color-top: #1a1c2d;
+$base-color-sidenav-text: #506690;
+$base-color-text: #e0e6ed;
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #212121;
-  color: #fff;
-}
+  background: $base-color-body;
+  overflow-x: hidden;
 
+}
+h1,h4,.modal-title {
+  color: $base-color-text;
+}
 p {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #999;
+  color: $base-color-text;
 }
 
 a,
@@ -27,13 +31,13 @@ a:focus {
 
 .navbar {
   border: none;
-  height: 71px;
+  height: 58px;
   border-radius: 0;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navbar.bg-dark {
-  background: #131313 !important;
+  background: $base-color-top !important;
 }
 
 .navbar-btn {
@@ -68,11 +72,15 @@ span a {
 }
 
 #sidebar {
-  min-width: 224px;
-  max-width: 224px;
-  background: #121212;
-  color: #fff;
+  min-width: 204px;
+  max-width: 204px;
+  background: $base-color-body;
+  color: $base-color-sidenav-text;
   transition: all 0.3s;
+
+}
+#sidebar .sidebar-links {
+  border-right: 1px solid #0e1726;
 }
 
 #sidebar .sidebar-logo {
@@ -106,6 +114,7 @@ span a {
 }
 
 #sidebar.active ul li a {
+
   padding: 20px 10px;
   text-align: center;
   font-size: 0.85em;
@@ -137,8 +146,8 @@ span a {
 }
 
 #sidebar .sidebar-header {
-  padding: 15px 20px;
-  border-bottom: 1px solid #343434;
+  padding: 8.5px 20px;
+  background-color: $base-color-top;
   overflow: hidden !important;
 }
 
@@ -149,11 +158,14 @@ span a {
 
 #sidebar ul.components {
   padding: 20px 10px;
+  height: calc(100vh - 58px);
+  overflow-y: hidden;
+
 }
 
 #sidebar ul li a {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
   display: block;
   border-radius: 10px !important;
 }
@@ -215,7 +227,6 @@ a.article:hover {
   width: 100%;
   display: block;
   margin-top: -3px;
-  border-bottom: 1px solid #343434;
 }
 
 .top-nav #rightElemenets .navbar-nav {
@@ -245,6 +256,14 @@ a.article:hover {
   flex: auto;
   position: relative;
   top: 4px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: normal !important;
+  font-size: 1.5rem;
+  color: $base-color-text;
+}
+.btn-top {
+  background-color: $base-color-top;
+  color: $base-color-text;
 }
 
 .top-nav .container-fluid {
@@ -252,10 +271,11 @@ a.article:hover {
 }
 
 .top-nav .profile-icon {
-  width: 47px;
-  height: 47px;
+  width: 38px;
+  height: 38px;
   border-radius: 25px;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 /* ---------------------------------------------------
@@ -264,18 +284,18 @@ a.article:hover {
 
 #content {
   width: 100%;
-  min-height: 100vh;
+  min-height: 95vh;
   transition: all 0.3s;
 }
 
 section#main-section {
-  padding: 69px !important;
-  padding-bottom: 0 !important;
+  padding: 30px !important;
+  //padding-bottom: 10px !important;
 }
 
 .tile {
-  background: #343434 !important;
-  border: 1px solid #EAEAEA;
+  background: $base-color-elements !important;
+  //border: 1px solid #EAEAEA;
   height: 100%;
 }
 
@@ -338,4 +358,80 @@ section#main-section {
   #sidebarCollapse span {
     display: none;
   }
+}
+
+.addButton {
+  background: #288DB9;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modal-content {
+ background-color: $base-color-elements;
+}
+.form-control {
+  height: auto;
+  border: 1px solid #1b2e4b;
+  color: #009688;
+  font-size: 15px;
+  padding: 8px 10px;
+  letter-spacing: 1px;
+  height: calc(1.4em + 1.4rem + 2px);
+  padding: .75rem 1.25rem;
+  border-radius: 6px;
+  background: #1b2e4b;
+}
+.form-group label, label {
+  font-size: 15px;
+  color: #acb0c3;
+  letter-spacing: 1px;
+}
+.form-group {
+  margin-bottom: 0;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #1b55e2 !important;
+  border-color: #1b55e2;
+}
+.custom-control-label {
+  //position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1rem;
+  height: 1.25rem;
+  opacity: 0;
+}
+.custom-control {
+  //position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.modal-header {
+  border-bottom: 1px solid $base-color-sidenav-text;
+}
+.modal-footer {
+  border-top: 1px solid $base-color-sidenav-text;
+}
+.toast {
+  opacity: 1 !important;
+}
+.dataHover:hover{
+  cursor: pointer;
+}
+.dataHover:hover{
+  background-color: rgba(77, 87, 96, 0.52) !important;
 }
