@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const income_controller = require("../controllers/incomeController");
+const passport = require('passport');
+const {ensureAuthenticated} = require("../../config/auth.js")
 
 /// INCOME ROUTES ///
 // GET request for list of all incomes.
@@ -28,7 +30,7 @@ router.post('/:id/update', income_controller.income_update_post);
 router.get('/:id', income_controller.index);
 
 // GET income page.
-router.get('/', income_controller.index);
+router.get('/',ensureAuthenticated, income_controller.index);
 
 
 module.exports = router;

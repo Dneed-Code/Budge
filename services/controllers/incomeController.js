@@ -6,6 +6,7 @@ const async = require('async');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+
 // Gets Income page
 exports.index = function (req, res, next) {
     async.parallel({
@@ -43,7 +44,7 @@ exports.index = function (req, res, next) {
             transaction_logic.listActiveIncomes(callback);
         },
     }, function (err, results) {
-        res.render('income', {title: 'Income', error: err, data: results, income: true});
+        res.render('income', {title: 'Income', error: err, data: results, income: true, user: req.user});
     });
 };
 
@@ -91,7 +92,7 @@ exports.income_create_post = [
         var income = new Income(
             {
                 transaction_type: "Income",
-                user: "5fc8ef42ba58094c449725c4",
+                user: req.user,
                 source: req.body.source,
                 date_paid: datePaid,
                 amount: req.body.amount,
