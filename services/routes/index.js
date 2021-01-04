@@ -12,7 +12,7 @@ router.get('/dashboard',ensureAuthenticated, function(req, res, next) {
 });
 //register page
 router.get('/register', (req,res)=>{
-  res.render('register');
+  res.render('register' ,{layout: 'pre-main'});
 })
 
 module.exports = router;

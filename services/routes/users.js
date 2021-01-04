@@ -31,11 +31,12 @@ router.post('/register',(req,res)=>{
             lastName: lastName,
             email : email,
             password : password,
-            password2 : password2})
+            password2 : password2,
+            layout: 'pre-main'})
     } else {
         //validation passed
-        User.findOne({email : email}).exec((err,user)=> {
-            console.log(user);
+        User.findOne({email_address : email}).exec((err,user)=> {
+            console.log("found a user?" + user);
             if (user) {
                 errors.push({msg: 'email already registered'});
                 res.render('register', {title: 'Register',layout: 'pre-main',errors: errors, lastName: lastName ,firstName: firstName, email: email, password: password})

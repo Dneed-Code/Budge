@@ -1,55 +1,102 @@
-<h1>Register</h1>
-{{> messages}}
-<form action="/users/register" method="POST">
-    <div>
-        <label for="firstName">Name</label>
-        <input
-                type="name"
-                name="firstName"
-                placeholder="Enter First Name"
-                value="firstName"
-        />
+<div class="row align-items-center justify-content-center h-100">
+    <div class="col-md-4">
+        <div class="card tile">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h1 class="" style="color:#acb0c3; font-family:'Nunito', sans-serif">Register</h1>
+                    <p class="" style="color:#acb0c3">Log in to your account to continue.</p>
+                    {{> messages}}
+                </div>
+                <form action="/users/register" method="POST">
+                    <div class="row">
+                        <div class="col-6">
+                            <div id="" class="field-wrapper input mt-3">
+                                <label for="firstName">FIRST NAME</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                     fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input
+                                        class="form-control"
+                                        type="name"
+                                        name="firstName"
+                                        placeholder="Enter First Name"
+                                        value="First Name"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div id="" class="field-wrapper input mt-3">
+                                <label for="lastName">LAST NAME</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                     fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input type="name" name="lastName" placeholder="Enter Last Name" value="Last Name"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div id="email-field" class="field-wrapper input">
+                                <label for="email">EMAIL ADDRESS</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                     fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-at-sign register">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                                </svg>
+                                <input
+                                        class="form-control"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Enter Email"
+                                        value="Email Address"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                        <label for="password">PASSWORD</label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="Create Password"
+                                            value="password"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <label for="password2">CONFIRM PASSWORD</label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input
+                                            type="password"
+                                            name="password2"
+                                            placeholder="Confirm Password"
+                                            value="password2"
+                                            class="form-control"
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
+                            <button type="submit" class="btn btn-primary btn-block mt-3">
+                                Register
+                            </button>
+                </form>
+                <p>Have An Account? <a href="/users/login" style="color: #2F96B4; text-decoration: underline">Login</a>
+                </p>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="lastName">Name</label>
-        <input
-                type="name"
-                name="lastName"
-                placeholder="Enter Last Name"
-                value="lastName"
-        />
-
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input
-                type="email"
-                name="email"
-                placeholder="Enter Email"
-                value="email"
-        />
-    </div>
-    <div >
-        <label for="password">Password</label>
-        <input
-                type="password"
-                name="password"
-                placeholder="Create Password"
-                value="password"
-        />
-    </div>
-    <div >
-        <label for="password2">Confirm Password</label>
-        <input
-                type="password"
-                name="password2"
-                placeholder="Confirm Password"
-                value="password2"
-        />
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">
-        Register
-    </button>
-</form>
-<p >Have An Account? <a href="/users/login">Login</a></p>
+</div>
