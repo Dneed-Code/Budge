@@ -7,8 +7,12 @@ $base-color-text: #e0e6ed;
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
   background: $base-color-body;
-}
+  overflow-x: hidden;
 
+}
+h1,h4,.modal-title {
+  color: $base-color-text;
+}
 p {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1em;
@@ -154,8 +158,9 @@ span a {
 
 #sidebar ul.components {
   padding: 20px 10px;
-  height: calc(100vh - 85px);
+  height: calc(100vh - 58px);
   overflow-y: hidden;
+
 }
 
 #sidebar ul li a {
@@ -279,13 +284,13 @@ a.article:hover {
 
 #content {
   width: 100%;
-  min-height: 100vh;
+  min-height: 95vh;
   transition: all 0.3s;
 }
 
 section#main-section {
-  padding: 69px !important;
-  padding-bottom: 0 !important;
+  padding: 30px !important;
+  //padding-bottom: 10px !important;
 }
 
 .tile {
@@ -360,4 +365,73 @@ section#main-section {
   border-radius: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.modal-content {
+ background-color: $base-color-elements;
+}
+.form-control {
+  height: auto;
+  border: 1px solid #1b2e4b;
+  color: #009688;
+  font-size: 15px;
+  padding: 8px 10px;
+  letter-spacing: 1px;
+  height: calc(1.4em + 1.4rem + 2px);
+  padding: .75rem 1.25rem;
+  border-radius: 6px;
+  background: #1b2e4b;
+}
+.form-group label, label {
+  font-size: 15px;
+  color: #acb0c3;
+  letter-spacing: 1px;
+}
+.form-group {
+  margin-bottom: 0;
+}
 
+.btn-primary {
+  color: #fff !important;
+  background-color: #1b55e2 !important;
+  border-color: #1b55e2;
+}
+.custom-control-label {
+  //position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1rem;
+  height: 1.25rem;
+  opacity: 0;
+}
+.custom-control {
+  //position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.modal-header {
+  border-bottom: 1px solid $base-color-sidenav-text;
+}
+.modal-footer {
+  border-top: 1px solid $base-color-sidenav-text;
+}
+.toast {
+  opacity: 1 !important;
+}
+.dataHover:hover{
+  cursor: pointer;
+}
+.dataHover:hover{
+  background-color: rgba(77, 87, 96, 0.52) !important;
+}

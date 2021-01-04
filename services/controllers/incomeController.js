@@ -1,25 +1,55 @@
-var User = require('../../domain/models/User');
-var Income = require('../../domain/models/Transaction');
-
+const User = require('../../domain/models/User');
+const Income = require('../../domain/models/Transaction');
+const transaction_logic = require('../../domain/app/transactionLogic');
 const {body, validationResult} = require('express-validator');
-var async = require('async');
+const async = require('async');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // Gets Income page
 exports.index = function (req, res, next) {
     async.parallel({
         income_count: function (callback) {
-            Income.countDocuments({transaction_type: 'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
+            transaction_logic.countIncomes(callback);
         },
         income_list: function (callback) {
-            Income.find({}, 'user source amount interval', callback).populate('user');
+            transaction_logic.listIncomes(callback);
+        },
+        income_per_month: function (callback) {
+            transaction_logic.getIncomePerMonth().then(function (incomePerMonth) {
+                callback("", incomePerMonth);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        income_current_month: function (callback) {
+            transaction_logic.getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
+                callback("", incomeCurrentMonth);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        change: function (callback) {
+            transaction_logic.getChange().then(function (change) {
+                callback("", change);
+            })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        active_incomes: function (callback) {
+            transaction_logic.listActiveIncomes(callback);
         },
     }, function (err, results) {
-        res.render('income', {title: 'Income', error: err, data: results});
+        res.render('income', {title: 'Income', error: err, data: results, income: true});
     });
 };
+
 // Display list of all Incomes.
 exports.income_list = function (req, res, next) {
-    Income.find({}, 'user source amount interval')
+    Income.find({}, 'user source amount date_paid')
         .populate('user')
         .exec(function (err, list_incomes) {
             if (err) {
@@ -44,13 +74,18 @@ exports.income_create_get = function (req, res, next) {
 exports.income_create_post = [
 
     // Validate and santise the name field.
-    body('name', 'Income name required').trim().isLength({min: 1}).escape(),
+    body('source', 'Income source required').trim().isLength({min: 2}).escape(),
+    body('amount', 'Income source required').trim().isLength({min: 1}).escape(),
+    body('start_date', 'Income start date required').trim().isLength({min: 2}).escape(),
+    body('end_date', 'Income end date required').trim().isLength({min: 2}).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
 
         // Extract the validation errors from a request.
         const errors = validationResult(req);
+        var datePaid = transaction_logic.getDatePaid(req.body.start_date);
+        var status = transaction_logic.getStatus(req.body.start_date, req.body.end_date);
 
         // Create a income object with escaped and trimmed data.
         var income = new Income(
@@ -58,45 +93,39 @@ exports.income_create_post = [
                 transaction_type: "Income",
                 user: "5fc8ef42ba58094c449725c4",
                 source: req.body.source,
-                interval: req.body.interval,
-                amount: req.body.amount
+                date_paid: datePaid,
+                amount: req.body.amount,
+                start_date: req.body.start_date,
+                end_date: req.body.end_date,
+                status: status
             }
         );
-
-
-        // if (!errors.isEmpty()) {
-        //     // There are errors. Render the form again with sanitized values/error messages.
-        //     res.render('income', { title: 'Income', income: income, errors: errors.array()});
-        //     return;
-        // }
-        // else {
-        // Data from form is valid.
-        // Check if Income with same name already exists.
-        Income.findOne({'name': req.body.name})
-            .exec(function (err, found_income) {
-                if (err) {
-                    return next(err);
-                }
-
-                if (found_income) {
-                    // Income exists, redirect to its detail page.
-                    res.redirect(found_income.url);
-                } else {
-
-                    income.save(function (err) {
-                        if (err) {
-                            return next(err);
-                        }
-                        // Income saved. Redirect to income detail page.
-                        res.redirect(income.url);
-                    });
-
-                }
-
-            });
-    }
-
-];
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values/error messages.
+            res.render('income', {title: 'Income', income: income, errors: errors.array(), income: true});
+        } else {
+            // Data from form is valid.
+            // Check if Income with same name already exists.
+            Income.findOne({'source': req.body.source, 'date_paid': datePaid, 'amount': req.body.amount})
+                .exec(function (err, found_income) {
+                    if (err) {
+                        return next(err);
+                    }
+                    if (found_income) {
+                        // Income exists, redirect to its detail page.
+                        res.redirect(found_income.url);
+                    } else {
+                        income.save(function (err) {
+                            if (err) {
+                                return next(err);
+                            }
+                            // Income saved. Redirect to income page.
+                            res.redirect('/income');
+                        });
+                    }
+                });
+        }
+    }];
 
 // Display income delete form on GET.
 exports.income_delete_get = function (req, res, next) {
@@ -143,23 +172,21 @@ exports.income_update_get = function (req, res, next) {
 
     // Get income and user for form.
     async.parallel({
-        income: function (callback) {
-            Income.findById(req.params.id).populate('user').exec(callback);
-        },
-        users: function (callback) {
-            User.find(callback);
+        income_found: function (callback) {
+            console.log(req.params.id);
+            Income.find({_id: req.params.id}, callback).populate('user');
         },
     }, function (err, results) {
         if (err) {
             return next(err);
         }
-        if (results.income == null) { // No results.
-            var err = new Error('Income not found');
+        if (results.income_found == null) { // No results.
+            var err = new Error('Income not found', err);
             err.status = 404;
             return next(err);
         }
         // Success.
-        res.render('income_modal', {title: 'Update Income', authors: results.users, income: results.income});
+        res.send({data: results});
     });
 
 };
@@ -167,14 +194,18 @@ exports.income_update_get = function (req, res, next) {
 // Handle income update on POST.
 exports.income_update_post = [
 
-    // Validate and sanitise fields.
-    body('source', 'Source must not be empty.').trim().isLength({min: 1}).escape(),
-    body('interval', 'Interval must not be empty.').trim().isLength({min: 1}).escape(),
-    body('amount', 'Amount must not be empty.').trim().isLength({min: 1}).escape(),
 
+    // Validate and santise the name field.
+    body('source', 'Income source required').trim().isLength({min: 2}).escape(),
+    body('amount', 'Income source required').trim().isLength({min: 1}).escape(),
+    body('start_date', 'Income start date required').trim().isLength({min: 2}).escape(),
+    body('end_date', 'Income end date required').trim().isLength({min: 2}).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
+
+        var datePaid = transaction_logic.getDatePaid(req.body.start_date);
+        var status = transaction_logic.getStatus(req.body.start_date, req.body.end_date);
 
         // Extract the validation errors from a request.
         const errors = validationResult(req);
@@ -184,9 +215,12 @@ exports.income_update_post = [
             {
                 transaction_type: "Income",
                 source: req.body.source,
-                interval: req.body.interval,
+                date_paid: req.body.date_paid,
                 amount: req.body.amount,
-                _id: req.params.id
+                _id: req.params.id,
+                start_date: req.body.start_date,
+                end_date: req.body.end_date,
+                status: status
             });
 
         income.user = Income.findById(req.params.id).populate('user');
@@ -223,3 +257,6 @@ exports.income_update_post = [
         }
     }
 ];
+
+
+

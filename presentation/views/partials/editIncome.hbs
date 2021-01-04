@@ -1,9 +1,6 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addIncomeModal">
-    Add Income
-</button>
+
 <!-- Modal -->
-<div class="modal fade" id="addIncomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editIncomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,16 +11,17 @@
             </div>
             <div class="modal-body">
                 <div class="statbox">
-                    <div class="">
-                        <form id="addIncomeForm" onsubmit="postIncome()" >
+                    <div >
+                        <p style="display: none" id="inputEditId"></p>
+                        <form id="editIncomeForm" onsubmit="editIncome()" >
                             <div class="form-row mb-2">
                                 <div class="form-group col-md-6">
-                                    <label for="inputSource">Source</label>
-                                    <input type="text" class="form-control" id="inputSource" placeholder="Source">
+                                    <label for="inputEditSource">Source</label>
+                                    <input type="text" class="form-control" id="inputEditSource" placeholder="Source">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputAmount">Amount</label>
-                                    <input type="number" class="form-control" id="inputAmount" placeholder="Amount">
+                                    <label for="inputEditAmount">Amount</label>
+                                    <input type="number" class="form-control" id="inputEditAmount" placeholder="Amount">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -33,15 +31,15 @@
                             </div>
                             <div class="form-row ">
                                 <div class="form-group col-md-6">
-                                    <label for="inputStartDate">Start Date</label>
-                                    <input type="date" class="form-control" id="inputStartDate" placeholder="Start Date">
+                                    <label for="inputEditStartDate">Start Date</label>
+                                    <input type="date" class="form-control" id="inputEditStartDate" placeholder="Start Date">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputEndDate">End Date</label>
-                                    <input type="date" class="form-control" id="inputEndDate" placeholder="End Date">
+                                    <label for="inputEditEndDate">End Date</label>
+                                    <input type="date" class="form-control" id="inputEditEndDate" placeholder="End Date">
                                     <div class="custom-control custom-checkbox checkbox-info">
-                                        <input type="checkbox" class="custom-control-input" id="gridCheck">
-                                        <label class="custom-control-label" for="gridCheck">No end date?</label>
+                                        <input type="checkbox" class="custom-control-input" id="gridEditCheck">
+                                        <label class="custom-control-label" for="gridEditCheck">No end date?</label>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveIncome" onclick="postIncome()">Add Income</button>
+                <button type="button" class="btn btn-primary" id="editIncome" onclick="editIncome()">Update Income</button>
             </div>
         </div>
     </div>
