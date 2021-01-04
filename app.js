@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 require('toastr');
 require('dotenv/config');
 var moment = require('moment'); // require
+const session = require('express-session');
+const flash = require('connect-flash');
 moment().format();
 
 //Set up mongoose connection
@@ -41,8 +43,23 @@ app.engine( 'hbs', hbs( {
   partialsDir: __dirname + '/presentation/views/partials/'
 } ) );
 app.set('view engine', 'hbs');
-
 var exphbs = hbs.create({});
+
+//express session
+app.use(session({
+  secret : 'secret',
+  resave : true,
+  saveUninitialized : true
+}));
+//use flash
+app.use(flash());
+app.use((req,res,next)=> {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error  = req.flash('error');
+  next();
+})
+
 var DateFormats = {
   year: "YYYYMMDD",
   short: "DD MMMM - YYYY",
@@ -102,7 +119,6 @@ app.use(sassMiddleware({
   outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'presentation/public')));
-
 app.use('/', indexRouter);
 app.use('/income', incomesRouter);
 app.use('/expense', expensesRouter);

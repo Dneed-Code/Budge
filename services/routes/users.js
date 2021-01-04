@@ -2,42 +2,17 @@ var express = require('express');
 var router = express.Router();
 const User = require('../../domain/models/User');
 const user_controller = require("../controllers/userController");
-
-// /* GET user dashboard. */
-// router.get('/', function (req, res, next) {
-//     res.render('user', {title: 'Users'});
-// });
-//
-// /* Post new user. */
-// router.post('/', function (req, res) {
-//     const user = new User({
-//         user_group: req.body.user_group,
-//         first_name: req.body.first_name,
-//         last_name: req.body.last_name,
-//         permission_level: req.body.permission_level,
-//         email_address: req.body.email_address,
-//     });
-//     user.save()
-//         .then(data => {
-//             res.status(200).json(data);
-//         })
-//         .catch(err => {
-//             res.status(404).json({message: err});
-//         })
-// });
-
-
-
+const bcrypt = require("bcrypt");
 
 // login
 router.get('/login',(req,res)=>{
     res.render('login');
 })
 router.post('/register',(req,res)=>{
-    const {name,email, password, password2} = req.body;
+    const {firstName, lastName,email, password, password2} = req.body;
     let errors = [];
-    console.log(' Name ' + name+ ' email :' + email+ ' pass:' + password);
-    if(!name || !email || !password || !password2) {
+    console.log(' Name ' + firstName+ ' email :' + email+ ' pass:' + password);
+    if(!firstName ||!lastName || !email || !password || !password2) {
         errors.push({msg : "Please fill in all fields"})
     }
 //check if match
@@ -50,10 +25,10 @@ router.post('/register',(req,res)=>{
         errors.push({msg : 'password atleast 6 characters'})
     }
     if(errors.length > 0 ) {
-
         res.render('register', {
             errors : errors,
-            name : name,
+            firstName : firstName,
+            lastName: lastName,
             email : email,
             password : password,
             password2 : password2})
@@ -63,15 +38,35 @@ router.post('/register',(req,res)=>{
             console.log(user);
             if (user) {
                 errors.push({msg: 'email already registered'});
-                res.render('register', {errors: errors})
+                res.render('register', {errors: errors, lastName: lastName ,firstName: firstName, email: email, password: password})
                 //render(res, errors, name, email, password, password2);
 
             } else {
                 const newUser = new User({
-                    name: name,
-                    email: email,
-                    password: password
+                    first_name: firstName,
+                    last_name: lastName,
+                    email_address: email,
+                    password: password,
+                    user_group: '5fc8eeb4f90fb40cd8645cd3'
                 });
+
+                //hash password
+                bcrypt.genSalt(10,(err,salt)=>
+                    bcrypt.hash(newUser.password,salt,
+                        (err,hash)=> {
+                            if(err) throw err;
+                            //save pass to hash
+                            newUser.password = hash;
+                            //save user
+                            newUser.save()
+                                .then((value)=>{
+                                    console.log(value)
+                                    req.flash('success_msg','You have now registered!');
+                                    res.redirect('/users/login');
+                                })
+                                .catch(value=> console.log(value));
+
+                        }));
             }
         });
     }
