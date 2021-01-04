@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const passport = require('passport');
 // login
 router.get('/login',(req,res)=>{
-    res.render('login');
+    res.render('login', {layout: 'pre-main', title: 'Login'});
 })
 router.post('/register',(req,res)=>{
     const {firstName, lastName,email, password, password2} = req.body;
@@ -38,7 +38,7 @@ router.post('/register',(req,res)=>{
             console.log(user);
             if (user) {
                 errors.push({msg: 'email already registered'});
-                res.render('register', {errors: errors, lastName: lastName ,firstName: firstName, email: email, password: password})
+                res.render('register', {title: 'Register',layout: 'pre-main',errors: errors, lastName: lastName ,firstName: firstName, email: email, password: password})
                 //render(res, errors, name, email, password, password2);
 
             } else {
