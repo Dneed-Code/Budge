@@ -1,4 +1,5 @@
 <h1>Register</h1>
+{{> messages}}
 <form action="/users/register" method="POST">
     <div>
         <label for="name">Name</label>
@@ -6,7 +7,7 @@
                 type="name"
                 name="name"
                 placeholder="Enter Name"
-                value="<%= typeof name != 'undefined' ? name : '' %>"
+                value="name"
         />
 
     </div>
@@ -16,7 +17,7 @@
                 type="email"
                 name="email"
                 placeholder="Enter Email"
-                value="<%= typeof email != 'undefined' ? email : '' %>"
+                value="email"
         />
     </div>
     <div >
@@ -25,7 +26,7 @@
                 type="password"
                 name="password"
                 placeholder="Create Password"
-                value="<%= typeof password != 'undefined' ? password : '' %>"
+                value="password"
         />
     </div>
     <div >
@@ -34,7 +35,7 @@
                 type="password"
                 name="password2"
                 placeholder="Confirm Password"
-                value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                value="password2"
         />
     </div>
     <button type="submit" class="btn btn-primary btn-block">
