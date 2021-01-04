@@ -31,8 +31,5 @@ router.get('/:id', income_controller.index);
 router.get('/', income_controller.index);
 
 
-
-
-
 module.exports = router;
 
