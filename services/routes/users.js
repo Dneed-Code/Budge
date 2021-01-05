@@ -11,8 +11,9 @@ router.get('/login',(req,res)=>{
 router.post('/register',(req,res)=>{
     const {firstName, lastName,email, password, password2} = req.body;
     let errors = [];
-    console.log(' Name ' + firstName+ ' email :' + email+ ' pass:' + password);
-    if(!firstName ||!lastName || !email || !password || !password2) {
+    var lowerCaseEmail = email.toLowerCase();
+    console.log(' Name ' + firstName+ ' email :' + lowerCaseEmail+ ' pass:' + password);
+    if(!firstName ||!lastName || !lowerCaseEmail || !password || !password2) {
         errors.push({msg : "Please fill in all fields"})
     }
 //check if match
@@ -29,24 +30,24 @@ router.post('/register',(req,res)=>{
             errors : errors,
             firstName : firstName,
             lastName: lastName,
-            email : email,
+            email : lowerCaseEmail,
             password : password,
             password2 : password2,
             layout: 'pre-main'})
     } else {
         //validation passed
-        User.findOne({email_address : email}).exec((err,user)=> {
+        User.findOne({email_address : lowerCaseEmail}).exec((err,user)=> {
             console.log("found a user?" + user);
             if (user) {
                 errors.push({msg: 'email already registered'});
-                res.render('register', {title: 'Register',layout: 'pre-main',errors: errors, lastName: lastName ,firstName: firstName, email: email, password: password})
+                res.render('register', {title: 'Register',layout: 'pre-main',errors: errors, lastName: lastName ,firstName: firstName, email: lowerCaseEmail, password: password})
                 //render(res, errors, name, email, password, password2);
 
             } else {
                 const newUser = new User({
                     first_name: firstName,
                     last_name: lastName,
-                    email_address: email,
+                    email_address: lowerCaseEmail,
                     password: password,
                     user_group: '5fc8eeb4f90fb40cd8645cd3'
                 });
@@ -74,13 +75,17 @@ router.post('/register',(req,res)=>{
 });
 // Register
 
-router.post('/login',(req,res,next)=>{
+router.post('/login',emailToLowerCase,(req,res,next)=>{
     passport.authenticate('local',{
         successRedirect : '/dashboard',
         failureRedirect : '/users/login',
         failureFlash : true,
     })(req,res,next);
 })
+function emailToLowerCase(req, res, next){
+    req.body.email = req.body.email.toLowerCase();
+    next();
+}
 // logout
 router.get('/logout',(req,res)=>{
     req.logout();
