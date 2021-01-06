@@ -11,13 +11,14 @@ const ObjectId = mongoose.Types.ObjectId;
 exports.index = function (req, res, next) {
     async.parallel({
         income_count: function (callback) {
-            transaction_logic.countIncomes(callback);
+            console.log(req.user.user_group)
+            transaction_logic.countIncomes(callback, req.user.user_group);
         },
         income_list: function (callback) {
-            transaction_logic.listIncomes(callback);
+            transaction_logic.listIncomes(callback, req.user.user_group);
         },
         income_per_month: function (callback) {
-            transaction_logic.getIncomePerMonth().then(function (incomePerMonth) {
+            transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
                 callback("", incomePerMonth);
             })
                 .catch((err) => {
@@ -25,7 +26,7 @@ exports.index = function (req, res, next) {
                 })
         },
         income_current_month: function (callback) {
-            transaction_logic.getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
+            transaction_logic.getIncomeCurrentMonth(req.user.user_group).then(function (incomeCurrentMonth) {
                 callback("", incomeCurrentMonth);
             })
                 .catch((err) => {
@@ -33,7 +34,7 @@ exports.index = function (req, res, next) {
                 })
         },
         change: function (callback) {
-            transaction_logic.getChange().then(function (change) {
+            transaction_logic.getChange(req.user.user_group).then(function (change) {
                 callback("", change);
             })
                 .catch((err) => {
@@ -41,7 +42,7 @@ exports.index = function (req, res, next) {
                 })
         },
         active_incomes: function (callback) {
-            transaction_logic.listActiveIncomes(callback);
+            transaction_logic.listActiveIncomes(callback, req.user.user_group);
         },
     }, function (err, results) {
         res.render('income', {title: 'Income', error: err, data: results, income: true, user: req.user});

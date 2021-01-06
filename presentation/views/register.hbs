@@ -1,5 +1,5 @@
 <div class="row align-items-center justify-content-center h-100">
-    <div class="col-md-4">
+    <div class="col-lg-6 col-md-8 col-sm-10">
         <div class="card tile">
             <div class="card-body">
                 <div class="text-center mb-4">
@@ -23,7 +23,7 @@
                                         type="name"
                                         name="firstName"
                                         placeholder="Enter First Name"
-                                        value="First Name"
+                                        value="{{#if firstName}}{{firstName}}{{else}}First Name{{/if}}"
                                 />
                             </div>
                         </div>
@@ -36,8 +36,12 @@
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                 </svg>
-                                <input type="name" name="lastName" placeholder="Enter Last Name" value="Last Name"
-                                       class="form-control"/>
+                                <input
+                                        type="name"
+                                        name="lastName"
+                                        placeholder="Enter Last Name"
+                                        value="{{#if lastName}}{{lastName}}{{else}}Last Name{{/if}}"
+                                        class="form-control"/>
                             </div>
                         </div>
                     </div>
@@ -56,7 +60,7 @@
                                         type="email"
                                         name="email"
                                         placeholder="Enter Email"
-                                        value="Email Address"
+                                        value="{{#if email}}{{email}}{{else}}Email Address{{/if}}"
                                 />
                             </div>
                         </div>
@@ -70,7 +74,7 @@
                                             type="password"
                                             name="password"
                                             placeholder="Create Password"
-                                            value="password"
+                                            value="{{#if password}}{{password}}{{else}}password{{/if}}"
                                             class="form-control"
                                     />
                                 </div>
@@ -83,12 +87,50 @@
                                             type="password"
                                             name="password2"
                                             placeholder="Confirm Password"
-                                            value="password2"
+                                            value="{{#if password2}}{{password2}}{{else}}password2{{/if}}"
                                             class="form-control"
                                     />
                                 </div>
                             </div>
                         </div>
+                    <div class="row mt-3 border-top border-dark">
+                        <div class="col-12 text-center">
+                            <p class="mt-2" style="color:#acb0c3">Below please enter your User Group, If it does not exist you will create a new group!</p>
+                        </div>
+                    </div>
+                    <div class="row border-top border-dark">
+                        <div class="col-6 mt-3">
+                            <div id="user-group-name" class="field-wrapper input mb-2">
+                                <label for="group-name">GROUP NAME</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                     fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-user">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input
+                                        class="form-control"
+                                        type="name"
+                                        name="userGroupName"
+                                        placeholder="Enter User-Group Name"
+                                        value="{{#if userGroup}}{{userGroup}}{{else}}User Group Name{{/if}}"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <div id="user-group-password" class="field-wrapper input mb-2">
+                                <label for="user-group-password">GROUP PASSWORD</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#288db9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <input
+                                        type="password"
+                                        name="userGroupPassword"
+                                        placeholder="Confirm Password"
+                                        value="{{#if userGroupPassword}}{{userGroupPassword}}{{else}}userGroupPassword{{/if}}"
+                                        class="form-control"
+                                />
+                            </div>
+                        </div>
+                    </div>
 
                             <button type="submit" class="btn btn-primary btn-block mt-3">
                                 Register
