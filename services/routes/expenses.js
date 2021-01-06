@@ -1,36 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const Expense = require('../../domain/models/Transaction');
 const expense_controller = require("../controllers/expenseController");
-
-/*
-/!* GET expense dashboard. *!/
-router.get('/', async function (req, res, next) {
-    const expense = await Expense.find();
-    res.render('expense', {title: 'Expenses', expense: expense});
-});
-
-/!* Post new expense. *!/
-router.post('/', function (req, res) {
-    const expense = new Expense({
-        user: req.body.user,
-        transaction_type: "Expense",
-        source: req.body.source,
-        interval: req.body.interval,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
-    });
-
-    expense.save()
-        .then(data => {
-            res.status(200).json(data);
-        })
-        .catch(err => {
-            res.status(404).json({message: err});
-        })
-});
-*/
-
+const passport = require('passport');
+const {ensureAuthenticated} = require("../../config/auth.js")
 
 /// INCOME ROUTES ///
 // GET request for list of all expenses.
@@ -55,13 +27,10 @@ router.get('/:id/update', expense_controller.expense_update_get);
 router.post('/:id/update', expense_controller.expense_update_post);
 
 // GET request for one expense.
-router.get('/:id', expense_controller.expense_detail);
+router.get('/:id', expense_controller.index);
 
 // GET expense page.
-router.get('/', expense_controller.index);
-
-
-
+router.get('/',ensureAuthenticated, expense_controller.index);
 
 
 module.exports = router;

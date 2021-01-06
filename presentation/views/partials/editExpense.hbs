@@ -1,0 +1,57 @@
+
+<!-- Modal -->
+<div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add an Expense</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: #e0e6ed">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="statbox">
+                    <div >
+                        <p style="display: none" id="inputEditId"></p>
+                        <form id="editExpenseForm" onsubmit="editExpense()" >
+                            <div class="form-row mb-2">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEditSource">Source</label>
+                                    <input type="text" class="form-control" id="inputEditSource" placeholder="Source">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputEditAmount">Amount</label>
+                                    <input type="number" class="form-control" id="inputEditAmount" placeholder="Amount">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <p class="font-italic" style="color: #acb0c3; font-size: 15px">If this is a one-off expense have it start and end on the same day!</p>
+                                </div>
+                            </div>
+                            <div class="form-row ">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEditStartDate">Start Date</label>
+                                    <input type="date" class="form-control" id="inputEditStartDate" placeholder="Start Date">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputEditEndDate">End Date</label>
+                                    <input type="date" class="form-control" id="inputEditEndDate" placeholder="End Date">
+                                    <div class="custom-control custom-checkbox checkbox-info">
+                                        <input type="checkbox" class="custom-control-input" id="gridEditCheck">
+                                        <label class="custom-control-label" for="gridEditCheck">No end date?</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="editExpense" onclick="deleteExpense()">Delete Expense</button>
+                <button type="button" class="btn btn-primary" id="editExpense" onclick="editExpense()">Update Expense</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
