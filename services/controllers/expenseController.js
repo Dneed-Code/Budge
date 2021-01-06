@@ -49,7 +49,7 @@ exports.index = function (req, res, next) {
             UserGroup.findById(req.user.user_group, callback);
         }
     }, function (err, results) {
-        res.render('expense', {title: 'Expense', error: err, data: results, expense: true, user: req.user});
+        res.render('expense', {title: 'Expenses', error: err, data: results, expense: true, user: req.user});
     });
 };
 
@@ -96,7 +96,7 @@ exports.expense_create_post = [
         // Create a expense object with escaped and trimmed data.
         var expense = new Expense(
             {
-                expense_type: "Expense",
+                transaction_type: "Expense",
                 user: req.user,
                 source: req.body.source,
                 date_paid: datePaid,
@@ -108,7 +108,7 @@ exports.expense_create_post = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('expense', {title: 'Expense', expense: expense, errors: errors.array(), expense: true});
+            res.render('expense', {title: 'Expenses', expense: expense, errors: errors.array(), expense: true});
         } else {
             // Data from form is valid.
             // Check if Expense with same name already exists.
@@ -219,7 +219,7 @@ exports.expense_update_post = [
         // Create a Expense object with escaped/trimmed data and old id.
         var expense = new Expense(
             {
-                expense_type: "Expense",
+                transaction_type: "Expense",
                 source: req.body.source,
                 date_paid: req.body.date_paid,
                 amount: req.body.amount,

@@ -82,10 +82,10 @@ exphbs.handlebars.registerHelper('formatDatePaid', function(number) {
 }
 );
 // register new function for formatting dates in view
-exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format) {
+exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format, type) {
   var endDateNoEnd = new Date(2024, 11, 12);
   if (datetime > endDateNoEnd){
-    return 'Ongoing Income'
+    return 'Ongoing ' + type;
   }
   if (moment) {
     // can use other formats like 'lll' too
