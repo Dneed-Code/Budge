@@ -155,7 +155,7 @@ exports.income_delete_get = function (req, res, next) {
 exports.income_delete_post = function (req, res) {
     async.parallel({
         income: function (callback) {
-            Income.findById(req.body.incomeid).exec(callback)
+            Income.findById(req.params.id).exec(callback)
         }
     }, function (err, results) {
         if (err) {
@@ -163,12 +163,12 @@ exports.income_delete_post = function (req, res) {
         }
         // Success
         // Income has no dependants. Delete object and redirect to the list of incomes.
-        Income.findByIdAndRemove(req.body.incomeid, function deleteIncome(err) {
+        Income.findByIdAndRemove(req.params.id, function deleteIncome(err) {
             if (err) {
                 return next(err);
             }
             // Success - go to income list
-            res.redirect('/incomes')
+            res.redirect('/income')
         })
     });
 };
