@@ -8,7 +8,9 @@ var UserSchema = new Schema(
         first_name: {type: String, required: true, maxlength: 25},
         last_name: {type: String, required: true, maxlength: 25},
         permission_level: {type: String, required: true, enum: ['Admin', 'User'], default: 'User'},
-        email_address: {type: String, required: true, maxlength: 25},
+        email_address: {type: String, required: true},
+        date: { type: Date, default: Date.now},
+        password:{type: String, required: true}
 
     }
 );

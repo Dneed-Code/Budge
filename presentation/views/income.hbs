@@ -191,11 +191,11 @@
     }
 
     function isAfterStartDate() {
-        return new $('#inputStartDate').val() < $('#inputEndDate').val();
+        return new $('#inputStartDate').val() <= $('#inputEndDate').val();
     }
 
     function isAfterEditStartDate() {
-        return new $('#inputEditStartDate').val() < $('#inputEditEndDate').val();
+        return new $('#inputEditStartDate').val() <= $('#inputEditEndDate').val();
     }
 
     function editModal(id) {
@@ -262,6 +262,27 @@
                 }
             });
         }
+    }
+
+    function deleteIncome() {
+        var id = $('#inputEditId').text();
+            $.ajax({
+                url: '/income/' + id + '/delete',
+                type: 'POST',
+                cache: false,
+                data: {
+                    source: $('#inputEditSource').val(),
+                    amount: $('#inputEditAmount').val(),
+                    start_date: $('#inputEditStartDate').val()
+                },
+                success: function (data) {
+                    window.location.assign('/income')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    //alert('text status ' + textStatus + ', err ' + err)
+                }
+            });
+
     }
 
     function formatDate(date) {
