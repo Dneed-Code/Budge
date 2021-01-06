@@ -6,10 +6,8 @@ var router = express.Router();
 const {ensureAuthenticated} = require("../../config/auth.js")
 const index_controller = require("../controllers/indexController");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('home', {layout: 'pre-main'});
-});
+/* GET dashboard page(home). */
+router.get('/',ensureAuthenticated, index_controller.index);
 /* GET dashboard page. */
 router.get('/dashboard',ensureAuthenticated, index_controller.index);
 //register page

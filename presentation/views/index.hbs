@@ -1,29 +1,98 @@
 
-<p>{{user.first_name}}</p>
-<a href="/users/logout">Logout</a>
-<div class="row col-equal-height">
-    <div class="col-md-4">
-        <div class="card tile" style="height: 200px;">
-            <div class="card-body">
-                Incomes
+<!--<p>{{user.first_name}}</p>-->
+<!--<a href="/users/logout">Logout</a>-->
+<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Cashflow Over Time (Year) </h4>
+                <canvas id="incomeLineChart"></canvas>
             </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <div class="card tile" style="height: 200px;">
-            <div class="card-body">
-                Expenses
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+                <canvas id="incomeLineChartApex"></canvas>
             </div>
         </div>
     </div>
 </div>
+<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+                <canvas id="incomeLineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+                <canvas id="incomeLineChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
 
-<div class="row mt-5">
-    <div class="col-md-12">
-        <div class="card tile" style="height: 300px;">
-            <div class="card-body">
-                Net Worth
-            </div>
-        </div>
-    </div>
-</div>
+    $(document).ready(
+            function () {
+                $('#expenseTotal').text('£' + sum(expenseAmounts));
+            }
+    );
+    var incomeAmounts = []
+        {{#each data.income_list}}
+        incomeAmounts.push({{amount}});
+        {{/each}}
+    function sum(incomeAmounts) {
+        var sum = 0;
+        for (var index = 0; index < incomeAmounts.length; index++) {
+            sum += incomeAmounts[index];
+        }
+        return sum;
+    }
+
+    $(document).ready(
+            function () {
+                $('#incomeTotal').text('£' + sum(incomeAmounts));
+            }
+    );
+    var ctx = document.getElementById('incomeLineChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Income Over Time (£)',
+                backgroundColor: ['rgba(20, 255, 40, 0.05)',],
+                borderColor: ['rgba(0, 199, 17, 0.75)', 'rgba(198, 47, 47, 0.74)'],
+                data: [{{data.income_per_month}}],
+
+            }, {
+                label: 'Expenses Over Time (£)',
+                backgroundColor: 'rgba(198, 47, 47, 0.11)',
+                borderColor: 'rgba(198, 47, 47, 0.74)',
+                data: [{{data.expense_per_month}}],
+
+            }],
+        },
+        // Configuration options go here
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
