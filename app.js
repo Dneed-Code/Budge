@@ -9,6 +9,11 @@ var bodyParser = require('body-parser');
 require('toastr');
 require('dotenv/config');
 var moment = require('moment'); // require
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require("passport");
+require('../Budge/config/passport')(passport)
+var app = express();
 moment().format();
 
 //Set up mongoose connection
@@ -18,16 +23,16 @@ mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true, us
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
+// Require routes
 var indexRouter = require('./services/routes/index');
 var incomesRouter = require('./services/routes/incomes');
 var expensesRouter = require('./services/routes/expenses');
 var usersRouter = require('./services/routes/users');
 var userGroupsRouter = require('./services/routes/userGroups');
 
-var app = express();
-
+// Use body parser
 app.use(bodyParser.json());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'presentation/views'));
 app.engine( 'hbs', hbs( {
@@ -41,8 +46,9 @@ app.engine( 'hbs', hbs( {
   partialsDir: __dirname + '/presentation/views/partials/'
 } ) );
 app.set('view engine', 'hbs');
-
 var exphbs = hbs.create({});
+
+// View helpers hbs
 var DateFormats = {
   year: "YYYYMMDD",
   short: "DD MMMM - YYYY",
@@ -91,6 +97,24 @@ exphbs.handlebars.registerHelper('formatEndDate', function(datetime, format) {
   }
 });
 
+//express session
+app.use(session({
+  secret : 'secret',
+  resave : true,
+  saveUninitialized : true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+//use flash
+app.use(flash());
+app.use((req,res,next)=> {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error  = req.flash('error');
+  next();
+})
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -102,7 +126,6 @@ app.use(sassMiddleware({
   outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'presentation/public')));
-
 app.use('/', indexRouter);
 app.use('/income', incomesRouter);
 app.use('/expense', expensesRouter);
@@ -124,6 +147,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 

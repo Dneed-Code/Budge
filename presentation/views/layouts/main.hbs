@@ -46,7 +46,7 @@
 
         <ul class="list-unstyled components sidebar-links">
             <li class="{{#if dashboard}}active{{/if}}">
-                <a href="/">
+                <a href="/dashboard">
                     <i class="fab fa-bimobject"></i>
                     <span>Dashboard</span>
                 </a>
@@ -105,7 +105,7 @@
                     <div id="rightElemenets">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Dom<span class="chevron"><i
+                                <a class="nav-link" href="#">{{user.first_name}} {{user.last_name}} - {{data.user_group.name}} <span class="chevron"><i
                                         class="fas fa-chevron-down"></i></span></a>
                             </li>
                             <li class="nav-item">

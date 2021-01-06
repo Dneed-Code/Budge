@@ -1,4 +1,5 @@
 const User = require('../../domain/models/User');
+const UserGroup = require('../../domain/models/UserGroup');
 const Income = require('../../domain/models/Transaction');
 const transaction_logic = require('../../domain/app/transactionLogic');
 const {body, validationResult} = require('express-validator');
@@ -6,17 +7,19 @@ const async = require('async');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+
 // Gets Income page
 exports.index = function (req, res, next) {
     async.parallel({
         income_count: function (callback) {
-            transaction_logic.countIncomes(callback);
+            console.log(req.user.user_group)
+            transaction_logic.countIncomes(callback, req.user.user_group);
         },
         income_list: function (callback) {
-            transaction_logic.listIncomes(callback);
+            transaction_logic.listIncomes(callback, req.user.user_group);
         },
         income_per_month: function (callback) {
-            transaction_logic.getIncomePerMonth().then(function (incomePerMonth) {
+            transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
                 callback("", incomePerMonth);
             })
                 .catch((err) => {
@@ -24,7 +27,7 @@ exports.index = function (req, res, next) {
                 })
         },
         income_current_month: function (callback) {
-            transaction_logic.getIncomeCurrentMonth().then(function (incomeCurrentMonth) {
+            transaction_logic.getIncomeCurrentMonth(req.user.user_group).then(function (incomeCurrentMonth) {
                 callback("", incomeCurrentMonth);
             })
                 .catch((err) => {
@@ -32,7 +35,7 @@ exports.index = function (req, res, next) {
                 })
         },
         change: function (callback) {
-            transaction_logic.getChange().then(function (change) {
+            transaction_logic.getChange(req.user.user_group).then(function (change) {
                 callback("", change);
             })
                 .catch((err) => {
@@ -40,10 +43,13 @@ exports.index = function (req, res, next) {
                 })
         },
         active_incomes: function (callback) {
-            transaction_logic.listActiveIncomes(callback);
+            transaction_logic.listActiveIncomes(callback, req.user.user_group);
         },
+        user_group: function (callback) {
+            UserGroup.findById(req.user.user_group, callback);
+        }
     }, function (err, results) {
-        res.render('income', {title: 'Income', error: err, data: results, income: true});
+        res.render('income', {title: 'Income', error: err, data: results, income: true, user: req.user});
     });
 };
 
@@ -91,7 +97,7 @@ exports.income_create_post = [
         var income = new Income(
             {
                 transaction_type: "Income",
-                user: "5fc8ef42ba58094c449725c4",
+                user: req.user,
                 source: req.body.source,
                 date_paid: datePaid,
                 amount: req.body.amount,
@@ -149,7 +155,7 @@ exports.income_delete_get = function (req, res, next) {
 exports.income_delete_post = function (req, res) {
     async.parallel({
         income: function (callback) {
-            Income.findById(req.body.incomeid).exec(callback)
+            Income.findById(req.params.id).exec(callback)
         }
     }, function (err, results) {
         if (err) {
@@ -157,12 +163,12 @@ exports.income_delete_post = function (req, res) {
         }
         // Success
         // Income has no dependants. Delete object and redirect to the list of incomes.
-        Income.findByIdAndRemove(req.body.incomeid, function deleteIncome(err) {
+        Income.findByIdAndRemove(req.params.id, function deleteIncome(err) {
             if (err) {
                 return next(err);
             }
             // Success - go to income list
-            res.redirect('/incomes')
+            res.redirect('/income')
         })
     });
 };

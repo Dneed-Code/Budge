@@ -1,69 +1,130 @@
 const Income = require('../../domain/models/Transaction');
+const User = require('../../domain/models/User')
 var moment = require('moment');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // Count the number of incomes
 // TODO: Make this only count the current users group
-exports.countIncomes = function (callback) {
-    return Income.countDocuments({transaction_type: 'Income'}, callback); // Pass an income string as match condition to find all documents of this collection
+exports.countIncomes = function (callback, userGroup) {
+    const users = User.find({user_group: userGroup});
+    var userIds = [];
+    users.then(function (doc) {
+        for (var i = 0; i < doc.length; i++) {
+            userIds.push(doc[i]._id.toString());
+        }
+        return Income.countDocuments({transaction_type: 'Income', user: {$in: userIds}}, callback); // Pass an income string as match condition to find all documents of this collection
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 // List the all the incomes
 // TODO: Make this only list the incomes from the current users group
-exports.listIncomes = function (callback) {
-    Income.find({'transaction_type': 'Income'}, '_id user source amount date_paid start_date end_date status', callback).populate('user');
+exports.listIncomes = function (callback, userGroup) {
+    const users = User.find({user_group: userGroup});
+    var userIds = [];
+    users.then(function (doc) {
+        for (var i = 0; i < doc.length; i++) {
+            userIds.push(doc[i]._id.toString());
+        }
+        Income.find({
+            'transaction_type': 'Income',
+            user: {$in: userIds}
+        }, '_id user source amount date_paid start_date end_date status', callback).populate('user');
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 // List the all the active incomes
 // TODO: Make this only list the incomes from the current users group
-exports.listActiveIncomes = function (callback) {
-    Income.find({
-        'transaction_type': 'Income',
-        status: true
-    }, 'user source amount date_paid start_date end_date status', callback).populate('user');
+exports.listActiveIncomes = function (callback, userGroup) {
+    const users = User.find({user_group: userGroup});
+    var userIds = [];
+    users.then(function (doc) {
+        for (var i = 0; i < doc.length; i++) {
+            userIds.push(doc[i]._id.toString());
+        }
+        Income.find({
+            'transaction_type': 'Income',
+            user: {$in: userIds},
+            status: true
+        }, 'user source amount date_paid start_date end_date status', callback).populate('user');
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 // Calculate the Income per month of all the cumulative incomes in the list
 // TODO: Make this only calculate the incomes from the current users group
-exports.getIncomePerMonth = function () {
+exports.getIncomePerMonth = function (userGroup) {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = [];
-        incomes.then(function (doc) {
-            monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
-            var thisYearIncome = [];
-            var dateNow = new Date();
-            var startDate = new Date(dateNow.getFullYear(), 0);
-            var startDateMo = moment(startDate);
-            for (var j = 0; j < 12; j++) {
+        const users = User.find({user_group: userGroup});
+        var userIds = [];
+        users.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
+                userIds.push(doc[i]._id.toString());
+            }
+            const incomes = Income.find({
+                transaction_type: "Income",
+                user: {$in: userIds}
+            }, 'user amount date_paid start_date end_date');
+            let monthlyIncomeData = [];
+            incomes.then(function (doc) {
+                monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
+                var thisYearIncome = [];
+                var dateNow = new Date();
+                var startDate = new Date(dateNow.getFullYear(), 0);
+                var startDateMo = moment(startDate);
+                for (var j = 0; j < 12; j++) {
 
-                if (isNaN(monthlyIncomeData[getDictKey(startDate)])) {
-                    thisYearIncome[j] = 0;
-                } else {
-                    thisYearIncome[j] = monthlyIncomeData[getDictKey(startDate)];
+                    if (isNaN(monthlyIncomeData[getDictKey(startDate)])) {
+                        thisYearIncome[j] = 0;
+                    } else {
+                        thisYearIncome[j] = monthlyIncomeData[getDictKey(startDate)];
+                    }
+
+                    startDateMo.add(1, 'months');
+                    startDate = new Date(startDateMo);
                 }
 
-                startDateMo.add(1, 'months');
-                startDate = new Date(startDateMo);
-            }
 
-
-            resolve(thisYearIncome);
+                resolve(thisYearIncome);
+            }).catch((err) => {
+                console.log(err);
+            });
         }).catch((err) => {
             console.log(err);
+
         });
     });
 }
 
 // Calculate the income of the current month
 // TODO: Make this user/usergroup specific
-exports.getIncomeCurrentMonth = function getIncomeCurrentMonth() {
+exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = [];
-        incomes.then(function (doc) {
-            monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
-            var dateNow = new Date();
-            var currentMonth = dateNow;
-            resolve(monthlyIncomeData[getDictKey(currentMonth)]);
+        var userIds = [];
+        const users = User.find({user_group: userGroup});
+        users.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
+                userIds.push(doc[i]._id.toString());
+            }
+            const incomes = Income.find({
+                transaction_type: "Income",
+                user: {$in: userIds}
+            }, 'user amount date_paid start_date end_date');
+            let monthlyIncomeData = [];
+            incomes.then(function (doc) {
+                monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
+                var dateNow = new Date();
+                var currentMonth = dateNow;
+                console.log(doc);
+                resolve(monthlyIncomeData[getDictKey(currentMonth)]);
+            }).catch((err) => {
+                console.log(err);
+            });
+            console.log(userIds);
         }).catch((err) => {
             console.log(err);
         });
@@ -72,9 +133,15 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth() {
 
 // Calculate the change in income between last month and this month
 // TODO: Make this user/usergroup specific
-exports.getChange = function getChange() {
+exports.getChange = function getChange(userGroup) {
     return new Promise(function (resolve, reject) {
-        const incomes = Income.find({transaction_type: "Income"}, 'user amount date_paid start_date end_date');
+        const users = User.find({user_group: userGroup});
+        var userIds = [];
+        users.then(function (doc) {
+            for (var i = 0; i < doc.length; i++) {
+                userIds.push(doc[i]._id.toString());
+            }
+        const incomes = Income.find({transaction_type: "Income", user: {$in: userIds} }, 'user amount date_paid start_date end_date');
         let monthlyIncomeData = [];
         incomes.then(function (doc) {
             monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
@@ -82,7 +149,7 @@ exports.getChange = function getChange() {
             resolve(change);
         }).catch((err) => {
             console.log(err);
-        });
+        });});
     });
 }
 
