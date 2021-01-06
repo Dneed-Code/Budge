@@ -1,4 +1,5 @@
 const User = require('../../domain/models/User');
+const UserGroup = require('../../domain/models/UserGroup');
 const Income = require('../../domain/models/Transaction');
 const transaction_logic = require('../../domain/app/transactionLogic');
 const {body, validationResult} = require('express-validator');
@@ -44,6 +45,9 @@ exports.index = function (req, res, next) {
         active_incomes: function (callback) {
             transaction_logic.listActiveIncomes(callback, req.user.user_group);
         },
+        user_group: function (callback) {
+            UserGroup.findById(req.user.user_group, callback);
+        }
     }, function (err, results) {
         res.render('income', {title: 'Income', error: err, data: results, income: true, user: req.user});
     });
