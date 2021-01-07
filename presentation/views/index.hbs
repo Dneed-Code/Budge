@@ -1,6 +1,41 @@
-
 <!--<p>{{user.first_name}}</p>-->
 <!--<a href="/users/logout">Logout</a>-->
+<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+    <div class="col-md-3">
+        <div class="card tile">
+            <div class="row p-2">
+                <div class="col-8">
+                    <h5 class="pl-3">Total Income Post-Tax (Yearly)</h5>
+                </div>
+                <div class="col-4">
+                    <p class="pr-2" id="income_total">18%</p>
+                </div>
+            </div>
+            <div id="income_trend"></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card tile">
+            <div class="row p-2">
+                <div class="col-9">
+                    <h5 class="pl-3">Total Cumulative Expenses (Yearly)</h5>
+                </div>
+                <div class="col-3">
+                    <p class="pr-2" id="expense_total"></p>
+                </div>
+            </div>
+            <div id="expense_trend"></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row col-equal-height mb-4 align-items-center justify-content-center">
     <div class="col-md-12">
         <div class="card tile">
@@ -10,35 +45,25 @@
         </div>
     </div>
 </div>
-<div class="row col-equal-height mb-4 align-items-center justify-content-center">
-    <div class="col-md-6">
-        <div class="card tile">
-            <div class="card-body text-center">
-                <h4>Income Over Time (Year) </h4>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card tile">
-            <div class="card-body text-center">
-                <h4>Income Over Time (Year) </h4>
-
-            </div>
-        </div>
-    </div>
-</div>
 <script>
-var income = [{{data.income_per_month}}];
-var expense = [{{data.expense_per_month}}];
+    var income = [{{data.income_per_month}}];
+    var expense = [{{data.expense_per_month}}];
 
-var options1 = getOptions(income, expense);
+    $(document).ready(function () {
+        $('#expense_total').html('£' + Math.round(expense.reduce((a, b) => a + b, 0)));
+        $('#income_total').html('£' + Math.round(income.reduce((a, b) => a + b, 0)));
+    });
 
-var chart1 = new ApexCharts(
-        document.querySelector("#chart"),
-        options1
-);
+    var options1 = getOptions(income, expense);
+    var chart1 = new ApexCharts(
+            document.querySelector("#chart"),
+            options1
+    );
+    chart1.render();
 
-chart1.render();
+    var chart2 = new ApexCharts(document.querySelector("#income_trend"), getDIncomeOptions(income, 'Income', 'rgba(0, 199, 17)'));
+    chart2.render()
+    var chart3 = new ApexCharts(document.querySelector("#expense_trend"), getDIncomeOptions(expense, 'Expense', '#E64040'));
+    chart3.render()
 
 </script>
