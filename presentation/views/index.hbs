@@ -1,29 +1,44 @@
 
-<p>{{user.first_name}}</p>
-<a href="/users/logout">Logout</a>
-<div class="row col-equal-height">
-    <div class="col-md-4">
-        <div class="card tile" style="height: 200px;">
-            <div class="card-body">
-                Incomes
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="card tile" style="height: 200px;">
-            <div class="card-body">
-                Expenses
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-5">
+<!--<p>{{user.first_name}}</p>-->
+<!--<a href="/users/logout">Logout</a>-->
+<div class="row col-equal-height mb-4 align-items-center justify-content-center">
     <div class="col-md-12">
-        <div class="card tile" style="height: 300px;">
-            <div class="card-body">
-                Net Worth
+        <div class="card tile">
+            <div class="card-body text-center">
+                <div id="chart"></div>
             </div>
         </div>
     </div>
 </div>
+<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h4>Income Over Time (Year) </h4>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+var income = [{{data.income_per_month}}];
+var expense = [{{data.expense_per_month}}];
+
+var options1 = getOptions(income, expense);
+
+var chart1 = new ApexCharts(
+        document.querySelector("#chart"),
+        options1
+);
+
+chart1.render();
+
+</script>

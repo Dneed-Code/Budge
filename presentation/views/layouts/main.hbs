@@ -30,6 +30,18 @@
     <script src="/stylesheets/libraries/toastr.min.js"></script>
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apex-widgets.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apexcharts.css">
+
+
+
+    <script src="javascripts/apexcharts.min.js"></script>
+    <script src="javascripts/apex-widgets.js"></script>
+    <script src="javascripts/cashflow-chart.js"></script>
+    <script src="javascripts/transaction-chart.js"></script>
+
+
+
 </head>
 
 <body>
@@ -57,7 +69,7 @@
                     <span>Incomes</span>
                 </a>
             </li>
-            <li>
+            <li class="{{#if expense}}active{{/if}}">
                 <a href="/expense">
                     <i class="fas fa-cash-register"></i>
                     <span>Expenses</span>
@@ -143,32 +155,8 @@
 <script src="javascripts/datatables.js"></script>
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
 
-    $(document).ready(function() {
-        $('#table_id').DataTable({
-            "sDom": '<"row view-filter"<"col-sm-8"<"toolbar">><"col-sm-4"f><"clearfix">>t<"row view-pager"<"col-sm-12"<"text-center"p>>>',
-            "oLanguage": {
-                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-            },
-             "lengthChange": false,
-             "pageLength": 5,
-            drawCallback: function () {
-                $('.t-dot').tooltip({ template: '<div class="tooltip status" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' })
-                $('.dataTables_wrapper table').removeClass('table-striped');
-            }
-        });
-        $("div.toolbar").html('<p style="margin-top: 17px;margin-bottom: 0; font-size: 0.9em">Below you will see all incomes associated with your group, to edit them simply click the row in the table of the income you would like to edit!</p>');
-    } );
-</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
 <script>
     var socket = io();

@@ -1,7 +1,7 @@
 const User = require('../../domain/models/User');
 const UserGroup = require('../../domain/models/UserGroup');
 const Income = require('../../domain/models/Transaction');
-const transaction_logic = require('../../domain/app/transactionLogic');
+const transaction_logic = require('../../domain/app/incomeLogic');
 const {body, validationResult} = require('express-validator');
 const async = require('async');
 const mongoose = require('mongoose');
