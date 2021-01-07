@@ -7,8 +7,7 @@
     <div class="col-md-4">
         <div class="card tile">
             <div class="card-body text-center">
-                <h4>Income Over Time (Year) </h4>
-                <canvas id="incomeLineChart"></canvas>
+                <div id="chart"></div>
             </div>
         </div>
     </div>
@@ -54,7 +53,7 @@
                             <td>£{{amount}}</td>
                             <td data-sort="{{date_paid}}">{{formatDatePaid date_paid}}</td>
                             <td data-sort="{{formatDate start_date "year"}}">{{formatDate start_date "short"}}</td>
-                            <td data-sort="{{formatDate end_date "year"}}">{{formatEndDate end_date "short"}}</td>
+                            <td data-sort="{{formatDate end_date "year"}}">{{formatEndDate end_date "short" "income"}}</td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -84,7 +83,16 @@
                 $('#incomeTotal').text('£' + sum(incomeAmounts));
             }
     );
-    var ctx = document.getElementById('incomeLineChart').getContext('2d');
+
+
+    var income = [{{data.income_per_month}}];
+    var options1 = getTransOptions(income, 'Income', 'rgba(0, 199, 17)' );
+    var chart1 = new ApexCharts(
+            document.querySelector("#chart"),
+            options1
+    );
+    chart1.render();
+
     var donutLabels = [];
     var donutAmounts = [];
         {{#each data.active_incomes}}
@@ -93,35 +101,6 @@
         {{else}}
         $("#donutHead").after("<p>You have no active incomes currently, Try adding one!</p>");
         {{/each}}
-
-
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Income Over Time (£)',
-                backgroundColor: 'rgba(20, 255, 40, 0.05)',
-                borderColor: 'rgba(0, 199, 17, 0.75)',
-                data: [{{data.income_per_month}}]
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            responsive: true,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
     var dough = document.getElementById('incomeDonutChart').getContext('2d');
     var myDoughnutChart = new Chart(dough, {
         type: 'doughnut',
@@ -130,7 +109,8 @@
             labels: donutLabels,
             datasets: [{
                 label: 'My First dataset',
-                backgroundColor: ['#5c1ac3', '#e7515a', '#e2a03f', '#60e23f', '#3cba92', '#194e3a', '#bff0c1', '#ff56c1'],
+                backgroundColor: ['#5c1ac3', '#e7515a', '#e2a03f', '#60e23f', '#3cba92', '#194e3a', '#bff0c1', '#ff56c1',
+                    '#5c1dc3', '#e9515a', '#e6a03f', '#60f23f', '#3cca32', '#124f3a', '#bbf0f1', '#fb68c1'],
                 borderColor: '#0e1726',
                 weight: 2,
                 data: donutAmounts
@@ -152,7 +132,7 @@
             toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
             isErrors = true;
         }
-        if ($('#inputAmount').val() == "" || $('#inputAmount').val().length < 2) {
+        if ($('#inputAmount').val() == "" || $('#inputAmount').val().length < 1) {
             toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
             isErrors = true;
         }
@@ -298,4 +278,30 @@
 
         return [year, month, day].join('-');
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    $(document).ready(function() {
+        $('#table_id').DataTable({
+            "sDom": '<"row view-filter"<"col-sm-8"<"toolbar">><"col-sm-4"f><"clearfix">>t<"row view-pager"<"col-sm-12"<"text-center"p>>>',
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+            },
+            "lengthChange": false,
+            "pageLength": 5,
+            drawCallback: function () {
+                $('.t-dot').tooltip({ template: '<div class="tooltip status" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' })
+                $('.dataTables_wrapper table').removeClass('table-striped');
+            }
+        });
+        $("div.toolbar").html('<p style="margin-top: 17px;margin-bottom: 0; font-size: 0.9em">Below you will see all incomes associated with your group, to edit them simply click the row in the table of the income you would like to edit!</p>');
+    } );
 </script>
