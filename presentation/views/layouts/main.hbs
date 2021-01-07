@@ -33,17 +33,11 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apex-widgets.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apexcharts.css">
 
-
-
     <script src="javascripts/apexcharts.min.js"></script>
     <script src="javascripts/apex-widgets.js"></script>
     <script src="javascripts/cashflow-chart.js"></script>
     <script src="javascripts/transaction-chart.js"></script>
     <script src="javascripts/dashboard-income.js"></script>
-
-
-
-
 </head>
 
 <body>
@@ -161,6 +155,12 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
 <script>
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
     var socket = io();
 </script>
 </body>

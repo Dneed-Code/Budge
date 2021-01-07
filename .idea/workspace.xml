@@ -26,11 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard-income.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/income.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/income.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
     </list>
@@ -122,13 +119,6 @@
       <workItem from="1609759774526" duration="11694000" />
       <workItem from="1609848656867" duration="28123000" />
       <workItem from="1609940051938" duration="6268000" />
-    </task>
-    <task id="LOCAL-00004" summary="Added income page (with no content) ready for implementation">
-      <created>1606772292812</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1606772292812</updated>
     </task>
     <task id="LOCAL-00005" summary="Route for income page set up">
       <created>1606813369204</created>
@@ -466,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609921517336</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Dashboard now shows total incomes and expenses">
+      <created>1610005544349</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1610005544349</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +494,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reformatting income controller helper methods" />
     <MESSAGE value="Calculations on income page now working correctly, Add income modal now populated with some UI elements ready for backend integration" />
     <MESSAGE value="Add Income now working from modal, with Toast errors" />
     <MESSAGE value="Datatable sorting now working on Date recieved, start and end dates" />
@@ -522,7 +518,8 @@
     <MESSAGE value="Logic for expenses input" />
     <MESSAGE value="Expense view tailored to expenses within text" />
     <MESSAGE value="Datatable helper changed to allow for expense" />
-    <option name="LAST_COMMIT_MESSAGE" value="Datatable helper changed to allow for expense" />
+    <MESSAGE value="Dashboard now shows total incomes and expenses" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dashboard now shows total incomes and expenses" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
