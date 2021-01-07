@@ -39,11 +39,6 @@
 </div>
 <script>
 
-    $(document).ready(
-            function () {
-                $('#expenseTotal').text('£' + sum(expenseAmounts));
-            }
-    );
     var incomeAmounts = []
         {{#each data.income_list}}
         incomeAmounts.push({{amount}});
