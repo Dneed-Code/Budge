@@ -7,8 +7,7 @@
     <div class="col-md-4">
         <div class="card tile">
             <div class="card-body text-center">
-                <h4>Income Over Time (Year) </h4>
-                <canvas id="incomeLineChart"></canvas>
+                <div id="chart"></div>
             </div>
         </div>
     </div>
@@ -84,7 +83,16 @@
                 $('#incomeTotal').text('£' + sum(incomeAmounts));
             }
     );
-    var ctx = document.getElementById('incomeLineChart').getContext('2d');
+
+
+    var income = [{{data.income_per_month}}];
+    var options1 = getTransOptions(income, 'Income', 'rgba(0, 199, 17)' );
+    var chart1 = new ApexCharts(
+            document.querySelector("#chart"),
+            options1
+    );
+    chart1.render();
+
     var donutLabels = [];
     var donutAmounts = [];
         {{#each data.active_incomes}}
@@ -93,35 +101,6 @@
         {{else}}
         $("#donutHead").after("<p>You have no active incomes currently, Try adding one!</p>");
         {{/each}}
-
-
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Income Over Time (£)',
-                backgroundColor: 'rgba(20, 255, 40, 0.05)',
-                borderColor: 'rgba(0, 199, 17, 0.75)',
-                data: [{{data.income_per_month}}]
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            responsive: true,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
     var dough = document.getElementById('incomeDonutChart').getContext('2d');
     var myDoughnutChart = new Chart(dough, {
         type: 'doughnut',

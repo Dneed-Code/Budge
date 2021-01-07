@@ -7,8 +7,7 @@
     <div class="col-md-4">
         <div class="card tile">
             <div class="card-body text-center">
-                <h4>Expense Over Time (Year) </h4>
-                <canvas id="expenseLineChart"></canvas>
+                <div id="chart"></div>
             </div>
         </div>
     </div>
@@ -84,7 +83,17 @@
                 $('#expenseTotal').text('£' + sum(expenseAmounts));
             }
     );
-    var ctx = document.getElementById('expenseLineChart').getContext('2d');
+
+
+    var expense = [{{data.expense_per_month}}];
+    var options1 = getTransOptions(expense, 'Expense', '#E64040' );
+    var chart1 = new ApexCharts(
+            document.querySelector("#chart"),
+            options1
+    );
+    chart1.render();
+
+
     var donutLabels = [];
     var donutAmounts = [];
         {{#each data.active_expenses}}
@@ -95,33 +104,6 @@
         {{/each}}
 
 
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Expense Over Time (£)',
-                backgroundColor: 'rgba(198, 47, 47, 0.11)',
-                borderColor: 'rgba(198, 47, 47, 0.74)',
-                data: [{{data.expense_per_month}}]
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            responsive: true,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
     var dough = document.getElementById('expenseDonutChart').getContext('2d');
     var myDoughnutChart = new Chart(dough, {
         type: 'doughnut',
