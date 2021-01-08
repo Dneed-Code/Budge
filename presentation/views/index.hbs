@@ -1,6 +1,6 @@
 <!--<p></p>-->
 <!--<a href="/users/logout">Logout</a>-->
-<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+<div class="row col-equal-height mb-4 ">
     <div class="col-md-4">
         <div class="card tile">
             <div class="row p-2">
@@ -52,23 +52,21 @@
         </div>
     </div>
 </div>
-<div class="row col-equal-height mb-4 align-items-center justify-content-center">
+<div class="row col-equal-height">
     <div class="col-md-12">
         <div class="card tile">
-            <div class="card-body text-center">
+            <div class="card-body">
                 <div id="chart"></div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     var income = [{{data.income_per_month}}];
     var expense = [{{data.expense_per_month}}];
 
-    $(document).ready(function () {
-        $('#expense_total').html('£' + Math.round(expense.reduce((a, b) => a + b, 0)));
-        $('#income_total').html('£' + Math.round(income.reduce((a, b) => a + b, 0)));
-    });
+
 
     var options1 = getOptions(income, expense);
     var chart1 = new ApexCharts(
@@ -81,5 +79,13 @@
     chart2.render()
     var chart3 = new ApexCharts(document.querySelector("#expense_trend"), getDIncomeOptions(expense, 'Expense', '#E64040'));
     chart3.render()
+
+    $(window).on('load', function (e) {
+        $('#expense_total').html('£' + Math.round(expense.reduce((a, b) => a + b, 0)));
+        $('#income_total').html('£' + Math.round(income.reduce((a, b) => a + b, 0)));
+
+                window.dispatchEvent(new Event('resize'));
+
+    });
 
 </script>

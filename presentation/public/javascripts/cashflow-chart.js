@@ -3,7 +3,7 @@ function getOptions(income, expense) {
     var options1 = {
         chart: {
             fontFamily: 'Nunito, sans-serif',
-            height: 450,
+            height: 430,
             type: 'area',
             zoom: {
                 enabled: false
@@ -16,7 +16,7 @@ function getOptions(income, expense) {
                 top: 22
             },
             toolbar: {
-                show: false
+                show: true
             },
             events: {
                 mounted: function (ctx, config) {
