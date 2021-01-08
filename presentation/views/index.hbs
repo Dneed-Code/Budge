@@ -66,7 +66,16 @@
     var income = [{{data.income_per_month}}];
     var expense = [{{data.expense_per_month}}];
 
+    function renderCharts(){
+        var options1 = getOptions(income, expense);
+        var chart1 = new ApexCharts(
+                document.querySelector("#chart"),
+                options1
+        );
+        var chart2 = new ApexCharts(document.querySelector("#income_trend"), getDIncomeOptions(income, 'Income', 'rgba(0, 199, 17)'));
+        var chart3 = new ApexCharts(document.querySelector("#expense_trend"), getDIncomeOptions(expense, 'Expense', '#E64040'));
 
+    };
 
     var options1 = getOptions(income, expense);
     var chart1 = new ApexCharts(
@@ -86,6 +95,13 @@
 
                 window.dispatchEvent(new Event('resize'));
 
+    });
+
+
+    var socket = io();
+    socket.on('group update', function(data) {
+        toastr.info('Rog Wood has updated an Income, please refresh the page to see these changes reflected!', 'User Group Data Update');
+console.log(data);
     });
 
 </script>

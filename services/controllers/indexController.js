@@ -7,6 +7,9 @@ const {body, validationResult} = require('express-validator');
 const async = require('async');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 
 
@@ -34,6 +37,8 @@ exports.index = function (req, res, next) {
             UserGroup.findById(req.user.user_group, callback);
         }
     }, function (err, results) {
+
         res.render('index', {title: 'Dashboard', error: err, data: results, dashboard: true, user: req.user});
+        req.app.io.emit('group update', "Income" ); //emit to everyone
     });
 };
