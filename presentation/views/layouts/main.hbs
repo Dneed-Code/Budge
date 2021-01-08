@@ -33,15 +33,15 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apex-widgets.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apexcharts.css">
 
-
-
     <script src="javascripts/apexcharts.min.js"></script>
     <script src="javascripts/apex-widgets.js"></script>
     <script src="javascripts/cashflow-chart.js"></script>
     <script src="javascripts/transaction-chart.js"></script>
+    <script src="javascripts/dashboard-income.js"></script>
 
 
-
+    <!-- Socket IO-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -75,28 +75,28 @@
                     <span>Expenses</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Assets</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-landmark"></i>
-                    <span>Liabilities</span>
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fas fa-chart-line"></i>-->
+<!--                    <span>Assets</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fas fa-landmark"></i>-->
+<!--                    <span>Liabilities</span>-->
+<!--                </a>-->
+<!--            </li>-->
             <li>
                 <a href="#">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <span>Reports</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="{{#if chat}}active{{/if}}">
+                <a href="/chat">
                     <i class="fas fa-chart-bar"></i>
-                    <span>Forecasting</span>
+                    <span>Group Chat</span>
                 </a>
             </li>
         </ul>
@@ -157,9 +157,17 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+
 <script>
-    var socket = io();
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            window.dispatchEvent(new Event('resize'));
+        });
+    });
+
+
+
 </script>
 </body>
 </html>
