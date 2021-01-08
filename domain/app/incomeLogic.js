@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
 // Count the number of incomes
-// TODO: Make this only count the current users group
+
 exports.countIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -20,7 +20,7 @@ exports.countIncomes = function (callback, userGroup) {
 }
 
 // List the all the incomes
-// TODO: Make this only list the incomes from the current users group
+
 exports.listIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -37,7 +37,7 @@ exports.listIncomes = function (callback, userGroup) {
     });
 }
 // List the all the active incomes
-// TODO: Make this only list the incomes from the current users group
+
 exports.listActiveIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -56,7 +56,7 @@ exports.listActiveIncomes = function (callback, userGroup) {
 }
 
 // Calculate the Income per month of all the cumulative incomes in the list
-// TODO: Make this only calculate the incomes from the current users group
+
 exports.getIncomePerMonth = function (userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
@@ -83,12 +83,9 @@ exports.getIncomePerMonth = function (userGroup) {
                     } else {
                         thisYearIncome[j] = monthlyIncomeData[getDictKey(startDate)];
                     }
-
                     startDateMo.add(1, 'months');
                     startDate = new Date(startDateMo);
                 }
-
-
                 resolve(thisYearIncome);
             }).catch((err) => {
                 console.log(err);
@@ -101,7 +98,7 @@ exports.getIncomePerMonth = function (userGroup) {
 }
 
 // Calculate the income of the current month
-// TODO: Make this user/usergroup specific
+
 exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
         var userIds = [];
@@ -132,7 +129,6 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
 }
 
 // Calculate the change in income between last month and this month
-// TODO: Make this user/usergroup specific
 exports.getChange = function getChange(userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
