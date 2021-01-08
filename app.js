@@ -16,6 +16,7 @@ require('../Budge/config/passport')(passport)
 var app = express();
 moment().format();
 
+
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = process.env.DB_CONNECTION;
@@ -29,6 +30,7 @@ var incomesRouter = require('./services/routes/incomes');
 var expensesRouter = require('./services/routes/expenses');
 var usersRouter = require('./services/routes/users');
 var userGroupsRouter = require('./services/routes/userGroups');
+var chatRouter = require('./services/routes/chat');
 
 // Use body parser
 app.use(bodyParser.json());
@@ -131,6 +133,7 @@ app.use('/income', incomesRouter);
 app.use('/expense', expensesRouter);
 app.use('/users', usersRouter);
 app.use('/userGroups', userGroupsRouter);
+app.use('/chat', chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -147,8 +150,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 
 module.exports = app;

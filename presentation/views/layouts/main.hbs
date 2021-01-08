@@ -71,28 +71,28 @@
                     <span>Expenses</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Assets</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-landmark"></i>
-                    <span>Liabilities</span>
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fas fa-chart-line"></i>-->
+<!--                    <span>Assets</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fas fa-landmark"></i>-->
+<!--                    <span>Liabilities</span>-->
+<!--                </a>-->
+<!--            </li>-->
             <li>
                 <a href="#">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <span>Reports</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="{{#if chat}}active{{/if}}">
+                <a href="/chat">
                     <i class="fas fa-chart-bar"></i>
-                    <span>Forecasting</span>
+                    <span>Group Chat</span>
                 </a>
             </li>
         </ul>
@@ -163,6 +163,8 @@
     });
 
     var socket = io();
+
+
 </script>
 </body>
 </html>
