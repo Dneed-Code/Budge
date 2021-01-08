@@ -126,6 +126,19 @@ exports.income_create_post = [
                                 return next(err);
                             }
                             // Income saved. Redirect to income page.
+                            async.parallel({
+                                    income_per_month: function (callback) {
+                                        transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                                            callback("", incomePerMonth);
+                                        })
+                                            .catch((err) => {
+                                                console.log(err);
+                                            })
+                                    },
+                                }, function (err, results) {
+                                req.app.io.emit('group update', results); //emit to everyone
+                            })
+
                             res.redirect('/income');
                         });
                     }
@@ -147,6 +160,7 @@ exports.income_delete_get = function (req, res, next) {
             res.redirect('/incomes');
         }
         // Successful, so render.
+
         res.render('income_delete', {title: 'Delete Income', income: results.income});
     });
 };
@@ -168,6 +182,18 @@ exports.income_delete_post = function (req, res) {
                 return next(err);
             }
             // Success - go to income list
+            async.parallel({
+                income_per_month: function (callback) {
+                    transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                        callback("", incomePerMonth);
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                },
+            }, function (err, results) {
+                req.app.io.emit('group update', results); //emit to everyone
+            })
             res.redirect('/income')
         })
     });
@@ -257,6 +283,19 @@ exports.income_update_post = [
                 if (err) {
                     return next(err);
                 }
+
+                async.parallel({
+                    income_per_month: function (callback) {
+                        transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                            callback("", incomePerMonth);
+                        })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    },
+                }, function (err, results) {
+                    req.app.io.emit('group update', results); //emit to everyone
+                })
                 // Successful - redirect to income detail page.
                 res.redirect('/income');
             });
