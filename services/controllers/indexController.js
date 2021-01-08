@@ -39,6 +39,6 @@ exports.index = function (req, res, next) {
     }, function (err, results) {
 
         res.render('index', {title: 'Dashboard', error: err, data: results, dashboard: true, user: req.user});
-        req.app.io.emit('group update', "Income" ); //emit to everyone
+        req.app.io.emit('group update', results); //emit to everyone
     });
 };
