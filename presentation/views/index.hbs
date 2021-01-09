@@ -1,5 +1,5 @@
 <!--<p></p>-->
-<!--<a href="/users/logout">Logout</a>-->
+<a href="/users/logout">Logout</a>
 <div class="row col-equal-height">
     <div class="col-9 ">
         <div class="row col-equal-height mb-4 ">
@@ -54,7 +54,7 @@
                             <p style="margin-bottom: 1px">{{formatDate date_time 'short'}}</p>
                         </div>
                         <div class="col-3">
-                            <img src="https://eu.ui-avatars.com/api/?name={{user.first_name}}+{{user.last_name}}&background=random&rounded=true&size=40&bold=true"
+                            <img src="https://eu.ui-avatars.com/api/?name={{user.first_name}}+{{user.last_name}}&background={{user.colour}}&rounded=true&size=40&bold=true"
                                  alt="" id="recent-avatars">
                         </div>
                     </div>
