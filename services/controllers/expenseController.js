@@ -125,6 +125,18 @@ exports.expense_create_post = [
                             if (err) {
                                 return next(err);
                             }
+                            async.parallel({
+                                expense_per_month: function (callback) {
+                                    expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                                        callback("", expensePerMonth);
+                                    })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        })
+                                },
+                            }, function (err, results) {
+                                req.app.io.emit('group update', results); //emit to everyone
+                            })
                             // Expense saved. Redirect to expense page.
                             res.redirect('/expense');
                         });
@@ -168,6 +180,18 @@ exports.expense_delete_post = function (req, res) {
                 return next(err);
             }
             // Success - go to expense list
+            async.parallel({
+                expense_per_month: function (callback) {
+                    expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                        callback("", expensePerMonth);
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                },
+            }, function (err, results) {
+                req.app.io.emit('group update', results); //emit to everyone
+            })
             res.redirect('/expense')
         })
     });
@@ -257,6 +281,18 @@ exports.expense_update_post = [
                 if (err) {
                     return next(err);
                 }
+                async.parallel({
+                    expense_per_month: function (callback) {
+                        expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                            callback("", expensePerMonth);
+                        })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    },
+                }, function (err, results) {
+                    req.app.io.emit('group update', results); //emit to everyone
+                })
                 // Successful - redirect to expense detail page.
                 res.redirect('/expense');
             });

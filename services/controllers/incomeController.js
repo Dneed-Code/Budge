@@ -5,6 +5,7 @@ const transaction_logic = require('../../domain/app/incomeLogic');
 const {body, validationResult} = require('express-validator');
 const async = require('async');
 const mongoose = require('mongoose');
+const expense_logic = require("../../domain/app/expenseLogic");
 const ObjectId = mongoose.Types.ObjectId;
 
 
