@@ -9,7 +9,7 @@ var NotificationSchema = new Schema(
         date_time: {type: Date},
         user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
         user_group: {type: Schema.Types.ObjectId, ref: 'UserGroup', required: true},
-        colours: {type: String}
+
     }
 );
 
