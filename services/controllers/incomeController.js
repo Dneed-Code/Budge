@@ -139,12 +139,8 @@ exports.income_create_post = [
                                 },
                             }, function (err, results) {
                                 req.app.io.emit('group update', results); //emit to everyone
-
-
                             });
-
                         });
-
                     }
                 })
             var dateNow = new Date();
@@ -162,6 +158,7 @@ exports.income_create_post = [
                 if (err) {
                     return next(err);
                 } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
                     res.redirect('/income');
                 }
 
@@ -217,7 +214,7 @@ exports.income_delete_post = function (req, res) {
             if (err) {
                 return next(err);
             } else {
-
+                req.app.io.emit('notification', notification); //emit to everyone
             }
 
         });
@@ -358,6 +355,7 @@ exports.income_update_post = [
                 if (err) {
                     return next(err);
                 } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
                     res.redirect('/income');
                 }
 

@@ -33,7 +33,7 @@ exports.index = function (req, res, next) {
                     console.log(err);
                 })
         },notifications: function (callback) {
-            Notification.find({user_group: req.user.user_group}, callback).populate('user');
+            Notification.find({user_group: req.user.user_group}, callback).populate('user').sort('-date_time');
         },
         user_group: function (callback) {
             UserGroup.findById(req.user.user_group, callback);
