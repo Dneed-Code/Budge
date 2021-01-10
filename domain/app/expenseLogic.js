@@ -1,11 +1,23 @@
+/**
+ * Expense logic:
+ * Logic for handling the expense transaction within the expense controller
+ */
+
+/**
+ * Dependencies
+ * Expense = our expense model
+ * User = our user model
+ * Moment = a library for formatting dates
+ * Mongoose = ORM
+ */
 const Expense = require('../../domain/models/Transaction');
 const User = require('../../domain/models/User')
 var moment = require('moment');
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
 
-// Count the number of expenses
-// TODO: Make this only count the current users group
+/**
+ * Counts the number of expenses in this user group
+ */
 exports.countExpenses = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -19,8 +31,9 @@ exports.countExpenses = function (callback, userGroup) {
     });
 }
 
-// List the all the expenses
-// TODO: Make this only list the expenses from the current users group
+/**
+ * Returns a list of all expenses in this user group (can be interpreted as JSON)
+ */
 exports.listExpenses = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -36,8 +49,9 @@ exports.listExpenses = function (callback, userGroup) {
         console.log(err);
     });
 }
-// List the all the active expenses
-// TODO: Make this only list the expenses from the current users group
+/**
+ * Returns a list of all active expenses in this user group (can be interpreted as JSON)
+ */
 exports.listActiveExpenses = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -54,9 +68,9 @@ exports.listActiveExpenses = function (callback, userGroup) {
         console.log(err);
     });
 }
-
-// Calculate the Expense per month of all the cumulative expenses in the list
-// TODO: Make this only calculate the expenses from the current users group
+/**
+ * Returns a list of all expenses in this user group for each month of the current year
+ */
 exports.getExpensePerMonth = function (userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
@@ -77,31 +91,27 @@ exports.getExpensePerMonth = function (userGroup) {
                 var startDate = new Date(dateNow.getFullYear(), 0);
                 var startDateMo = moment(startDate);
                 for (var j = 0; j < 12; j++) {
-
                     if (isNaN(monthlyExpenseData[getDictKey(startDate)])) {
                         thisYearExpense[j] = 0;
                     } else {
                         thisYearExpense[j] = monthlyExpenseData[getDictKey(startDate)];
                     }
-
                     startDateMo.add(1, 'months');
                     startDate = new Date(startDateMo);
                 }
-
-
                 resolve(thisYearExpense);
             }).catch((err) => {
                 console.log(err);
             });
         }).catch((err) => {
             console.log(err);
-
         });
     });
 }
 
-// Calculate the expense of the current month
-// TODO: Make this user/usergroup specific
+/**
+ * Returns the expenses for the current month
+ */
 exports.getExpenseCurrentMonth = function getExpenseCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
         var userIds = [];
@@ -131,8 +141,9 @@ exports.getExpenseCurrentMonth = function getExpenseCurrentMonth(userGroup) {
     });
 }
 
-// Calculate the change in expense between last month and this month
-// TODO: Make this user/usergroup specific
+/**
+ * Returns the change in expenses from last month to current month
+ */
 exports.getChange = function getChange(userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
@@ -153,14 +164,18 @@ exports.getChange = function getChange(userGroup) {
     });
 }
 
-// Get Start dates day of the Month as this will be date paid
+/**
+ * Returns the start date of the transaction as this will be the date paid
+ */
 exports.getDatePaid = function getDatePaid(startDate) {
     var startDate = new Date(startDate);
     var datePaid = startDate.getDate();
     return datePaid;
 }
 
-// Get status (If its an expense still being received or not)
+/**
+ * Returns the status of the transaction i.e. whether its active or not
+ */
 exports.getStatus = function getStatus(startDateInput, endDateInput) {
     var status;
     var currentDate = new Date();
@@ -179,7 +194,9 @@ exports.getStatus = function getStatus(startDateInput, endDateInput) {
     return status;
 }
 
-// Create a string message that conveys the change in expense from last month to the current month
+/**
+ * Returns the change in expenses from last month to current month in a string format consumable for front end
+ */
 function constructChangeMessage(monthlyExpenseData) {
     var dateNow = new Date();
     var lastMonthMo = moment(dateNow);
@@ -198,7 +215,9 @@ function constructChangeMessage(monthlyExpenseData) {
     return change;
 }
 
-// Calculate the Monthly Expense Data
+/**
+ * Returns the transaction data from each contributing expense and assigns them their month in a dictionary
+ */
 function getMonthlyExpenseData(expenseData, doc) {
 
     // For each Expense
@@ -216,25 +235,16 @@ function getMonthlyExpenseData(expenseData, doc) {
                 var newAmount = expenseData[getDictKey(startDate)] + doc[i].amount;
                 expenseData[getDictKey(startDate)] = newAmount;
             }
-
             startDateMo.add(1, 'months');
             startDate = new Date(startDateMo);
         }
     }
-
-    //
-    //
-    //
-    // for (var i = 0; i < doc.length; i++) {
-
-    //     for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-    //         expenseData[j] += doc[i].amount;
-    //     }
-    // }
     return expenseData;
 }
 
-// Calculate the difference in months from the start date of the transaction to the end date of the transaction
+/**
+ * Calculate the difference in months from the start date of the transaction to the end date of the transaction
+ */
 function monthDiff(d1, d2) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
@@ -243,7 +253,9 @@ function monthDiff(d1, d2) {
     return months <= 0 ? 1 : months;
 }
 
-// Get date key for dictionary
+/**
+ * Calculate the date key for dictionary
+ */
 function getDictKey(date) {
     var key = date.toLocaleString('default', {month: 'short'}) + " " + date.getFullYear();
     return key;
