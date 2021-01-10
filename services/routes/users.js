@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
 router.post('/register', (req, res) => {
     const {firstName, lastName, email, password, password2, userGroupName, userGroupPassword} = req.body;
     let errors = [];
-    var lowerCaseUserGroupName = userGroupName.toLowerCase();
+
     var lowerCaseEmail = email.toLowerCase();
     console.log(' Name ' + firstName + ' email :' + lowerCaseEmail + ' pass:' + password + 'ugpw' + userGroupPassword);
     if (!firstName || !lastName || !lowerCaseEmail || !password || !password2 || !userGroupName || !userGroupPassword) {
@@ -33,8 +33,10 @@ router.post('/register', (req, res) => {
 
 // Check if its an existing user group
     var userGroupId;
-    UserGroup.findOne({name: lowerCaseUserGroupName}).exec((err, userGroup) => {
+    // var lowerCaseUserGroupName = userGroupName.toLowerCase();
+    UserGroup.findOne({name: userGroupName}).exec((err, userGroup) => {
         if (userGroup) {
+            console.log(userGroup);
             if (userGroup.password === userGroupPassword) {
                 userGroupId = userGroup;
             } else if (userGroup.password !== userGroupPassword) {

@@ -1,7 +1,8 @@
 <!--<p></p>-->
 <!--<a href="/users/logout">Logout</a>-->
-<div class="row col-equal-height">
+<div class="row col-equal-height ">
     <div class="col-9 ">
+        <div id="mainrow">
         <div class="row col-equal-height mb-4 ">
             <div class="col-md-6">
                 <div class="card tile">
@@ -30,6 +31,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row col-equal-height">
             <div class="col-md-12">
                 <div class="card tile">
@@ -40,9 +42,9 @@
             </div>
         </div>
     </div>
+    </div>
     <div class="col-3">
-
-        <div class="card tile">
+        <div class="card tile recent-container">
             <div class="card-body">
                 <div class="widget-heading">
                     <h5 class="border-bottom ">Recent Activity</h5>
@@ -70,6 +72,7 @@
         <script>
 
 
+
             var income = [{{data.income_per_month}}];
             var expense = [{{data.expense_per_month}}];
 
@@ -89,7 +92,10 @@
             $(window).on('load', function (e) {
                 $('#expense_total').html('£' + Math.round(expense.reduce((a, b) => a + b, 0)));
                 $('#income_total').html('£' + Math.round(income.reduce((a, b) => a + b, 0)));
+                $('.recent-container').css('height', $('#mainrow').height());
 
+                const ps = new PerfectScrollbar('.recent-container');
+                const psfull = new PerfectScrollbar('#main-section');
                 window.dispatchEvent(new Event('resize'));
 
             });

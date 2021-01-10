@@ -290,6 +290,8 @@ a.article:hover {
 section#main-section {
   padding: 30px !important;
   //padding-bottom: 10px !important;
+  position: relative;
+  height: 90vh;
 }
 
 .tile {
