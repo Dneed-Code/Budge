@@ -30,16 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app/mongooseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/mongooseConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app/sockets.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/sockets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/passport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/app/expenseLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/domain/app/expenseLogic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/apex-widgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/apex-widgets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/apexcharts.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/apexcharts.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/datatables.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/datatables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,13 +123,6 @@
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
       <workItem from="1610155200309" duration="39747000" />
-    </task>
-    <task id="LOCAL-00018" summary="Controller income index and list now working correctly">
-      <created>1608173834537</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1608173834537</updated>
     </task>
     <task id="LOCAL-00019" summary="Expense controller and route and view added with simple implementation (mostly dummy)">
       <created>1608227142443</created>
@@ -476,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610260920759</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Commenting application and refactoring js directory">
+      <created>1610283380621</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1610283380621</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +498,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="layout link to dashboard updated" />
     <MESSAGE value="UI for login elements" />
     <MESSAGE value="registration ui implemented and already registered logic implemented" />
     <MESSAGE value="emails no longer case sensitive" />
@@ -532,7 +522,8 @@
     <MESSAGE value="scrollbars implemented" />
     <MESSAGE value="removed native y scroll" />
     <MESSAGE value="web sockets for income notifications added" />
-    <option name="LAST_COMMIT_MESSAGE" value="web sockets for income notifications added" />
+    <MESSAGE value="Commenting application and refactoring js directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commenting application and refactoring js directory" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
