@@ -32,12 +32,14 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apex-widgets.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/libraries/apexcharts.css">
+    <link rel="stylesheet" href="/stylesheets/libraries/perfect-scrollbar.css">
 
     <script src="javascripts/apexcharts.min.js"></script>
     <script src="javascripts/apex-widgets.js"></script>
     <script src="javascripts/cashflow-chart.js"></script>
     <script src="javascripts/transaction-chart.js"></script>
     <script src="javascripts/dashboard-income.js"></script>
+    <script src="javascripts/libraries/perfect-scrollbar.js"></script>
 
 
     <!-- Socket IO-->
@@ -87,18 +89,18 @@
 <!--                    <span>Liabilities</span>-->
 <!--                </a>-->
 <!--            </li>-->
-            <li>
-                <a href="#">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Reports</span>
-                </a>
-            </li>
-            <li class="{{#if chat}}active{{/if}}">
-                <a href="/chat">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Group Chat</span>
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fas fa-file-invoice-dollar"></i>-->
+<!--                    <span>Reports</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="{{#if chat}}active{{/if}}">-->
+<!--                <a href="/chat">-->
+<!--                    <i class="fas fa-chart-bar"></i>-->
+<!--                    <span>Group Chat</span>-->
+<!--                </a>-->
+<!--            </li>-->
         </ul>
     </nav>
 
@@ -117,15 +119,16 @@
                     <div id="rightElemenets">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{user.first_name}} {{user.last_name}} - {{data.user_group.name}} <span class="chevron"><i
-                                        class="fas fa-chevron-down"></i></span></a>
+                                <a class="nav-link" href="#">{{user.first_name}} {{user.last_name}} - {{data.user_group.name}}
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="padding-left: 0 !important;"><img
-                                        src="/images/notification.png"/></a>
+                                <a class="nav-link" href="/users/logout" style="padding-left: 0 !important;">
+                                <button class="btn btn-primary" style="padding: 3px">Log Out</button>
+                                </a>
                             </li>
                             <li class="nav-item">
-                               <img src="/images/placeholder.jpg" class="profile-icon" onclick="openProfilePopUp()"/>
+                               <img src="https://eu.ui-avatars.com/api/?name={{user.first_name}}+{{user.last_name}}&background={{user.colour}}&rounded=true&size=40&bold=true" class="mt-2"/>
                             </li>
                         </ul>
                     </div>

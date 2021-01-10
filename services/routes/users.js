@@ -9,10 +9,13 @@ const passport = require('passport');
 router.get('/login', (req, res) => {
     res.render('login', {layout: 'pre-main', title: 'Login'});
 })
+
+
+
 router.post('/register', (req, res) => {
     const {firstName, lastName, email, password, password2, userGroupName, userGroupPassword} = req.body;
     let errors = [];
-    var lowerCaseUserGroupName = userGroupName.toLowerCase();
+
     var lowerCaseEmail = email.toLowerCase();
     console.log(' Name ' + firstName + ' email :' + lowerCaseEmail + ' pass:' + password + 'ugpw' + userGroupPassword);
     if (!firstName || !lastName || !lowerCaseEmail || !password || !password2 || !userGroupName || !userGroupPassword) {
@@ -30,8 +33,10 @@ router.post('/register', (req, res) => {
 
 // Check if its an existing user group
     var userGroupId;
-    UserGroup.findOne({name: lowerCaseUserGroupName}).exec((err, userGroup) => {
+    // var lowerCaseUserGroupName = userGroupName.toLowerCase();
+    UserGroup.findOne({name: userGroupName}).exec((err, userGroup) => {
         if (userGroup) {
+            console.log(userGroup);
             if (userGroup.password === userGroupPassword) {
                 userGroupId = userGroup;
             } else if (userGroup.password !== userGroupPassword) {
@@ -92,11 +97,12 @@ router.post('/register', (req, res) => {
 
             } else {
                 const newUser = new User({
-                    first_name: firstName,
-                    last_name: lastName,
+                    first_name: toTitleCase(firstName),
+                    last_name: toTitleCase(lastName),
                     email_address: lowerCaseEmail,
                     password: password,
-                    user_group: userGroupId
+                    user_group: userGroupId,
+                    colour: getRandomColor()
                 });
 
                 //hash password
@@ -129,9 +135,23 @@ router.post('/login', emailToLowerCase, (req, res, next) => {
     })(req, res, next);
 })
 
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
 function emailToLowerCase(req, res, next) {
     req.body.email = req.body.email.toLowerCase();
     next();
+}
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 // logout

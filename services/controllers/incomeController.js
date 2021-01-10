@@ -1,10 +1,12 @@
 const User = require('../../domain/models/User');
 const UserGroup = require('../../domain/models/UserGroup');
 const Income = require('../../domain/models/Transaction');
+const Notification = require('../../domain/models/Notification');
 const transaction_logic = require('../../domain/app/incomeLogic');
 const {body, validationResult} = require('express-validator');
 const async = require('async');
 const mongoose = require('mongoose');
+const expense_logic = require("../../domain/app/expenseLogic");
 const ObjectId = mongoose.Types.ObjectId;
 
 
@@ -126,12 +128,45 @@ exports.income_create_post = [
                                 return next(err);
                             }
                             // Income saved. Redirect to income page.
-                            res.redirect('/income');
+                            async.parallel({
+                                income_per_month: function (callback) {
+                                    transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                                        callback("", incomePerMonth);
+                                    })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        })
+                                },
+                            }, function (err, results) {
+                                req.app.io.emit('group update', results); //emit to everyone
+                            });
                         });
                     }
-                });
+                })
+            var dateNow = new Date();
+            var notification = new Notification(
+                {
+                    title: "New Income added",
+                    user: req.user,
+                    user_group: req.user.user_group,
+                    date_time: dateNow,
+                    description: req.user.first_name + " " + req.user.last_name + " has added an income, the source is " + income.source
+                }
+            );
+
+            notification.save(function (err) {
+                if (err) {
+                    return next(err);
+                } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
+                    res.redirect('/income');
+                }
+
+            });
         }
-    }];
+    }
+]
+
 
 // Display income delete form on GET.
 exports.income_delete_get = function (req, res, next) {
@@ -147,6 +182,7 @@ exports.income_delete_get = function (req, res, next) {
             res.redirect('/incomes');
         }
         // Successful, so render.
+
         res.render('income_delete', {title: 'Delete Income', income: results.income});
     });
 };
@@ -163,11 +199,42 @@ exports.income_delete_post = function (req, res) {
         }
         // Success
         // Income has no dependants. Delete object and redirect to the list of incomes.
+        var dateNow = new Date();
+        var notification = new Notification(
+            {
+                title: "Income Deleted",
+                user: req.user,
+                user_group: req.user.user_group,
+                date_time: dateNow,
+                description: req.user.first_name + " " + req.user.last_name + " Has deleted an income, the source was " + results.income.source
+            }
+        );
+
+        notification.save(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                req.app.io.emit('notification', notification); //emit to everyone
+            }
+
+        });
         Income.findByIdAndRemove(req.params.id, function deleteIncome(err) {
             if (err) {
                 return next(err);
             }
             // Success - go to income list
+            async.parallel({
+                income_per_month: function (callback) {
+                    transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                        callback("", incomePerMonth);
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                },
+            }, function (err, results) {
+                req.app.io.emit('group update', results); //emit to everyone
+            })
             res.redirect('/income')
         })
     });
@@ -257,8 +324,41 @@ exports.income_update_post = [
                 if (err) {
                     return next(err);
                 }
+
+                async.parallel({
+                    income_per_month: function (callback) {
+                        transaction_logic.getIncomePerMonth(req.user.user_group).then(function (incomePerMonth) {
+                            callback("", incomePerMonth);
+                        })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    },
+                }, function (err, results) {
+                    req.app.io.emit('group update', results); //emit to everyone
+                })
                 // Successful - redirect to income detail page.
-                res.redirect('/income');
+
+            });
+            var dateNow = new Date();
+            var notification = new Notification(
+                {
+                    title: "Income updated",
+                    user: req.user,
+                    user_group: req.user.user_group,
+                    date_time: dateNow,
+                    description: req.user.first_name + " " + req.user.last_name + " has updated an income, the source is " + income.source
+                }
+            );
+
+            notification.save(function (err) {
+                if (err) {
+                    return next(err);
+                } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
+                    res.redirect('/income');
+                }
+
             });
         }
     }
