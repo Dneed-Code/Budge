@@ -29,25 +29,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/presentation/views/partials/dependencies.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/app/incomeLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/domain/app/incomeLogic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/dashboard-income.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard-income.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/libraries/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/transaction-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/transaction-chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/chat.hbs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/pre-main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/pre-main.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/partials/editExpense.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/editExpense.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/partials/editIncome.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/editIncome.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/controllers/chatController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/routes/chat.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,13 +122,6 @@
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
       <workItem from="1610155200309" duration="39747000" />
-    </task>
-    <task id="LOCAL-00020" summary="income controller can now post (some hardcoded values)">
-      <created>1608246696259</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1608246696259</updated>
     </task>
     <task id="LOCAL-00021" summary="Deleting Income controllers implemented">
       <created>1608556538654</created>
@@ -483,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610283759126</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Code cleanup complete">
+      <created>1610297930130</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1610297930130</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,7 +497,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="registration ui implemented and already registered logic implemented" />
     <MESSAGE value="emails no longer case sensitive" />
     <MESSAGE value="Only incomes in your group are showing now" />
     <MESSAGE value="user now being displayed when logged in, in top right" />
@@ -539,7 +521,8 @@
     <MESSAGE value="web sockets for income notifications added" />
     <MESSAGE value="Commenting application and refactoring js directory" />
     <MESSAGE value="further refactoring js directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="further refactoring js directory" />
+    <MESSAGE value="Code cleanup complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup complete" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
