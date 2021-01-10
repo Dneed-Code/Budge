@@ -159,6 +159,7 @@ exports.expense_create_post = [
             if (err) {
                 return next(err);
             } else {
+                req.app.io.emit('notification', notification); //emit to everyone
                 res.redirect('/expense');
             }
 
@@ -210,6 +211,7 @@ exports.expense_delete_post = function (req, res) {
             if (err) {
                 return next(err);
             } else {
+                req.app.io.emit('notification', notification); //emit to everyone
                 res.redirect('/expense');
             }
 
@@ -351,6 +353,7 @@ exports.expense_update_post = [
                 if (err) {
                     return next(err);
                 } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
                     res.redirect('/expense');
                 }
 

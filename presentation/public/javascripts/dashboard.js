@@ -31,7 +31,7 @@ socket.on('group update', function (data) {
 socket.on('notification', function (data) {
     //toastr.info('Rog Wood has updated an Income, please refresh the page to see these changes reflected!', 'User Group Data Update');
     console.log(getNotificationString(data));
-    $( ".widget-heading" ).append(getNotificationString(data));
+    $( ".widget-heading" ).first().after(getNotificationString(data));
 
 });
 
@@ -97,7 +97,7 @@ function newAnnotations() {
     })
 }
 function getNotificationString(data) {
-    var notificationString = '<div class="row"> <div class="col-9"><p style="margin-bottom: 1px">' + data.title + '</p><p style="margin-bottom: 1px">' + getDateFormat(data.date_time) + '</p></div><div class="col-3"> <img src="https://eu.ui-avatars.com/api/?name=' + data.user.first_name +'+'+ data.user.last_name + '&background=' + data.user.colour + '&rounded=true&size=40&bold=true" alt="" id="recent-avatars"> </div> </div> <div class="row"> <div class="col-12"> <p class="noti-desc">' + data.description + '</p> </div> </div>';
+    var notificationString = '<div class="row" id="notification-row"> <div class="col-9"><p style="margin-bottom: 1px">' + data.title + '</p><p style="margin-bottom: 1px">' + getDateFormat(data.date_time) + '</p></div><div class="col-3"> <img src="https://eu.ui-avatars.com/api/?name=' + data.user.first_name +'+'+ data.user.last_name + '&background=' + data.user.colour + '&rounded=true&size=40&bold=true" alt="" id="recent-avatars"> </div> </div> <div class="row"> <div class="col-12"> <p class="noti-desc">' + data.description + '</p> </div> </div>';
     return notificationString
 }
 function getDateFormat(date){
