@@ -1,4 +1,6 @@
-
+/**
+ * Get options for our Expense Apex chart (Preconfigured)
+ */
 function getTransOptions(transaction_data, transaction_string, transaction_colour) {
     var options1 = {
         chart: {

@@ -26,7 +26,6 @@ var incomesRouter = require('./services/routes/incomes');
 var expensesRouter = require('./services/routes/expenses');
 var usersRouter = require('./services/routes/users');
 var userGroupsRouter = require('./services/routes/userGroups');
-var chatRouter = require('./services/routes/chat');
 
 // Use body parser
 app.use(bodyParser.json());
@@ -84,7 +83,6 @@ app.use('/income', incomesRouter);
 app.use('/expense', expensesRouter);
 app.use('/users', usersRouter);
 app.use('/userGroups', userGroupsRouter);
-app.use('/chat', chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

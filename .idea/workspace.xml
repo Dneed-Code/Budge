@@ -29,9 +29,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/presentation/views/partials/dependencies.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/viewEngineHelpersConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/app/incomeLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/domain/app/incomeLogic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/dashboard-income.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard-income.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/libraries/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/transaction-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/transaction-chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/chat.hbs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/pre-main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/pre-main.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/partials/editExpense.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/editExpense.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/partials/editIncome.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/editIncome.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/controllers/chatController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/routes/chat.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +92,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts\libraries" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets\libraries" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets\libraries" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts\libraries" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\apex-widgets" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\views\partials" />
@@ -123,13 +139,6 @@
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
       <workItem from="1610155200309" duration="39747000" />
-    </task>
-    <task id="LOCAL-00019" summary="Expense controller and route and view added with simple implementation (mostly dummy)">
-      <created>1608227142443</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1608227142443</updated>
     </task>
     <task id="LOCAL-00020" summary="income controller can now post (some hardcoded values)">
       <created>1608246696259</created>
@@ -467,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610283380621</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="further refactoring js directory">
+      <created>1610283759126</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1610283759126</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +514,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UI for login elements" />
     <MESSAGE value="registration ui implemented and already registered logic implemented" />
     <MESSAGE value="emails no longer case sensitive" />
     <MESSAGE value="Only incomes in your group are showing now" />
@@ -523,7 +538,8 @@
     <MESSAGE value="removed native y scroll" />
     <MESSAGE value="web sockets for income notifications added" />
     <MESSAGE value="Commenting application and refactoring js directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commenting application and refactoring js directory" />
+    <MESSAGE value="further refactoring js directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="further refactoring js directory" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -543,6 +559,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="393" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1608685113911" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610297867398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610297867398" />
     <state x="629" y="298" width="662" height="640" key="EditFileWatcherDialog" timestamp="1605214117682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -551,37 +571,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605380205858" />
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom" timestamp="1610283186307">
+    <state width="1899" height="411" key="GridCell.Tab.0.bottom" timestamp="1610292069129">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283186307" />
+    <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610292069129" />
     <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="411" key="GridCell.Tab.0.center" timestamp="1610283186306">
+    <state width="1899" height="411" key="GridCell.Tab.0.center" timestamp="1610292069128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283186306" />
+    <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610292069128" />
     <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="411" key="GridCell.Tab.0.left" timestamp="1610283186306">
+    <state width="1899" height="411" key="GridCell.Tab.0.left" timestamp="1610292069128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283186306" />
+    <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610292069128" />
     <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619726" />
-    <state width="1899" height="411" key="GridCell.Tab.0.right" timestamp="1610283186307">
+    <state width="1899" height="411" key="GridCell.Tab.0.right" timestamp="1610292069129">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283186307" />
+    <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610292069129" />
     <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1610010806991">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -652,12 +672,12 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1609996532260" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610179059979">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610283763447">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609055859351" />
     <state x="-1368" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1609565077547" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610179059979" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283763447" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609917181733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

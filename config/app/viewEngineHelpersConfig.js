@@ -19,7 +19,7 @@ var moment = require('moment'); // require
 var DateFormats = {
     year: "YYYYMMDD",
     short: "DD MMMM - YYYY",
-    long: "dddd DD.MM.YYYY HH:mm"
+    long: "dddd DD MMMM HH:mm"
 };
 
 /**

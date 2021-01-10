@@ -5,6 +5,10 @@ $base-color-sidenav-text: #506690;
 $base-color-text: #e0e6ed;
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+/* ---------------------------------------------------
+    Generic styling
+----------------------------------------------------- */
 body {
   background: $base-color-body;
   overflow-y: hidden;
@@ -28,7 +32,9 @@ a:focus {
   text-decoration: none;
   transition: all 0.3s;
 }
-
+/* ---------------------------------------------------
+    Navigation Styles
+----------------------------------------------------- */
 .navbar {
   border: none;
   height: 58px;
@@ -63,7 +69,7 @@ span a {
 }
 
 /* ---------------------------------------------------
-    SIDEBAR STYLE
+    Side navigation styling
 ----------------------------------------------------- */
 
 .wrapper {
@@ -220,7 +226,7 @@ a.article:hover {
 }
 
 /* ---------------------------------------------------
-    TOP NAV STYLE
+    Top Navigation styling
 ----------------------------------------------------- */
 .top-nav {
   width: 100%;
@@ -278,7 +284,7 @@ a.article:hover {
 }
 
 /* ---------------------------------------------------
-    CONTENT STYLE
+    Content Styling
 ----------------------------------------------------- */
 
 #content {
@@ -301,7 +307,7 @@ section#main-section {
 }
 
 /* ---------------------------------------------------
-    BUTTONS
+    Button Styling
 ----------------------------------------------------- */
 
 .btn-info {
@@ -310,7 +316,7 @@ section#main-section {
 }
 
 /* ---------------------------------------------------
-    MEDIAQUERIES
+    Media Queries
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -361,6 +367,9 @@ section#main-section {
   }
 }
 
+/* ---------------------------------------------------
+    Forms & associated buttons
+----------------------------------------------------- */
 .addButton {
   background: #288DB9;
   border-radius: 50px;
@@ -420,7 +429,6 @@ input[type=checkbox], input[type=radio] {
   margin-top: 10px;
   margin-left: 8px;
 }
-
 .modal-header {
   border-bottom: 1px solid $base-color-sidenav-text;
 }
