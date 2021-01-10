@@ -26,16 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/perfect-scrollbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/public/javascripts/libraries/perfect-scrollbar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/public/stylesheets/libraries/perfect-scrollbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/cashflow-chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/routes/users.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,14 +117,7 @@
       <workItem from="1609848656867" duration="28123000" />
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
-      <workItem from="1610155200309" duration="30964000" />
-    </task>
-    <task id="LOCAL-00015" summary="user group route and basic first pass post route">
-      <created>1607003704058</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1607003704058</updated>
+      <workItem from="1610155200309" duration="31061000" />
     </task>
     <task id="LOCAL-00016" summary="Posting of UserGroups, Users and Transactions now working (Backend)">
       <created>1607004383774</created>
@@ -471,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610211716337</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="scrollbars implemented">
+      <created>1610254693904</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1610254693904</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +493,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="redirect to login with success flash message 'now registered'" />
     <MESSAGE value="log in now correctly redirecting when valid or erroring when invalid" />
     <MESSAGE value="you now have to be authenticated to access pages, incomes added are now user specific" />
     <MESSAGE value="layout link to dashboard updated" />
@@ -527,7 +517,8 @@
     <MESSAGE value="users assigned colour at registration" />
     <MESSAGE value="temp log out button enabled" />
     <MESSAGE value="Notification set up for creation, deletion and update of income and expenses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Notification set up for creation, deletion and update of income and expenses" />
+    <MESSAGE value="scrollbars implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="scrollbars implemented" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
