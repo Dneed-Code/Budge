@@ -3,7 +3,7 @@ function getOptions(income, expense) {
     var options1 = {
         chart: {
             fontFamily: 'Nunito, sans-serif',
-            height: 430,
+            height: 510,
             type: 'area',
             zoom: {
                 enabled: false

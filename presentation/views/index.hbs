@@ -1,109 +1,63 @@
 <!--<p></p>-->
 <!--<a href="/users/logout">Logout</a>-->
-<div class="row col-equal-height mb-4 ">
-    <div class="col-md-4">
-        <div class="card tile">
-            <div class="row p-2">
-                <div class="col-8">
-                    <h5 class="pl-3">Total Income Post-Tax (Yearly)</h5>
+<div class="row col-equal-height ">
+    <div class="col-md-9 col-sm-12 ">
+        <div id="mainrow">
+            <div class="row col-equal-height mb-4 ">
+                <div class="col-md-6">
+                    <div class="card tile">
+                        <div class="row p-2">
+                            <div class="col-8">
+                                <h5 class="pl-3">Total Income Post-Tax (Yearly)</h5>
+                            </div>
+                            <div class="col-4">
+                                <p class="pr-2" id="income_total">18%</p>
+                            </div>
+                        </div>
+                        <div id="income_trend"></div>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <p class="pr-2" id="income_total">18%</p>
+                <div class="col-md-6">
+                    <div class="card tile">
+                        <div class="row p-2">
+                            <div class="col-9">
+                                <h5 class="pl-3">Total Cumulative Expenses (Yearly)</h5>
+                            </div>
+                            <div class="col-3">
+                                <p class="pr-2" id="expense_total"></p>
+                            </div>
+                        </div>
+                        <div id="expense_trend"></div>
+                    </div>
                 </div>
             </div>
-            <div id="income_trend"></div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card tile">
-            <div class="row p-2">
-                <div class="col-9">
-                    <h5 class="pl-3">Total Cumulative Expenses (Yearly)</h5>
-                </div>
-                <div class="col-3">
-                    <p class="pr-2" id="expense_total"></p>
-                </div>
-            </div>
-            <div id="expense_trend"></div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card tile">
-            <div class="card-body">
-                <div class="widget-heading">
-                    <h5 class="">Recent Activity</h5>
-                </div>
-                <div class="widget-content">
-                    <div class="mt-container mx-auto">
-                        <div class="timeline-line">
-                            <div class="item-timeline timeline-new">
-                                <h5>Income</h5>
-                                <p class="">06 Apr, 2020</p>
-                            </div>
-                            <p>Rog Wood Added an Income successfully</p>
-                            <div class="tags">
-                                <div class="badge badge-warning">Income</div>
-                                <div class="badge badge-primary">New</div>
-                            </div>
+
+            <div class="row col-equal-height">
+                <div class="col-md-12">
+                    <div class="card tile">
+                        <div class="card-body">
+                            <div id="chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row col-equal-height">
-    <div class="col-md-12">
-        <div class="card tile">
+    <div class="col-md-3 col-lg-3 col-sm-12">
+        <div class="card tile recent-container">
             <div class="card-body">
-                <div id="chart"></div>
+                <div class="widget-heading">
+                    <h5 class="border-bottom ">Recent Activity</h5>
+                </div>
+
+                {{#each data.notifications}}
+                    {{> notification data=this}}
+                {{/each}}
+
             </div>
         </div>
-    </div>
-</div>
-
-<script>
-    var income = [{{data.income_per_month}}];
-    var expense = [{{data.expense_per_month}}];
-
-
-
-    var options1 = getOptions(income, expense);
-    var cashflowchart = new ApexCharts(
-            document.querySelector("#chart"),
-            options1
-    );
-    cashflowchart.render();
-
-    var chart2 = new ApexCharts(document.querySelector("#income_trend"), getDIncomeOptions(income, 'Income', 'rgba(0, 199, 17)'));
-    chart2.render()
-    var chart3 = new ApexCharts(document.querySelector("#expense_trend"), getDIncomeOptions(expense, 'Expense', '#E64040'));
-    chart3.render()
-
-    $(window).on('load', function (e) {
-        $('#expense_total').html('£' + Math.round(expense.reduce((a, b) => a + b, 0)));
-        $('#income_total').html('£' + Math.round(income.reduce((a, b) => a + b, 0)));
-
-        window.dispatchEvent(new Event('resize'));
-
-    });
-
-
-    var socket = io();
-    socket.on('group update', function (data) {
-        toastr.info('Rog Wood has updated an Income, please refresh the page to see these changes reflected!', 'User Group Data Update');
-        console.log(data);
-        renderCharts(data);
-    });
-
-    function renderCharts(data) {
-        cashflowchart.updateSeries([{
-            name: 'Income',
-            data: data.income_per_month
-        }, {
-            name: 'Expenses',
-            data: data.expense_per_month
-        }])
-    }
-
-</script>
+        <script>
+            var income = [{{data.income_per_month}}];
+            var expense = [{{data.expense_per_month}}];
+        </script>
+<script src="javascripts/dashboard.js"/>

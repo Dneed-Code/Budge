@@ -1,6 +1,7 @@
 const User = require('../../domain/models/User');
 const UserGroup = require('../../domain/models/UserGroup');
 const Expense = require('../../domain/models/Transaction');
+const Notification = require('../../domain/models/Notification');
 const expense_logic = require('../../domain/app/expenseLogic');
 const {body, validationResult} = require('express-validator');
 const async = require('async');
@@ -125,12 +126,44 @@ exports.expense_create_post = [
                             if (err) {
                                 return next(err);
                             }
+                            async.parallel({
+                                expense_per_month: function (callback) {
+                                    expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                                        callback("", expensePerMonth);
+                                    })
+                                        .catch((err) => {
+                                            console.log(err);
+                                        })
+                                },
+                            }, function (err, results) {
+                                req.app.io.emit('group update', results); //emit to everyone
+                            })
                             // Expense saved. Redirect to expense page.
-                            res.redirect('/expense');
+
                         });
                     }
                 });
         }
+        var dateNow = new Date();
+        var notification = new Notification(
+            {
+                title: "New Expense added",
+                user: req.user,
+                user_group: req.user.user_group,
+                date_time: dateNow,
+                description: req.user.first_name + " " + req.user.last_name + " has added an expense, the source is " + expense.source
+            }
+        );
+
+        notification.save(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                req.app.io.emit('notification', notification); //emit to everyone
+                res.redirect('/expense');
+            }
+
+        });
     }];
 
 // Display expense delete form on GET.
@@ -163,14 +196,47 @@ exports.expense_delete_post = function (req, res) {
         }
         // Success
         // Expense has no dependants. Delete object and redirect to the list of expenses.
+        var dateNow = new Date();
+        var notification = new Notification(
+            {
+                title: "Expense Deleted",
+                user: req.user,
+                user_group: req.user.user_group,
+                date_time: dateNow,
+                description: req.user.first_name + " " + req.user.last_name + " has deleted an expense, the source was " + results.expense.source
+            }
+        );
+
+        notification.save(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                req.app.io.emit('notification', notification); //emit to everyone
+                res.redirect('/expense');
+            }
+
+        });
         Expense.findByIdAndRemove(req.params.id, function deleteExpense(err) {
             if (err) {
                 return next(err);
             }
             // Success - go to expense list
-            res.redirect('/expense')
+            async.parallel({
+                expense_per_month: function (callback) {
+                    expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                        callback("", expensePerMonth);
+                    })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                },
+            }, function (err, results) {
+                req.app.io.emit('group update', results); //emit to everyone
+            })
+
         })
     });
+
 };
 
 // Display expense update form on GET.
@@ -257,8 +323,40 @@ exports.expense_update_post = [
                 if (err) {
                     return next(err);
                 }
+                async.parallel({
+                    expense_per_month: function (callback) {
+                        expense_logic.getExpensePerMonth(req.user.user_group).then(function (expensePerMonth) {
+                            callback("", expensePerMonth);
+                        })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    },
+                }, function (err, results) {
+                    req.app.io.emit('group update', results); //emit to everyone
+                })
                 // Successful - redirect to expense detail page.
-                res.redirect('/expense');
+
+            });
+            var dateNow = new Date();
+            var notification = new Notification(
+                {
+                    title: "Expense updated",
+                    user: req.user,
+                    user_group: req.user.user_group,
+                    date_time: dateNow,
+                    description: req.user.first_name + " " + req.user.last_name + " has updated an expense, the source is " + expense.source
+                }
+            );
+
+            notification.save(function (err) {
+                if (err) {
+                    return next(err);
+                } else {
+                    req.app.io.emit('notification', notification); //emit to everyone
+                    res.redirect('/expense');
+                }
+
             });
         }
     }

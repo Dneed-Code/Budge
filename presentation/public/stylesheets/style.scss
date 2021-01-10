@@ -7,7 +7,7 @@ $base-color-text: #e0e6ed;
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
   background: $base-color-body;
-  overflow-x: hidden;
+  overflow-y: hidden;
 
 }
 h1,h4,h5,.modal-title {
@@ -290,6 +290,8 @@ a.article:hover {
 section#main-section {
   padding: 30px !important;
   //padding-bottom: 10px !important;
+  position: relative;
+  height: 90vh;
 }
 
 .tile {
@@ -434,3 +436,12 @@ input[type=checkbox], input[type=radio] {
 .dataHover:hover{
   background-color: rgba(77, 87, 96, 0.52) !important;
 }
+.widget-content {
+  padding: 0 8px 0 20px;
+}
+p.noti-desc {
+  font-size: 0.9em !important;
+  color: #288db9 !important;
+}
+
+
