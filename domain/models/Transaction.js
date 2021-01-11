@@ -14,8 +14,8 @@ var TransactionSchema = new Schema(
         },
         source: {type: String, required: true, maxlength: 25},
         date_paid: {type: Number, maxlength: 15},
-        start_date: {type: Date},
-        end_date: {type: Date},
+        start_date: {type: Date , default: Date.now},
+        end_date: {type: Date, default: Date.now},
         amount: {type: Number, maxlength: 15},
         status: {type: Boolean, required: true, maxlength: 15},
     }

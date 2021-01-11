@@ -107,20 +107,21 @@ exports.getIncomePerMonth = function (userGroup) {
                 console.log(err);
             });
         }).catch((err) => {
-            console.log(err);
+            //console.log(err);
 
         });
     });
 }
 
 /**
- * Returns the expenses for the current month
+ * Returns the incomes for the current month
  */
 exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
         var userIds = [];
         const users = User.find({user_group: userGroup});
-        users.then(function (doc) {
+         users.then(function (doc) {
+             console.log(doc);
             for (var i = 0; i < doc.length; i++) {
                 userIds.push(doc[i]._id.toString());
             }
@@ -132,17 +133,23 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
             incomes.then(function (doc) {
                 monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
                 var dateNow = new Date();
-                var currentMonth = dateNow;
-                console.log(doc);
-                resolve(monthlyIncomeData[getDictKey(currentMonth)]);
+                var data = monthlyIncomeData[getDictKey(dateNow)]
+                resolve(data);
             }).catch((err) => {
                 console.log(err);
+                reject(err);
             });
-            console.log(userIds);
-        }).catch((err) => {
-            console.log(err);
-        });
+             console.log(doc);
+         }).catch((err) => {
+             reject(err);
+         });
     });
+}
+
+exports.test = function test(){
+    return new Promise(function (resolve, reject){
+      resolve('100');
+    })
 }
 
 /**
