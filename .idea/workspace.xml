@@ -30,11 +30,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/login.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/login.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/partials/dependencies.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/dependencies.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/expense.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/expense.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/income.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/income.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,13 +127,7 @@
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
       <workItem from="1610155200309" duration="39747000" />
-    </task>
-    <task id="LOCAL-00022" summary="Adding example chart.js elements to income">
-      <created>1608603273052</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1608603273052</updated>
+      <workItem from="1610348420699" duration="2849000" />
     </task>
     <task id="LOCAL-00023" summary="Major overhaul of styling for Budge, new colour scheme and datatables styling">
       <created>1608695361062</created>
@@ -470,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610298068441</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Changes to dashboard responsiveness">
+      <created>1610306540168</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1610306540168</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,7 +503,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Only incomes in your group are showing now" />
     <MESSAGE value="user now being displayed when logged in, in top right" />
     <MESSAGE value="dashboard now loading user correctly" />
     <MESSAGE value="can have income be the same day" />
@@ -526,7 +527,8 @@
     <MESSAGE value="further refactoring js directory" />
     <MESSAGE value="Code cleanup complete" />
     <MESSAGE value="log out button styling changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="log out button styling changed" />
+    <MESSAGE value="Changes to dashboard responsiveness" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to dashboard responsiveness" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -659,12 +661,12 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1609996532260" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610283763447">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610306752535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609055859351" />
     <state x="-1368" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1609565077547" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610283763447" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610306752535" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609917181733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -326,6 +326,21 @@ section#main-section {
     text-align: center;
     margin-left: -80px !important;
   }
+
+  @media (max-width: 600px) {
+.small-dt{
+display: none}
+  }
+  @media (min-width: 600px) {
+    .small-dt{
+      }
+  }
+
+  @media only screen and (min-width: 995px) and (max-width: 1200px){
+    #recent-avatars {
+      display: none;
+    }
+  }
   .dropdown-toggle::after {
     top: auto;
     bottom: 10px;
@@ -451,11 +466,7 @@ p.noti-desc {
   font-size: 0.9em !important;
   color: #288db9 !important;
 }
-@media only screen and (min-width: 995px) and (max-width: 1200px){
-  #recent-avatars {
-display: none;
-  }
-}
+
 
 
 

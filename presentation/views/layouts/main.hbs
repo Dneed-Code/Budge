@@ -123,11 +123,15 @@
 <script src="javascripts/libraries/datatables.js"></script>
 
 <script>
+    $( window ).resize(function() {
+        const psfull = new PerfectScrollbar('#main-section');
+    });
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
             window.dispatchEvent(new Event('resize'));
         });
+        const psfull = new PerfectScrollbar('#main-section');
     });
 </script>
 </body>

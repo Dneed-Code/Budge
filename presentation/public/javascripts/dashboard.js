@@ -20,7 +20,9 @@ $(window).on('load', function (e) {
     window.dispatchEvent(new Event('resize'));
 
 });
-
+$( window ).resize(function() {
+    $('.recent-container').css('height', $('#mainrow').height());
+});
 
 var socket = io();
 socket.on('group update', function (data) {

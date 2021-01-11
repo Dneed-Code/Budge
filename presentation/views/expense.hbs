@@ -3,15 +3,15 @@
         color: white;
     }
 </style>
-<div class="row col-equal-height mb-4">
-    <div class="col-md-4">
+<div class="row col-equal-height mb-2">
+    <div class="col-md-12 col-sm-12 col-lg-4 mb-1">
         <div class="card tile">
             <div class="card-body text-center">
                 <div id="chart"></div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-12 col-sm-12 col-lg-4 mb-1">
         <div class="card tile" style="">
             <div class="card-body text-center">
                 <h4 id="donutHead">Active Expense Contribution (Total)</h4>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-12 col-sm-12 col-lg-4 mb-1">
         <div class="card tile" style="">
             <div class="card-body text-center">
                 <h4>Total Current Monthly Expense</h4>
@@ -30,19 +30,19 @@
         </div>
     </div>
 </div>
-<div class="row col-equal-height mb-3">
+<div class="row col-equal-height mb-2">
     <div class="col-md-12">
         <div class="card tile" style="">
             <div class="card-body">
-                <table id="table_id" class="display table table-hover">
+                <table id="table_id" class="display responsive table table-hover">
                     <thead>
                     <tr>
                         <th>User Name</th>
                         <th>Source</th>
                         <th>Amount</th>
                         <th>Date Paid</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th class="small-dt">Start Date</th>
+                        <th class="small-dt">End Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,8 +52,8 @@
                             <td>{{source}}</td>
                             <td>£{{amount}}</td>
                             <td data-sort="{{date_paid}}">{{formatDatePaid date_paid}}</td>
-                            <td data-sort="{{formatDate start_date "year"}}">{{formatDate start_date "short"}}</td>
-                            <td data-sort="{{formatDate end_date "year"}}">{{formatEndDate end_date "short" "expense"}}</td>
+                            <td class="small-dt" data-sort="{{formatDate start_date "year"}}">{{formatDate start_date "short"}}</td>
+                            <td class="small-dt" data-sort="{{formatDate end_date "year"}}">{{formatEndDate end_date "short" "expense"}}</td>
                         </tr>
                     {{/each}}
                     </tbody>
