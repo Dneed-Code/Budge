@@ -1,11 +1,25 @@
+/**
+ * Income logic:
+ * Logic for handling the expense transaction within the expense controller
+ */
+
+/**
+ * Dependencies
+ * Income = our Income model
+ * User = our user model
+ * Moment = a library for formatting dates
+ * Mongoose = ORM
+ */
+
 const Income = require('../../domain/models/Transaction');
 const User = require('../../domain/models/User')
 var moment = require('moment');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-// Count the number of incomes
-
+/**
+ * Counts the number of incomes in this user group
+ */
 exports.countIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -19,8 +33,9 @@ exports.countIncomes = function (callback, userGroup) {
     });
 }
 
-// List the all the incomes
-
+/**
+ * Returns a list of all expenses in this user group (can be interpreted as JSON)
+ */
 exports.listIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -36,8 +51,9 @@ exports.listIncomes = function (callback, userGroup) {
         console.log(err);
     });
 }
-// List the all the active incomes
-
+/**
+ * Returns a list of all active expenses in this user group (can be interpreted as JSON)
+ */
 exports.listActiveIncomes = function (callback, userGroup) {
     const users = User.find({user_group: userGroup});
     var userIds = [];
@@ -54,9 +70,9 @@ exports.listActiveIncomes = function (callback, userGroup) {
         console.log(err);
     });
 }
-
-// Calculate the Income per month of all the cumulative incomes in the list
-
+/**
+ * Returns a list of all expenses in this user group for each month of the current year
+ */
 exports.getIncomePerMonth = function (userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
@@ -97,8 +113,9 @@ exports.getIncomePerMonth = function (userGroup) {
     });
 }
 
-// Calculate the income of the current month
-
+/**
+ * Returns the expenses for the current month
+ */
 exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
         var userIds = [];
@@ -128,7 +145,9 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     });
 }
 
-// Calculate the change in income between last month and this month
+/**
+ * Returns the change in expenses from last month to current month
+ */
 exports.getChange = function getChange(userGroup) {
     return new Promise(function (resolve, reject) {
         const users = User.find({user_group: userGroup});
@@ -149,14 +168,18 @@ exports.getChange = function getChange(userGroup) {
     });
 }
 
-// Get Start dates day of the Month as this will be date paid
+/**
+ * Returns the start date of the transaction as this will be the date paid
+ */
 exports.getDatePaid = function getDatePaid(startDate) {
     var startDate = new Date(startDate);
     var datePaid = startDate.getDate();
     return datePaid;
 }
 
-// Get status (If its an income still being received or not)
+/**
+ * Returns the status of the transaction i.e. whether its active or not
+ */
 exports.getStatus = function getStatus(startDateInput, endDateInput) {
     var status;
     var currentDate = new Date();
@@ -175,7 +198,9 @@ exports.getStatus = function getStatus(startDateInput, endDateInput) {
     return status;
 }
 
-// Create a string message that conveys the change in income from last month to the current month
+/**
+ * Returns the change in expenses from last month to current month in a string format consumable for front end
+ */
 function constructChangeMessage(monthlyIncomeData) {
     var dateNow = new Date();
     var lastMonthMo = moment(dateNow);
@@ -194,7 +219,9 @@ function constructChangeMessage(monthlyIncomeData) {
     return change;
 }
 
-// Calculate the Monthly Income Data
+/**
+ * Returns the transaction data from each contributing expense and assigns them their month in a dictionary
+ */
 function getMonthlyIncomeData(incomeData, doc) {
 
     // For each Income
@@ -218,19 +245,11 @@ function getMonthlyIncomeData(incomeData, doc) {
         }
     }
 
-    //
-    //
-    //
-    // for (var i = 0; i < doc.length; i++) {
-
-    //     for (var j = startDate.getMonth(); j < numberOfMonths + startDate.getMonth(); j++) {
-    //         incomeData[j] += doc[i].amount;
-    //     }
-    // }
     return incomeData;
 }
-
-// Calculate the difference in months from the start date of the transaction to the end date of the transaction
+/**
+ * Calculate the difference in months from the start date of the transaction to the end date of the transaction
+ */
 function monthDiff(d1, d2) {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
@@ -239,7 +258,9 @@ function monthDiff(d1, d2) {
     return months <= 0 ? 1 : months;
 }
 
-// Get date key for dictionary
+/**
+ * Calculate the date key for dictionary
+ */
 function getDictKey(date) {
     var key = date.toLocaleString('default', {month: 'short'}) + " " + date.getFullYear();
     return key;

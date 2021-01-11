@@ -1,4 +1,6 @@
-
+/**
+ * Get options for our Income/expense Apex chart for the dashboard(Preconfigured)
+ */
 function getDIncomeOptions(transaction_data, transaction_string, transaction_colour) {
     var options1 = {
             chart: {

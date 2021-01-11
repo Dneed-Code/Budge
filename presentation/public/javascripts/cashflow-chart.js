@@ -1,4 +1,6 @@
-
+/**
+ * Get options for our Cashflow Apex chart (Preconfigured)
+ */
 function getOptions(income, expense) {
     var options1 = {
         chart: {
