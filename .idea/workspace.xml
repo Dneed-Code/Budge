@@ -31,9 +31,11 @@
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/index.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/partials/notification.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/controllers/expenseController.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/controllers/expenseController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/public/stylesheets/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/expense.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/expense.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/income.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/income.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/views/layouts/main.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +80,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts\libraries" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets\libraries" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets\libraries" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts\libraries" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\apex-widgets" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\views\partials" />
@@ -125,41 +127,7 @@
       <workItem from="1609940051938" duration="6268000" />
       <workItem from="1610028138394" duration="13145000" />
       <workItem from="1610155200309" duration="39747000" />
-    </task>
-    <task id="LOCAL-00018" summary="Controller income index and list now working correctly">
-      <created>1608173834537</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1608173834537</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Expense controller and route and view added with simple implementation (mostly dummy)">
-      <created>1608227142443</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1608227142443</updated>
-    </task>
-    <task id="LOCAL-00020" summary="income controller can now post (some hardcoded values)">
-      <created>1608246696259</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1608246696259</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Deleting Income controllers implemented">
-      <created>1608556538654</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1608556538654</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Adding example chart.js elements to income">
-      <created>1608603273052</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1608603273052</updated>
+      <workItem from="1610348420699" duration="2849000" />
     </task>
     <task id="LOCAL-00023" summary="Major overhaul of styling for Budge, new colour scheme and datatables styling">
       <created>1608695361062</created>
@@ -469,7 +437,42 @@
       <option name="project" value="LOCAL" />
       <updated>1610260920759</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Commenting application and refactoring js directory">
+      <created>1610283380621</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1610283380621</updated>
+    </task>
+    <task id="LOCAL-00068" summary="further refactoring js directory">
+      <created>1610283759126</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1610283759126</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Code cleanup complete">
+      <created>1610297930130</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1610297930130</updated>
+    </task>
+    <task id="LOCAL-00070" summary="log out button styling changed">
+      <created>1610298068441</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1610298068441</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Changes to dashboard responsiveness">
+      <created>1610306540168</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1610306540168</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,11 +503,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="layout link to dashboard updated" />
-    <MESSAGE value="UI for login elements" />
-    <MESSAGE value="registration ui implemented and already registered logic implemented" />
-    <MESSAGE value="emails no longer case sensitive" />
-    <MESSAGE value="Only incomes in your group are showing now" />
     <MESSAGE value="user now being displayed when logged in, in top right" />
     <MESSAGE value="dashboard now loading user correctly" />
     <MESSAGE value="can have income be the same day" />
@@ -525,7 +523,12 @@
     <MESSAGE value="scrollbars implemented" />
     <MESSAGE value="removed native y scroll" />
     <MESSAGE value="web sockets for income notifications added" />
-    <option name="LAST_COMMIT_MESSAGE" value="web sockets for income notifications added" />
+    <MESSAGE value="Commenting application and refactoring js directory" />
+    <MESSAGE value="further refactoring js directory" />
+    <MESSAGE value="Code cleanup complete" />
+    <MESSAGE value="log out button styling changed" />
+    <MESSAGE value="Changes to dashboard responsiveness" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to dashboard responsiveness" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -545,6 +548,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="393" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1608685113911" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610297867398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610297867398" />
     <state x="629" y="298" width="662" height="640" key="EditFileWatcherDialog" timestamp="1605214117682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -553,37 +560,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605380205858" />
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom" timestamp="1610262577672">
+    <state width="1899" height="411" key="GridCell.Tab.0.bottom" timestamp="1610298498043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610262577672" />
+    <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610298498043" />
     <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="411" key="GridCell.Tab.0.center" timestamp="1610262577672">
+    <state width="1899" height="411" key="GridCell.Tab.0.center" timestamp="1610298498043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610262577672" />
+    <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610298498043" />
     <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="411" key="GridCell.Tab.0.left" timestamp="1610262577672">
+    <state width="1899" height="411" key="GridCell.Tab.0.left" timestamp="1610298498043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610262577672" />
+    <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610298498043" />
     <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619726" />
-    <state width="1899" height="411" key="GridCell.Tab.0.right" timestamp="1610262577672">
+    <state width="1899" height="411" key="GridCell.Tab.0.right" timestamp="1610298498043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
     <state width="947" height="275" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
     <state width="1899" height="153" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610262577672" />
+    <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610298498043" />
     <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1610010806991">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -654,12 +661,12 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1609996532260" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610179059979">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610306752535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609055859351" />
     <state x="-1368" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1609565077547" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610179059979" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610306752535" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609917181733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
