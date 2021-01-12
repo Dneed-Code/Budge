@@ -7,7 +7,7 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var bodyParser = require('body-parser');
 require('toastr');
-require('dotenv/config');
+require('dotenv').config({path: path.join(__dirname, '.env')});
 var moment = require('moment'); // require
 const session = require('express-session');
 const flash = require('connect-flash');
