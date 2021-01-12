@@ -1,7 +1,7 @@
 const User = require('../../domain/models/User');
 const UserGroup = require('../../domain/models/UserGroup');
 require('../../domain/app/IncomeHelpers')
-const Transaction = require("../../domain/models/transaction");
+// const Transaction = require("../../domain/models/transaction");
 const {getDatePaid} = require("../../domain/app/IncomeHelpers");
 const users = User.find({last_name: 'Doe'});
 
