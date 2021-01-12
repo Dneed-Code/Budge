@@ -29,6 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/config/app/mongooseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/mongooseConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Expense.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Expense.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Income.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Income.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/dashboardExpenses.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dashboardExpenses.test.js" afterDir="false" />

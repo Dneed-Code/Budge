@@ -12,3 +12,5 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Configure DataMigrator
 //require('./DataMigrator.js');
+
+module.exports = mongoose;

@@ -4,7 +4,8 @@ const Expense = require('../domain/models/Transaction');
 // Configure Mongoose
 var path = require('path');
 require('dotenv').config({path: path.join(__dirname, '../.env')});
-require('../config/app/mongooseConfig');
+
+const mongoose = require('../config/app/mongooseConfig');
 const {testExpense} = require("./DataTest");
 const {testUserGroupThree} = require("./DataTest");
 const {testUserGroupTwo} = require("./DataTest");
@@ -60,3 +61,13 @@ test('TEXP-04: I should have the data returned relating to expense for the curre
 });
 
 
+afterAll(async(done) => {
+    // Closing the DB connection allows Jest to exit successfully.
+    try {
+        await mongoose.connection.close();
+        done()
+    } catch (error) {
+        console.log(error);
+        done()
+    }
+})

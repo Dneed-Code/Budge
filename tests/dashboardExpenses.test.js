@@ -4,7 +4,8 @@ const expense_logic = require("../domain/app/expenseLogic");
 // Configure Mongoose
 var path = require('path');
 require('dotenv').config({path: path.join(__dirname, '../.env')});
-require('../config/app/mongooseConfig');
+
+const mongoose = require('../config/app/mongooseConfig');
 const {testUserGroupThree} = require("./DataTest");
 const {testUserGroupTwo} = require("./DataTest");
 const {testUserGroup} = require("./DataTest");
@@ -59,3 +60,13 @@ test('TDAS-08: Expense Dictionary returns correct values (£0s)', () => {
 });
 
 
+afterAll(async(done) => {
+    // Closing the DB connection allows Jest to exit successfully.
+    try {
+        await mongoose.connection.close();
+        done()
+    } catch (error) {
+        console.log(error);
+        done()
+    }
+})
