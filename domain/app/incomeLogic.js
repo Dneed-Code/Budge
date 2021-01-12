@@ -13,6 +13,7 @@
 
 const Income = require('../../domain/models/Transaction');
 const User = require('../../domain/models/User')
+const IncomeHelpers = require('./IncomeHelpers')
 var moment = require('moment');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
@@ -94,10 +95,10 @@ exports.getIncomePerMonth = function (userGroup) {
                 var startDateMo = moment(startDate);
                 for (var j = 0; j < 12; j++) {
 
-                    if (isNaN(monthlyIncomeData[getDictKey(startDate)])) {
+                    if (isNaN(monthlyIncomeData[IncomeHelpers.getDictKey(startDate)])) {
                         thisYearIncome[j] = 0;
                     } else {
-                        thisYearIncome[j] = monthlyIncomeData[getDictKey(startDate)];
+                        thisYearIncome[j] = monthlyIncomeData[IncomeHelpers.getDictKey(startDate)];
                     }
                     startDateMo.add(1, 'months');
                     startDate = new Date(startDateMo);
@@ -107,20 +108,21 @@ exports.getIncomePerMonth = function (userGroup) {
                 console.log(err);
             });
         }).catch((err) => {
-            console.log(err);
+            //console.log(err);
 
         });
     });
 }
 
 /**
- * Returns the expenses for the current month
+ * Returns the incomes for the current month
  */
 exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
     return new Promise(function (resolve, reject) {
         var userIds = [];
         const users = User.find({user_group: userGroup});
         users.then(function (doc) {
+            //console.log(doc);
             for (var i = 0; i < doc.length; i++) {
                 userIds.push(doc[i]._id.toString());
             }
@@ -132,18 +134,20 @@ exports.getIncomeCurrentMonth = function getIncomeCurrentMonth(userGroup) {
             incomes.then(function (doc) {
                 monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
                 var dateNow = new Date();
-                var currentMonth = dateNow;
-                console.log(doc);
-                resolve(monthlyIncomeData[getDictKey(currentMonth)]);
+                var data = monthlyIncomeData[IncomeHelpers.getDictKey(dateNow)]
+                resolve(data);
             }).catch((err) => {
                 console.log(err);
+                reject(err);
             });
-            console.log(userIds);
+
+            //console.log(doc);
         }).catch((err) => {
-            console.log(err);
+            reject(err);
         });
     });
 }
+
 
 /**
  * Returns the change in expenses from last month to current month
@@ -156,26 +160,22 @@ exports.getChange = function getChange(userGroup) {
             for (var i = 0; i < doc.length; i++) {
                 userIds.push(doc[i]._id.toString());
             }
-        const incomes = Income.find({transaction_type: "Income", user: {$in: userIds} }, 'user amount date_paid start_date end_date');
-        let monthlyIncomeData = [];
-        incomes.then(function (doc) {
-            monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
-            var change = constructChangeMessage(monthlyIncomeData);
-            resolve(change);
-        }).catch((err) => {
-            console.log(err);
-        });});
+            const incomes = Income.find({
+                transaction_type: "Income",
+                user: {$in: userIds}
+            }, 'user amount date_paid start_date end_date');
+            let monthlyIncomeData = [];
+            incomes.then(function (doc) {
+                monthlyIncomeData = getMonthlyIncomeData(monthlyIncomeData, doc);
+                var change = IncomeHelpers.constructChangeMessage(monthlyIncomeData);
+                resolve(change);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
     });
 }
 
-/**
- * Returns the start date of the transaction as this will be the date paid
- */
-exports.getDatePaid = function getDatePaid(startDate) {
-    var startDate = new Date(startDate);
-    var datePaid = startDate.getDate();
-    return datePaid;
-}
 
 /**
  * Returns the status of the transaction i.e. whether its active or not
@@ -198,46 +198,27 @@ exports.getStatus = function getStatus(startDateInput, endDateInput) {
     return status;
 }
 
-/**
- * Returns the change in expenses from last month to current month in a string format consumable for front end
- */
-function constructChangeMessage(monthlyIncomeData) {
-    var dateNow = new Date();
-    var lastMonthMo = moment(dateNow);
-    lastMonthMo.subtract(1, 'months');
-    var lastMonth = new Date(lastMonthMo);
-    var change;
-    var changeAmount = monthlyIncomeData[getDictKey(dateNow)] - monthlyIncomeData[getDictKey(lastMonth)];
-    var changePercentage = ((changeAmount / monthlyIncomeData[getDictKey(lastMonth)]) * 100).toFixed(2) + '%';
-    if (monthlyIncomeData[getDictKey(dateNow)] < monthlyIncomeData[getDictKey(lastMonth)]) {
-        change = "a decrease of " + " " + "£" + Math.abs(changeAmount) + " " + " a " + " " + changePercentage + " " + "change in income from last month.";
-    } else if (monthlyIncomeData[getDictKey(dateNow)] > monthlyIncomeData[getDictKey(lastMonth)]) {
-        change = "a increase of " + " " + "£" + Math.abs(changeAmount) + " " + " a " + " " + changePercentage + " " + "change in income from last month.";
-    } else {
-        change = "the same income as last month, great work your income is stable!";
-    }
-    return change;
-}
 
 /**
  * Returns the transaction data from each contributing expense and assigns them their month in a dictionary
  */
-function getMonthlyIncomeData(incomeData, doc) {
+
+exports.getMonthlyIncomeData = function getMonthlyIncomeData(incomeData, doc) {
 
     // For each Income
     for (var i = 0; i < doc.length; i++) {
         var startDate = doc[i].start_date;
         var endDate = doc[i].end_date;
-        var numberOfMonths = monthDiff(startDate, endDate);
+        var numberOfMonths = IncomeHelpers.monthDiff(startDate, endDate);
         var startDateMo = moment(startDate);
 
         for (var j = 0; j < numberOfMonths; j++) {
 
-            if (isNaN(incomeData[getDictKey(startDate)])) {
-                incomeData[getDictKey(startDate)] = doc[i].amount;
+            if (isNaN(incomeData[IncomeHelpers.getDictKey(startDate)])) {
+                incomeData[IncomeHelpers.getDictKey(startDate)] = doc[i].amount;
             } else {
-                var newAmount = incomeData[getDictKey(startDate)] + doc[i].amount;
-                incomeData[getDictKey(startDate)] = newAmount;
+                var newAmount = incomeData[IncomeHelpers.getDictKey(startDate)] + doc[i].amount;
+                incomeData[IncomeHelpers.getDictKey(startDate)] = newAmount;
             }
 
             startDateMo.add(1, 'months');
@@ -247,21 +228,29 @@ function getMonthlyIncomeData(incomeData, doc) {
 
     return incomeData;
 }
-/**
- * Calculate the difference in months from the start date of the transaction to the end date of the transaction
- */
-function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    return months <= 0 ? 1 : months;
-}
 
-/**
- * Calculate the date key for dictionary
- */
-function getDictKey(date) {
-    var key = date.toLocaleString('default', {month: 'short'}) + " " + date.getFullYear();
-    return key;
+function getMonthlyIncomeData(incomeData, doc) {
+
+    // For each Income
+    for (var i = 0; i < doc.length; i++) {
+        var startDate = doc[i].start_date;
+        var endDate = doc[i].end_date;
+        var numberOfMonths = IncomeHelpers.monthDiff(startDate, endDate);
+        var startDateMo = moment(startDate);
+
+        for (var j = 0; j < numberOfMonths; j++) {
+
+            if (isNaN(incomeData[IncomeHelpers.getDictKey(startDate)])) {
+                incomeData[IncomeHelpers.getDictKey(startDate)] = doc[i].amount;
+            } else {
+                var newAmount = incomeData[IncomeHelpers.getDictKey(startDate)] + doc[i].amount;
+                incomeData[IncomeHelpers.getDictKey(startDate)] = newAmount;
+            }
+
+            startDateMo.add(1, 'months');
+            startDate = new Date(startDateMo);
+        }
+    }
+
+    return incomeData;
 }
