@@ -2,7 +2,7 @@ const expense_logic = require("../domain/app/expenseLogic");
 
 
 // Configure Mongoose
-require('dotenv/config');
+require('dotenv').config({path: path.join(__dirname, '../.env')});
 require('../config/app/mongooseConfig');
 const {testUserGroupThree} = require("./DataTest");
 const {testUserGroupTwo} = require("./DataTest");
