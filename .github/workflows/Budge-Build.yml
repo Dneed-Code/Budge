@@ -39,6 +39,6 @@ jobs:
           npm install --silent
           pm2 stop budge
           pm2 start --name "budge" /root/Budge/bin/www --interpreter=/root/.nvm/versions/node/v14.15.0/bin/node
-        host: 46.101.64.6
+        host: 46.101.43.72
         user: root
         key: ${{secrets.PRIVKEY}}
