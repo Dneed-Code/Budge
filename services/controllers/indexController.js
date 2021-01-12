@@ -39,6 +39,10 @@ exports.index = function (req, res, next) {
             UserGroup.findById(req.user.user_group, callback);
         }
     }, function (err, results) {
+
+
+
+
         res.render('index', {title: 'Dashboard', error: err, data: results, dashboard: true, user: req.user});
         req.app.io.emit('group update', results); //emit to everyone
     });

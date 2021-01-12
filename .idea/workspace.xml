@@ -29,12 +29,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2401a60-05ac-4f61-94ad-b1743cdb366c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/dashboard.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/app/DataMigrator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/app/IncomeHelpers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/DataTest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Expense.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Income.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/dashboardExpenses.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/dashboardIncome.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app/mongooseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/app/mongooseConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/app/incomeLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/domain/app/incomeLogic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/models/Transaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/domain/models/Transaction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/controllers/indexController.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/controllers/indexController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/dashboard.test.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +75,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.7" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/views/partials" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_interpreter_path" value="node" />
@@ -79,6 +85,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\tests" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\views\partials" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\domain\models" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\services\controllers" />
+      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\services\routes" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\stylesheets\libraries" />
@@ -86,15 +99,8 @@
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\javascripts\libraries" />
       <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\public\apex-widgets" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\views\partials" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\domain\models" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\services\controllers" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\services\routes" />
-      <recent name="C:\Users\Dominic\Documents\GitHub\Budge\presentation\views" />
-    </key>
   </component>
-  <component name="RunManager" selected="Jest.TDAS-01: User with £1000 income gets current income correctly returned as £1000">
+  <component name="RunManager" selected="Jest.TINC-04: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph">
     <configuration name="TDAS-01: User with £1000 income gets current income correctly returned as £1000" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -102,29 +108,71 @@
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/tests/dashboard.test.js" />
+      <test-file value="$PROJECT_DIR$/tests/Income.test.js" />
       <test-names>
         <test-name value="TDAS-01: User with £1000 income gets current income correctly returned as £1000" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="resolves a lemon" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="TINC-02: I should have the change in income from last month to the current month returned when the values are 0" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/tests/dashboard.test.js" />
+      <test-file value="$PROJECT_DIR$/tests/Income.test.js" />
       <test-names>
-        <test-name value="resolves a lemon" />
+        <test-name value="TINC-02: I should have the change in income from last month to the current month returned when the values are 0" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TINC-02: I should have the change in income from last month to the current month returned" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/Income.test.js" />
+      <test-names>
+        <test-name value="TINC-02: I should have the change in income from last month to the current month returned" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TINC-03: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/Income.test.js" />
+      <test-names>
+        <test-name value="TINC-03: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="TINC-04: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/Income.test.js" />
+      <test-names>
+        <test-name value="TINC-04: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" />
       </test-names>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.TINC-04: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" />
+        <item itemvalue="Jest.TINC-03: I should have a list of incomes return that I can use to feed a doughnut chart and a line graph" />
+        <item itemvalue="Jest.TINC-02: I should have the change in income from last month to the current month returned when the values are 0" />
+        <item itemvalue="Jest.TINC-02: I should have the change in income from last month to the current month returned" />
         <item itemvalue="Jest.TDAS-01: User with £1000 income gets current income correctly returned as £1000" />
-        <item itemvalue="Jest.resolves a lemon" />
       </list>
     </recent_temporary>
   </component>
@@ -164,14 +212,8 @@
       <workItem from="1610348420699" duration="18036000" />
       <workItem from="1610380152044" duration="299000" />
       <workItem from="1610380462063" duration="357000" />
-      <workItem from="1610380839127" duration="10856000" />
-    </task>
-    <task id="LOCAL-00024" summary="Update controller for income (GET for modal and POST for update)">
-      <created>1609047149182</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1609047149182</updated>
+      <workItem from="1610380839127" duration="10912000" />
+      <workItem from="1610439940161" duration="31943000" />
     </task>
     <task id="LOCAL-00025" summary="Middle chart on income now correctly using data from database (Left and right graphs now somewhat styled too)">
       <created>1609055856414</created>
@@ -509,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610351727819</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Testing income (Issues)">
+      <created>1610398337748</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1610398337749</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +589,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dashboard now loading user correctly" />
     <MESSAGE value="can have income be the same day" />
     <MESSAGE value="Logic for expenses input" />
     <MESSAGE value="Expense view tailored to expenses within text" />
@@ -565,7 +613,8 @@
     <MESSAGE value="log out button styling changed" />
     <MESSAGE value="Changes to dashboard responsiveness" />
     <MESSAGE value="responsive changes for transaction pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="responsive changes for transaction pages" />
+    <MESSAGE value="Testing income (Issues)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing income (Issues)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="845" y="354" width="737" height="332" key="#File_Watchers" timestamp="1605202761502">
@@ -573,9 +622,10 @@
     </state>
     <state x="845" y="354" width="737" height="332" key="#File_Watchers/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605202761502" />
     <state x="2765" y="354" width="718" height="332" key="#File_Watchers/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1605123769028" />
-    <state x="-68" y="133" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1610394595154">
+    <state x="-11" y="116" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1610444091692">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="-11" y="116" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610444091692" />
     <state x="-68" y="133" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394595154" />
     <state x="734" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606996118193">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -601,98 +651,98 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1605380205858" />
-    <state width="1899" height="268" key="GridCell.Tab.0.bottom" timestamp="1610397907466">
+    <state width="1899" height="268" key="GridCell.Tab.0.bottom" timestamp="1610482057109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
-    <state width="947" height="275" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
+    <state width="1899" height="268" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610482057109" />
     <state width="1899" height="153" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="268" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610397907466" />
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
     <state width="1899" height="411" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="268" key="GridCell.Tab.0.center" timestamp="1610397907466">
+    <state width="1899" height="268" key="GridCell.Tab.0.center" timestamp="1610482057109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
-    <state width="947" height="275" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
+    <state width="1899" height="268" key="GridCell.Tab.0.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610482057109" />
     <state width="1899" height="153" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="268" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610397907466" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
     <state width="1899" height="411" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="268" key="GridCell.Tab.0.left" timestamp="1610397907466">
+    <state width="1899" height="268" key="GridCell.Tab.0.left" timestamp="1610482057109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
-    <state width="947" height="275" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
+    <state width="1899" height="268" key="GridCell.Tab.0.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610482057109" />
     <state width="1899" height="153" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="268" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610397907466" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
     <state width="1899" height="411" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619726" />
-    <state width="1899" height="268" key="GridCell.Tab.0.right" timestamp="1610397907466">
+    <state width="1899" height="268" key="GridCell.Tab.0.right" timestamp="1610482057109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="947" height="270" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1609040296100" />
-    <state width="947" height="275" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609271051876" />
+    <state width="1899" height="268" key="GridCell.Tab.0.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610482057109" />
     <state width="1899" height="153" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1610074326468" />
-    <state width="1899" height="268" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610397907466" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
     <state width="1899" height="411" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1610254619727" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1610477225838">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.1.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225838" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1610477225838">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.1.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225838" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.1.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.1.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.2.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.2.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.2.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.2.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.2.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.2.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.3.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032105" />
-    <state width="1899" height="348" key="GridCell.Tab.3.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.3.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.3.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.3.center/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.3.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.3.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
-    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1610394765927">
+    <state width="1899" height="348" key="GridCell.Tab.3.left/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1610477225839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="949" height="348" key="GridCell.Tab.3.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609270032104" />
-    <state width="1899" height="348" key="GridCell.Tab.3.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610394765927" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1610477225839" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398357487" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1605203086142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -702,12 +752,12 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@1920.0.1920.1040" timestamp="1609996532260" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610352844219">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1610398341156">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.0.1920.1040/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1609055859351" />
     <state x="-1368" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1609565077547" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610352844219" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.0.1920.1040/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1610398341156" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609917181733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

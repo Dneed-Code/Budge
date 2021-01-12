@@ -19,7 +19,6 @@ moment().format();
 // Configure Mongoose
 require('../Budge/config/app/mongooseConfig');
 
-// Socket IO
 // Require routes
 var indexRouter = require('./services/routes/index');
 var incomesRouter = require('./services/routes/incomes');
