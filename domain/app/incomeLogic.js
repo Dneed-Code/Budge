@@ -254,3 +254,9 @@ function getMonthlyIncomeData(incomeData, doc) {
 
     return incomeData;
 }
+
+exports.getDatePaid = function getDatePaid(startDate) {
+    var startDate = new Date(startDate);
+    var datePaid = startDate.getDate();
+    return datePaid;
+}
