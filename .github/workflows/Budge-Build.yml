@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -28,3 +28,17 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+    - name: Deploy to Hosting
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          cd /root/Budge/
+          git reset --hard HEAD
+          git pull origin main
+          npm install --silent
+          pm2 stop budge
+          pm2 start --name "budge" /root/Budge/bin/www --interpreter=/root/.nvm/versions/node/v14.15.0/bin/node
+        host: 46.101.43.72
+        user: root
+        key: ${{secrets.PRIVKEY}}
