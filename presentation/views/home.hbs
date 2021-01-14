@@ -1,6 +1,157 @@
 <html>
-<h1>Welcome!</h1>
-<p>Create an account or login</p>
-<a href="/users/register">Register</a>
-<a href="/users/login"> Login</a>
-</html>
+
+
+<div class="row col-equal-height mb-2">
+    <div class="col-md-12">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <h1>Welcome to Budge</h1>
+                <p>“For households who struggle to maintain financial stability and forecast the future of their
+                    finances, Budge
+                    is a complete Financial software suite equip with tools to support families or collections of people
+                    with
+                    shared finances. Allowing multiple people to manage and visualize their finances in a shared area,
+                    allowing
+                    users in the group to spend money, add income and report on numerous key point indicators, an
+                    example being
+                    projected net worth. Allowing busy households to regain control of their finances and create
+                    concrete plans
+                    with appropriate data to support decisions and their feasibility.”</p>
+                <p>Without Expenses or Incomes the system is likely to look a little sparce for you! Try adding an
+                    income or an
+                    expense below, It'll likely take a couple before it starts to not look odd. Make sure your group add
+                    thier
+                    Incomes and expenses too!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row col-equal-height mb-2">
+    <div class="col-md-12 col-sm-12 col-lg-6 mb-1">
+        <div class="card tile">
+            <div class="card-body text-center">
+                <p>Below is an example of what your Income dashboard will look like with data!</p>
+                <img src="/images/income.png" class="img-fluid mb-2" alt="">
+                {{> addIncome}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-6 mb-1">
+        <div class="card tile" style="">
+            <div class="card-body text-center">
+                <p>Below is an example of what your Expense dashboard will look like with data!</p>
+                <img src="/images/expense.png" class="img-fluid mb-2" alt="">
+                {{> addExpense}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function postIncome() {
+        var endDate;
+        var isErrors = false;
+        if ($('#inputSource').val() == "" || $('#inputSource').val().length < 2) {
+            toastr.warning('You must enter a value for the source of the income, it must be greater than two characters!', 'Source Input Error');
+            isErrors = true;
+        }
+        if ($('#inputAmount').val() == "" || $('#inputAmount').val().length < 1) {
+            toastr.error('You must enter a value for the amount of the income, it must be a number!', 'Amount Input Error');
+            isErrors = true;
+        }
+        if ($('#inputStartDate').val() == "") {
+            toastr.info('You must enter a valid start date of the income, it must be a complete date!', 'Start Date Input Error');
+            isErrors = true;
+        }
+        if ($('#gridCheck').is(':checked')) {
+            endDate = new Date(2025, 12, 12);
+        } else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
+            toastr.info('You must enter a valid end date of the income, it must be a after the start date!', 'End Date Input Error');
+            isErrors = true;
+        } else {
+            endDate = $('#inputEndDate').val();
+        }
+
+        if (!isErrors) {
+            $.ajax({
+                url: '/income/create',
+                type: 'POST',
+                cache: false,
+                data: {
+                    source: $('#inputSource').val(),
+                    amount: $('#inputAmount').val(),
+                    start_date: $('#inputStartDate').val(),
+                    end_date: endDate
+                },
+                success: function (data) {
+                    window.location.assign('/income')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    //alert('text status ' + textStatus + ', err ' + err)
+                }
+            });
+        }
+    }
+
+    function isAfterStartDate() {
+        return new $('#inputStartDate').val() <= $('#inputEndDate').val();
+    }
+
+    function isAfterEditStartDate() {
+        return new $('#inputEditStartDate').val() <= $('#inputEditEndDate').val();
+    }
+
+    function postExpense() {
+        var endDate;
+        var isErrors = false;
+        if ($('#inputSource').val() == "" || $('#inputSource').val().length < 2) {
+            toastr.warning('You must enter a value for the source of the expense, it must be greater than two characters!', 'Source Input Error');
+            isErrors = true;
+        }
+        if ($('#inputAmount').val() == "" || $('#inputAmount').val().length < 1) {
+            toastr.error('You must enter a value for the amount of the expense, it must be a number!', 'Amount Input Error');
+            isErrors = true;
+        }
+        if ($('#inputStartDate').val() == "") {
+            toastr.info('You must enter a valid start date of the expense, it must be a complete date!', 'Start Date Input Error');
+            isErrors = true;
+        }
+        if ($('#gridCheck').is(':checked')) {
+            endDate = new Date(2025, 12, 12);
+        } else if ($('#inputEndDate').val() == "" || !isAfterStartDate($('#inputEndDate').val())) {
+            toastr.info('You must enter a valid end date of the expense, it must be a after the start date!', 'End Date Input Error');
+            isErrors = true;
+        } else {
+            endDate = $('#inputEndDate').val();
+        }
+
+        if (!isErrors) {
+            $.ajax({
+                url: '/expense/create',
+                type: 'POST',
+                cache: false,
+                data: {
+                    source: $('#inputSource').val(),
+                    amount: $('#inputAmount').val(),
+                    start_date: $('#inputStartDate').val(),
+                    end_date: endDate
+                },
+                success: function (data) {
+                    window.location.assign('/expense')
+                }
+                , error: function (jqXHR, textStatus, err) {
+                    //alert('text status ' + textStatus + ', err ' + err)
+                }
+            });
+        }
+    }
+
+    function isAfterStartDate() {
+        return new $('#inputStartDate').val() <= $('#inputEndDate').val();
+    }
+
+    function isAfterEditStartDate() {
+        return new $('#inputEditStartDate').val() <= $('#inputEditEndDate').val();
+    }
+</script>

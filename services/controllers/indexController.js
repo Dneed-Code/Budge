@@ -35,12 +35,22 @@ exports.index = function (req, res, next) {
         },notifications: function (callback) {
             Notification.find({user_group: req.user.user_group}, callback).populate('user').sort('-date_time');
         },
+        expense_count: function (callback) {
+            console.log(req.user.user_group)
+            expense_logic.countExpenses(callback, req.user.user_group);
+        },
+        income_count: function (callback) {
+            console.log(req.user.user_group)
+            income_logic.countIncomes(callback, req.user.user_group);
+        },
         user_group: function (callback) {
             UserGroup.findById(req.user.user_group, callback);
         }
     }, function (err, results) {
 
-
+if (results.income_count ==0 && results.expense_count ==0){
+    res.render('home', {title: 'New User', error: err, data: results, dashboard: true, user: req.user});
+}
 
 
         res.render('index', {title: 'Dashboard', error: err, data: results, dashboard: true, user: req.user});
